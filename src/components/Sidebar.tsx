@@ -13,6 +13,8 @@ import {
   GraduationCap,
   ShieldCheck,
   Building,
+  Building2,
+  FileCheck,
   Lock,
   FileText,
   Home,
@@ -38,6 +40,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const state = store.getState();
   const t = TRANSLATIONS[state.language] || TRANSLATIONS.en;
   const role = state.currentUser.role;
+  const pendingBatchesCount = state.batches.filter((b) => b.status === 'PENDING_APPROVAL').length;
 
   const navItems = [
     {
@@ -55,6 +58,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
       highlight: true,
     },
     {
+      id: 'batch-review',
+      label: 'Signatory Queue',
+      icon: FileCheck,
+      category: 'Institutional',
+      badge: pendingBatchesCount > 0 ? `${pendingBatchesCount}` : undefined,
+      badgeColor: 'bg-amber-900/60 text-amber-300 border-amber-700/50',
+    },
+    {
       id: 'upload',
       label: t.dataUpload,
       icon: UploadCloud,
@@ -67,6 +78,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
       icon: Users,
       category: 'Institutional',
       count: state.students.length,
+    },
+    {
+      id: 'institution-directory',
+      label: 'Institution Directory',
+      icon: Building2,
+      category: 'Institutional',
+      count: state.institutions.length,
     },
     {
       id: 'gate',

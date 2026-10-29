@@ -24,9 +24,16 @@ interface InstitutionDashboardProps {
 export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNavigate }) => {
   const state = store.getState();
   const currentInstId = state.currentUser.institutionId || 'INST-DEL-01';
+  const isNationalRole =
+    state.currentUser.role === 'AICTE_ADMIN' || state.currentUser.role === 'AICTE_AUDITOR';
 
-  const [selectedInstId, setSelectedInstId] = useState<string>(currentInstId);
-  const activeInstitution = state.institutions.find((i) => i.id === selectedInstId) || state.institutions[0];
+  const [selectedInstId, setSelectedInstId] = useState<string>(
+    isNationalRole ? currentInstId : currentInstId
+  );
+  const activeInstitution =
+    (isNationalRole
+      ? state.institutions.find((i) => i.id === selectedInstId)
+      : state.institutions.find((i) => i.id === currentInstId)) || state.institutions[0];
 
   // Filter students for this institution
   const instStudents = state.students.filter((s) => s.institutionId === activeInstitution.id);
@@ -106,21 +113,30 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
           </div>
         </div>
 
-        {/* Institution selector for evaluation demo */}
-        <div className="flex items-center gap-2">
-          <label className="text-xs text-slate-400">View Institution:</label>
-          <select
-            value={selectedInstId}
-            onChange={(e) => setSelectedInstId(e.target.value)}
-            className="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500 cursor-pointer"
-          >
-            {state.institutions.map((inst) => (
-              <option key={inst.id} value={inst.id}>
-                {inst.code} — {inst.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        {/* Institution selector */}
+        {isNationalRole ? (
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-400">View Institution:</label>
+            <select
+              value={selectedInstId}
+              onChange={(e) => setSelectedInstId(e.target.value)}
+              className="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500 cursor-pointer"
+            >
+              {state.institutions.map((inst) => (
+                <option key={inst.id} value={inst.id}>
+                  {inst.code} — {inst.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-300">
+            <span className="font-semibold text-white">{activeInstitution.code}</span>
+            <span className="text-[10px] bg-blue-950 text-blue-300 px-1.5 py-0.5 rounded border border-blue-800 font-mono">
+              Tenant Scoped
+            </span>
+          </div>
+        )}
       </div>
 
       {/* KPI Cards Grid */}
@@ -190,7 +206,7 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
 
         {/* Awaiting Signatory / Review */}
         <div
-          onClick={() => onNavigate('upload')}
+          onClick={() => onNavigate('batch-review')}
           className="cursor-pointer bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-purple-500 rounded-xl p-4 transition-all"
         >
           <div className="text-xs text-slate-400">Awaiting Signatory</div>

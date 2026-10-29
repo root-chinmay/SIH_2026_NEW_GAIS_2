@@ -19,6 +19,8 @@ import { AicteCentralDashboard } from './components/AicteCentralDashboard';
 import { SecurityPrivacyCentre } from './components/SecurityPrivacyCentre';
 import { ReportsInspectionPack } from './components/ReportsInspectionPack';
 import { DataCopilotDrawer } from './components/DataCopilotDrawer';
+import { InstitutionDirectory } from './components/InstitutionDirectory';
+import { BatchSignatoryReview } from './components/BatchSignatoryReview';
 
 export default function App() {
   const [, setTick] = useState(0);
@@ -63,11 +65,15 @@ export default function App() {
               <InstitutionDashboard onNavigate={(view) => setActiveView(view)} />
             )}
 
+            {activeView === 'batch-review' && <BatchSignatoryReview />}
+
             {activeView === 'upload' && (
               <StudentDataUpload onSuccess={() => setActiveView('students')} />
             )}
 
             {activeView === 'students' && <StudentRecordList />}
+
+            {activeView === 'institution-directory' && <InstitutionDirectory />}
 
             {activeView === 'gate' && <AdmissionGateSimulation />}
 

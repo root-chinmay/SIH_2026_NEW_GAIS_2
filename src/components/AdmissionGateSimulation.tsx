@@ -6,6 +6,7 @@ import {
   AlertTriangle,
   RefreshCw,
   ShieldCheck,
+  ShieldAlert,
   Building,
   Key,
   Layers,
@@ -33,6 +34,24 @@ export const AdmissionGateSimulation: React.FC = () => {
 
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [gateResult, setGateResult] = useState<AdmissionGateDecision | null>(null);
+
+  // Dual-Override Modal states
+  const [showOverrideModal, setShowOverrideModal] = useState(false);
+  const [overrideReason, setOverrideReason] = useState('Special State Counseling Allotment Order CS-2026-88');
+  const [aicteOfficer, setAicteOfficer] = useState('Dr. Anita Roy (AICTE Member Secretary)');
+
+  const handleExecuteOverride = () => {
+    if (!gateResult) return;
+    const updated = store.executeGateOverride(
+      idempotencyKey,
+      overrideReason,
+      aicteOfficer
+    );
+    if (updated) {
+      setGateResult({ ...updated });
+    }
+    setShowOverrideModal(false);
+  };
 
   const handleTestGate = () => {
     setIsEvaluating(true);
@@ -415,6 +434,19 @@ export const AdmissionGateSimulation: React.FC = () => {
                     ))}
                   </ul>
                 </div>
+
+                {/* Dual Override Action (Section 14) */}
+                {!gateResult.eligible && (
+                  <div className="pt-2">
+                    <button
+                      onClick={() => setShowOverrideModal(true)}
+                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-amber-950/60 hover:bg-amber-900/80 text-amber-300 border border-amber-800/80 rounded-xl text-xs font-bold transition-all"
+                    >
+                      <ShieldAlert className="w-4 h-4 text-amber-400" />
+                      Initiate Dual-Approval Regulatory Override Workflow
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -424,6 +456,70 @@ export const AdmissionGateSimulation: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Dual Override Modal */}
+      {showOverrideModal && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h2 className="text-base font-bold text-white flex items-center gap-2">
+                <ShieldAlert className="w-5 h-5 text-amber-400" />
+                Emergency Regulatory Override (Dual Approval)
+              </h2>
+              <button
+                onClick={() => setShowOverrideModal(false)}
+                className="text-slate-400 hover:text-white"
+              >
+                &times;
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Section 14 of the AICTE framework permits emergency exceptions (e.g. court/state counseling directives) requiring verified reasons and two independent authorizations. This does <strong>not</strong> silently alter statutory intake.
+            </p>
+
+            <div className="space-y-3 pt-2 text-xs">
+              <div>
+                <label className="font-semibold text-slate-300 block mb-1">
+                  1. Institutional Signatory / Dean Justification:
+                </label>
+                <textarea
+                  value={overrideReason}
+                  onChange={(e) => setOverrideReason(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white h-20"
+                />
+              </div>
+
+              <div>
+                <label className="font-semibold text-slate-300 block mb-1">
+                  2. AICTE Regulatory Officer Authorization:
+                </label>
+                <input
+                  type="text"
+                  value={aicteOfficer}
+                  onChange={(e) => setAicteOfficer(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-800">
+              <button
+                onClick={() => setShowOverrideModal(false)}
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleExecuteOverride}
+                className="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-bold"
+              >
+                Execute Dual Override
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

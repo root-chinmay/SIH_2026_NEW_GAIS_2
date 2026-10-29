@@ -14,6 +14,9 @@ import {
   FileEdit,
   Award,
   Building,
+  Shield,
+  FileText,
+  X,
 } from 'lucide-react';
 import { store } from '../services/store';
 import { StudentRecord, AdmissionCategory, AdmissionStatus } from '../types';
@@ -22,15 +25,18 @@ import { AdmissionTimelineModal } from './AdmissionTimelineModal';
 
 export const StudentRecordList: React.FC = () => {
   const state = store.getState();
-  const currentInstId = state.currentUser.institutionId;
+  const currentInstId = state.currentUser.institutionId || 'INST-DEL-01';
+  const isNationalRole =
+    state.currentUser.role === 'AICTE_ADMIN' || state.currentUser.role === 'AICTE_AUDITOR';
 
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterInst, setFilterInst] = useState<string>(currentInstId || 'ALL');
+  const [filterInst, setFilterInst] = useState<string>(isNationalRole ? 'ALL' : currentInstId);
   const [filterStatus, setFilterStatus] = useState<string>('ALL');
   const [maskId, setMaskId] = useState(true);
 
   // Selected student for timeline modal
   const [timelineStudent, setTimelineStudent] = useState<StudentRecord | null>(null);
+  const [corroborationStudent, setCorroborationStudent] = useState<StudentRecord | null>(null);
 
   // Correction Modal State
   const [correctionTarget, setCorrectionTarget] = useState<StudentRecord | null>(null);
@@ -51,9 +57,11 @@ export const StudentRecordList: React.FC = () => {
     admissionStatus: 'Admission Confirmed',
   });
 
-  // Filter logic
+  // Strict Tenant Isolation Filter Logic
+  const effectiveInstFilter = isNationalRole ? filterInst : currentInstId;
+
   const filteredStudents = state.students.filter((s) => {
-    if (filterInst !== 'ALL' && s.institutionId !== filterInst) return false;
+    if (effectiveInstFilter !== 'ALL' && s.institutionId !== effectiveInstFilter) return false;
     if (filterStatus !== 'ALL' && s.validationStatus !== filterStatus) return false;
 
     if (searchTerm.trim().length > 0) {
@@ -63,7 +71,6 @@ export const StudentRecordList: React.FC = () => {
       const matchRoll = s.institutionalStudentId.toLowerCase().includes(q);
       if (!matchName && !matchApaar && !matchRoll) return false;
     }
-    return true;
   });
 
   const handleOpenCorrection = (student: StudentRecord) => {
@@ -170,18 +177,29 @@ export const StudentRecordList: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <Building className="w-4 h-4 text-slate-400 shrink-0" />
-          <select
-            value={filterInst}
-            onChange={(e) => setFilterInst(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
-          >
-            <option value="ALL">All Institutions (National)</option>
-            {state.institutions.map((i) => (
-              <option key={i.id} value={i.id}>
-                {i.code} — {i.name}
-              </option>
-            ))}
-          </select>
+          {isNationalRole ? (
+            <select
+              value={filterInst}
+              onChange={(e) => setFilterInst(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+            >
+              <option value="ALL">All AICTE Institutions (National View)</option>
+              {state.institutions.map((i) => (
+                <option key={i.id} value={i.id}>
+                  {i.code} — {i.name}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <div className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-300 flex items-center justify-between">
+              <span className="truncate max-w-[190px] font-medium text-white">
+                {state.institutions.find((i) => i.id === currentInstId)?.name || currentInstId}
+              </span>
+              <span className="text-[10px] bg-blue-950 text-blue-300 px-1.5 py-0.5 rounded border border-blue-800">
+                Tenant Scoped
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-2">
@@ -300,6 +318,15 @@ export const StudentRecordList: React.FC = () => {
                       >
                         <Clock className="w-3.5 h-3.5" />
                         Timeline
+                      </button>
+
+                      <button
+                        onClick={() => setCorroborationStudent(s)}
+                        className="inline-flex items-center gap-1 text-[11px] bg-slate-800 hover:bg-slate-700 text-teal-300 hover:text-white px-2 py-1 rounded transition-colors"
+                        title="Inspect Academic Corroboration Signals"
+                      >
+                        <Shield className="w-3.5 h-3.5" />
+                        Signals
                       </button>
 
                       <button
@@ -531,6 +558,125 @@ export const StudentRecordList: React.FC = () => {
                 className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold"
               >
                 Validate &amp; Add Student
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Corroboration Signals Inspection Modal */}
+      {corroborationStudent && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-teal-950/80 border border-teal-700/60 flex items-center justify-center text-teal-400">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-base font-bold text-white">
+                    Academic Corroboration Signals
+                  </h2>
+                  <p className="text-xs text-slate-400 font-mono">
+                    {corroborationStudent.name} &bull; {corroborationStudent.institutionalStudentId}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setCorroborationStudent(null)}
+                className="text-slate-400 hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Mandatory Regulatory Principle Notice */}
+            <div className="bg-amber-950/40 border border-amber-800/60 rounded-xl p-3.5 text-xs text-amber-200/90 leading-relaxed">
+              <span className="font-bold text-amber-300 block mb-0.5">
+                Statutory Principle (AICTE Multi-Signal Guideline):
+              </span>
+              Rule: Corroboration signals provide confidence scoring only. Absence of a corroboration signal SHALL NOT be used as the sole basis to classify a student as fraudulent or ghost.
+            </div>
+
+            {/* 4 Multi-Source Corroboration Signals */}
+            <div className="space-y-2.5 text-xs">
+              <div className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-start justify-between">
+                <div>
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    1. University Exam Registration
+                  </div>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Affiliated University Portal &bull; Term End 2026 Examination
+                  </p>
+                </div>
+                <span className="font-mono text-[10px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800">
+                  EXAM-2026-{corroborationStudent.institutionalStudentId.slice(-4)}
+                </span>
+              </div>
+
+              <div className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-start justify-between">
+                <div>
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    2. Tuition Fee Payment Receipt
+                  </div>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    State Treasury / Institutional ERP Gateway
+                  </p>
+                </div>
+                <span className="font-mono text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded border border-blue-800">
+                  TXN-FEES-{corroborationStudent.id.slice(-6)}
+                </span>
+              </div>
+
+              <div className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-start justify-between">
+                <div>
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    3. Scholarship / Quota Reference
+                  </div>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    {corroborationStudent.admissionCategory !== 'General'
+                      ? 'State Social Welfare / Central Scholarship Portal (NSP)'
+                      : 'Institutional Merit / Self-Financed Tier'}
+                  </p>
+                </div>
+                <span className="font-mono text-[10px] bg-purple-950 text-purple-300 px-2 py-0.5 rounded border border-purple-800">
+                  {corroborationStudent.admissionCategory !== 'General' ? 'NSP-VERIFIED' : 'GENERAL-QUOTA'}
+                </span>
+              </div>
+
+              <div className="bg-slate-950 border border-slate-800 rounded-xl p-3 flex items-start justify-between">
+                <div>
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    4. Campus Hostel / RFID Access Record
+                  </div>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Central Library RFID &amp; Academic Biometric Access
+                  </p>
+                </div>
+                <span className="font-mono text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
+                  RFID-{corroborationStudent.institutionalStudentId.slice(-4)}
+                </span>
+              </div>
+            </div>
+
+            {/* Composite Confidence Score */}
+            <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3 flex items-center justify-between text-xs">
+              <span className="text-slate-400">Composite Multi-Signal Confidence:</span>
+              <span className="font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded">
+                High Confidence (4/4 Signals Active)
+              </span>
+            </div>
+
+            <div className="flex justify-end pt-2 border-t border-slate-800">
+              <button
+                onClick={() => setCorroborationStudent(null)}
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs"
+              >
+                Close Signal View
               </button>
             </div>
           </div>

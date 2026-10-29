@@ -13,6 +13,7 @@ import {
   generateMatchingToken,
 } from './cryptoEngine';
 import { Institution, Programme, StudentRecord, AuditEvent } from '../types';
+import { store } from './store';
 
 const mockProgramme: Programme = {
   id: 'PROG-CSE',
@@ -293,3 +294,91 @@ test('HMAC matching token is pseudonymous and deterministic', () => {
   assert.notEqual(token1, tokenOther);
   assert.ok(token1.startsWith('HMAC-'));
 });
+
+test('Tenant Isolation Guard enforces strict institutional boundaries', () => {
+  const instUser = {
+    id: 'USR-INST-01',
+    name: 'Operator Delhi',
+    email: 'operator@dtu.ac.in',
+    role: 'INSTITUTION_OPERATOR' as const,
+    institutionId: 'INST-DEL-01',
+  };
+
+  const aicteAdmin = {
+    id: 'USR-AICTE-01',
+    name: 'AICTE Director',
+    email: 'director@aicte.gov.in',
+    role: 'AICTE_ADMIN' as const,
+  };
+
+  // Institutional operator can only access their own institution
+  assert.equal(store.canUserAccessInstitution(instUser, 'INST-DEL-01'), true);
+  assert.equal(store.canUserAccessInstitution(instUser, 'INST-MAH-02'), false);
+  assert.equal(store.canUserAccessInstitution(instUser, 'INST-BLR-03'), false);
+
+  // AICTE Admin has national oversight across all institutions
+  assert.equal(store.canUserAccessInstitution(aicteAdmin, 'INST-DEL-01'), true);
+  assert.equal(store.canUserAccessInstitution(aicteAdmin, 'INST-MAH-02'), true);
+  assert.equal(store.canUserAccessInstitution(aicteAdmin, 'INST-BLR-03'), true);
+});
+
+test('Admission Gate rejects over-capacity and supports emergency dual-override', () => {
+  const gateReq = {
+    idempotencyKey: 'IDEM-TEST-OVER-01',
+    institutionId: 'INST-DEL-01',
+    programmeId: 'PROG-DEL-CSE',
+    academicYear: '2026-2027',
+    apaarId: 'APAAR-DEMO-9911',
+    studentName: 'Test Overcapacity Candidate',
+    institutionalStudentId: 'DTU/2026/CSE/9911',
+    admissionCategory: 'General',
+    isSupernumerary: false,
+    proposedAdmissionDate: '2026-08-01',
+    seatCategory: 'Regular',
+  };
+
+  // In seed data, PROG-DEL-CSE has 20 approved seats and 21 confirmed students (over capacity)
+  const decision = store.evaluateAdmissionGate(gateReq);
+  assert.equal(decision.eligible, false);
+  assert.equal(decision.status, 'Blocked — Configured Rule Failed');
+  assert.ok(decision.reasons?.some((r: string) => r.includes('Intake capacity full')));
+
+  // Execute dual-approval emergency override
+  const overridden = store.executeGateOverride(
+    gateReq.idempotencyKey,
+    'State Counseling Order SC-2026-99',
+    'Dr. Anita Roy (AICTE Secretary)'
+  );
+
+  assert.ok(overridden);
+  assert.equal(overridden.eligible, true);
+  assert.equal(overridden.status, 'Eligible to Proceed');
+  assert.ok(overridden.reservationId?.startsWith('OVR-RES-'));
+  assert.ok(overridden.reasons[0].includes('EMERGENCY STATUTORY DUAL-OVERRIDE'));
+});
+
+test('Digital Twin Simulator computes impact without mutating committed data', () => {
+  const preState = store.getState();
+  const dtu = preState.institutions.find((i: any) => i.id === 'INST-DEL-01');
+  const dtuCse = dtu?.programmes.find((p: any) => p.id === 'PROG-DEL-CSE');
+  const baselineIntake = dtuCse?.approvedIntake;
+
+  // Run simulation adding admissions
+  const simResult = store.runWhatIfSimulation({
+    institutionId: 'INST-DEL-01',
+    programmeId: 'PROG-DEL-CSE',
+    additionalAdmissions: 5,
+    projectedWithdrawals: 1,
+    supernumeraryAdjustments: 0,
+  });
+
+  assert.ok(simResult.projectedActive > simResult.currentReported);
+  assert.ok(simResult.intakeDiscrepancy > 0);
+  assert.ok(simResult.projectedAlerts.length > 0);
+
+  // Assert that committed store state remains strictly unchanged
+  const postState = store.getState();
+  const postDtuCse = postState.institutions.find((i: any) => i.id === 'INST-DEL-01')?.programmes.find((p: any) => p.id === 'PROG-DEL-CSE');
+  assert.equal(postDtuCse?.approvedIntake, baselineIntake);
+});
+

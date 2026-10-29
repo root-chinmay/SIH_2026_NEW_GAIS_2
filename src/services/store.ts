@@ -390,6 +390,7 @@ class Store {
         admissionStatus: rec.admissionStatus || 'Provisionally Admitted',
         validationStatus: v.status,
         externalVerificationStatus: 'Format Checked',
+        batchId: '', // populated below
         recordVersion: 1,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -400,6 +401,8 @@ class Store {
     }
 
     const batchId = `BATCH-${inst.code}-${Date.now().toString().slice(-4)}`;
+    committedRecords.forEach((r) => (r.batchId = batchId));
+
     const newBatch: SubmissionBatch = {
       id: batchId,
       batchNumber: `${inst.code}/${prog.code}/${new Date().getFullYear()}`,
@@ -435,15 +438,55 @@ class Store {
     return newBatch;
   }
 
+  // Tenant Isolation Guard
+  public canUserAccessInstitution(
+    userOrTargetId: string | { role: string; institutionId?: string },
+    maybeTargetId?: string
+  ): boolean {
+    const user = typeof userOrTargetId === 'object' ? userOrTargetId : this.state.currentUser;
+    const targetInstId = typeof userOrTargetId === 'string' ? userOrTargetId : (maybeTargetId || '');
+
+    const role = user.role;
+    // Regulatory Admin & Auditor have national multi-tenant read/write/audit permissions
+    if (role === 'AICTE_ADMIN' || role === 'AICTE_AUDITOR' || role === 'SECURITY_ADMIN' || role === 'AUTHORIZED_VERIFIER') {
+      return true;
+    }
+    // Student can only access their enrolled institution
+    if (role === 'STUDENT') {
+      return user.institutionId === targetInstId;
+    }
+    // Institutional Admin, Operator, Signatory are strictly isolated to their own institution
+    const isAllowed = Boolean(user.institutionId && user.institutionId === targetInstId);
+    if (!isAllowed && typeof userOrTargetId === 'string') {
+      this.recordSecurityEvent(
+        'CROSS_TENANT_BLOCKED',
+        `Access denied: User ${this.state.currentUser.email} (${role}) from ${this.state.currentUser.institutionId} attempted to access ${targetInstId}`,
+        true
+      );
+    }
+    return isAllowed;
+  }
+
   // Signatory approval of batch
-  public approveBatch(batchId: string, comments: string) {
+  public approveBatch(batchId: string, comments: string): SubmissionBatch | null {
     const batch = this.state.batches.find((b) => b.id === batchId);
-    if (!batch) return;
+    if (!batch) return null;
 
     batch.status = 'APPROVED';
     batch.signatoryApprovedBy = this.state.currentUser.name;
     batch.signatoryApprovedAt = new Date().toISOString();
     batch.signatoryComments = comments;
+
+    // Transition provisional students in this batch to officially confirmed
+    if (batch.records) {
+      batch.records.forEach((rec) => {
+        const student = this.state.students.find((s) => s.id === rec.id);
+        if (student && student.admissionStatus === 'Provisionally Admitted' && student.validationStatus === 'VALID') {
+          student.admissionStatus = 'Admission Confirmed';
+          student.updatedAt = new Date().toISOString();
+        }
+      });
+    }
 
     this.addAuditEvent(
       this.state.currentUser.email,
@@ -456,16 +499,28 @@ class Store {
     );
 
     this.saveState();
+    return batch;
   }
 
-  public rejectBatch(batchId: string, reason: string) {
+  public rejectBatch(batchId: string, reason: string): SubmissionBatch | null {
     const batch = this.state.batches.find((b) => b.id === batchId);
-    if (!batch) return;
+    if (!batch) return null;
 
     batch.status = 'REJECTED';
     batch.signatoryApprovedBy = this.state.currentUser.name;
     batch.signatoryApprovedAt = new Date().toISOString();
     batch.signatoryComments = reason;
+
+    // Mark students in this rejected batch as not confirmed
+    if (batch.records) {
+      batch.records.forEach((rec) => {
+        const student = this.state.students.find((s) => s.id === rec.id);
+        if (student && student.admissionStatus === 'Provisionally Admitted') {
+          student.admissionStatus = 'Admission Cancelled';
+          student.updatedAt = new Date().toISOString();
+        }
+      });
+    }
 
     this.addAuditEvent(
       this.state.currentUser.email,
@@ -473,10 +528,79 @@ class Store {
       'BATCH_SIGNATORY_REJECTED',
       'BATCH',
       batch.id,
-      `Signatory rejected batch ${batch.batchNumber}: ${reason}`,
+      `Signatory ${this.state.currentUser.name} rejected batch ${batch.batchNumber}: ${reason}`,
       batch.institutionId
     );
 
+    this.saveState();
+    return batch;
+  }
+
+  // Add / Edit Institution (Section 8)
+  public addInstitution(instData: Institution) {
+    this.state.institutions.push(instData);
+    this.addAuditEvent(
+      this.state.currentUser.email,
+      this.state.currentUser.role,
+      'INSTITUTION_REGISTERED',
+      'RULE',
+      instData.id,
+      `Registered new institution ${instData.name} (${instData.code}) with ${instData.programmes.length} approved programmes.`,
+      instData.id
+    );
+    this.saveState();
+  }
+
+  public updateInstitution(updatedInst: Institution) {
+    const idx = this.state.institutions.findIndex((i) => i.id === updatedInst.id);
+    if (idx !== -1) {
+      this.state.institutions[idx] = updatedInst;
+      this.addAuditEvent(
+        this.state.currentUser.email,
+        this.state.currentUser.role,
+        'INSTITUTION_UPDATED',
+        'RULE',
+        updatedInst.id,
+        `Updated configuration for ${updatedInst.name} (${updatedInst.code})`,
+        updatedInst.id
+      );
+      this.saveState();
+    }
+  }
+
+  public addProgrammeToIntake(institutionId: string, prog: Programme) {
+    const inst = this.state.institutions.find((i) => i.id === institutionId);
+    if (!inst) return;
+    inst.programmes.push(prog);
+    this.addAuditEvent(
+      this.state.currentUser.email,
+      this.state.currentUser.role,
+      'PROGRAMME_INTAKE_ADDED',
+      'RULE',
+      prog.id,
+      `Added programme ${prog.name} (${prog.code}) with approved intake of ${prog.approvedIntake} to ${inst.name}`,
+      inst.id
+    );
+    this.saveState();
+  }
+
+  public recordSecurityEvent(
+    eventType: SecurityEvent['eventType'],
+    details: string,
+    blocked = false,
+    severity: SecurityEvent['severity'] = 'HIGH'
+  ) {
+    const newSecEvent: SecurityEvent = {
+      id: `SEC-${Date.now().toString().slice(-5)}`,
+      timestamp: new Date().toISOString(),
+      eventType,
+      actor: this.state.currentUser.email,
+      ipAddress: '14.139.224.2',
+      severity,
+      details,
+      blocked,
+    };
+    this.state.securityEvents.unshift(newSecEvent);
     this.saveState();
   }
 
@@ -702,6 +826,43 @@ class Store {
 
     this.saveState();
     return decision;
+  }
+
+  // Dual Override Workflow (Section 14)
+  public executeGateOverride(
+    idempotencyKey: string,
+    instReason: string,
+    aicteOfficer: string
+  ): AdmissionGateDecision {
+    const cached = this.state.gateIdempotencyCache[idempotencyKey];
+    const reservationId = `OVR-RES-${Date.now().toString().slice(-6)}`;
+    const overrideDecision: AdmissionGateDecision = {
+      status: 'Eligible to Proceed',
+      eligible: true,
+      requiresReview: false,
+      reasons: [
+        `EMERGENCY STATUTORY DUAL-OVERRIDE GRANTED:`,
+        `• Institutional Signatory Reason: "${instReason}"`,
+        `• AICTE Regulatory Officer Authorization: "${aicteOfficer}"`,
+        `• Regulatory Notice: Does not silently alter sanctioned intake ceiling; tracked as an auditable exception.`,
+      ],
+      capacityCheck: cached
+        ? cached.capacityCheck
+        : { approvedIntake: 20, currentEnrolled: 20, availableSeats: 0, isSupernumerary: false },
+      reservationId,
+      idempotencyCached: false,
+    };
+    this.state.gateIdempotencyCache[idempotencyKey] = overrideDecision;
+    this.addAuditEvent(
+      aicteOfficer,
+      'AICTE_ADMIN',
+      'ADMISSION_GATE_OVERRIDE_APPROVED',
+      'GATE',
+      reservationId,
+      `Dual override executed for key ${idempotencyKey}: ${instReason}`
+    );
+    this.saveState();
+    return overrideDecision;
   }
 
   // What-If Digital Twin simulator (Section 16) - Never alters committed state

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
 import { verifyAuditChain, simulateTampering, verifyCredentialSignature } from './src/services/cryptoEngine';
+import { store } from './src/services/store';
 
 dotenv.config();
 
@@ -80,6 +81,103 @@ app.post('/api/credentials/verify', (req: Request, res: Response) => {
     });
   } catch (err: any) {
     res.status(500).json({ error: err.message || 'Verification failed' });
+  }
+});
+
+// Tenant-Isolated Institutions Endpoint
+app.get('/api/institutions', (req: Request, res: Response) => {
+  const userRole = (req.headers['x-user-role'] as string) || 'AICTE_ADMIN';
+  const userInst = (req.headers['x-institution-id'] as string) || 'INST-DEL-01';
+
+  const state = store.getState();
+  if (userRole === 'AICTE_ADMIN' || userRole === 'AICTE_AUDITOR') {
+    return res.json(state.institutions);
+  }
+
+  // Institutional user gets only their scoped tenant
+  const scoped = state.institutions.filter((i) => i.id === userInst);
+  res.json(scoped);
+});
+
+// Tenant-Isolated Students Query Endpoint
+app.get('/api/students', (req: Request, res: Response) => {
+  const userRole = (req.headers['x-user-role'] as string) || 'AICTE_ADMIN';
+  const userInst = (req.headers['x-institution-id'] as string) || 'INST-DEL-01';
+  const requestedInst = (req.query.institutionId as string) || undefined;
+
+  const state = store.getState();
+
+  // Strict Tenant Isolation Guard
+  if (
+    userRole !== 'AICTE_ADMIN' &&
+    userRole !== 'AICTE_AUDITOR' &&
+    requestedInst &&
+    requestedInst !== userInst
+  ) {
+    return res.status(403).json({
+      error: 'Tenant Isolation Violation: Institutional roles cannot access cross-institution records.',
+      targetInstitution: requestedInst,
+      authorizedInstitution: userInst,
+    });
+  }
+
+  const effectiveInst =
+    userRole === 'AICTE_ADMIN' || userRole === 'AICTE_AUDITOR'
+      ? requestedInst
+      : userInst;
+
+  const results = effectiveInst
+    ? state.students.filter((s) => s.institutionId === effectiveInst)
+    : state.students;
+
+  res.json({
+    count: results.length,
+    students: results,
+  });
+});
+
+// Pre-Admission Gate Evaluation Endpoint
+app.post('/api/gate/check', (req: Request, res: Response) => {
+  try {
+    const decision = store.evaluateAdmissionGate(req.body);
+    res.json(decision);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message || 'Gate evaluation failed' });
+  }
+});
+
+// Batch Signatory Approval Endpoint
+app.post('/api/batches/approve', (req: Request, res: Response) => {
+  try {
+    const { batchId, signatoryName, signatoryDesignation } = req.body;
+    if (!batchId || !signatoryName) {
+      return res.status(400).json({ error: 'batchId and signatoryName required' });
+    }
+    const comment = signatoryDesignation ? `${signatoryName} (${signatoryDesignation})` : signatoryName;
+    const approved = store.approveBatch(batchId, comment);
+    if (!approved) {
+      return res.status(404).json({ error: 'Batch not found or already finalized' });
+    }
+    res.json({ success: true, batch: approved });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Batch approval failed' });
+  }
+});
+
+// Batch Signatory Rejection Endpoint
+app.post('/api/batches/reject', (req: Request, res: Response) => {
+  try {
+    const { batchId, reason } = req.body;
+    if (!batchId || !reason) {
+      return res.status(400).json({ error: 'batchId and reason required' });
+    }
+    const rejected = store.rejectBatch(batchId, reason);
+    if (!rejected) {
+      return res.status(404).json({ error: 'Batch not found or already finalized' });
+    }
+    res.json({ success: true, batch: rejected });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || 'Batch rejection failed' });
   }
 });
 

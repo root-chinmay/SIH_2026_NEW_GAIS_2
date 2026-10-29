@@ -3,12 +3,15 @@ import {
   Layers,
   ArrowRight,
   Building,
+  Building2,
   CheckCircle2,
   Users,
   ShieldCheck,
   TrendingDown,
   TrendingUp,
   AlertOctagon,
+  Sparkles,
+  Search,
 } from 'lucide-react';
 import { store } from '../services/store';
 
@@ -19,6 +22,12 @@ export const SeatLifecycleLedger: React.FC = () => {
 
   const [selectedProgId, setSelectedProgId] = useState(activeInst.programmes[0]?.id || '');
   const activeProg = activeInst.programmes.find((p) => p.id === selectedProgId) || activeInst.programmes[0];
+
+  // National Vacant-Seat Extension State (Demonstration Only)
+  const [vacancyFilterBranch, setVacancyFilterBranch] = useState('ALL');
+  const [candidatePercentile, setCandidatePercentile] = useState(88.5);
+  const [candidateCategory, setCandidateCategory] = useState('General');
+  const [matchedToken, setMatchedToken] = useState<string | null>(null);
 
   // Calculate seat numbers for selected programme
   const progStudents = state.students.filter(
@@ -275,6 +284,227 @@ export const SeatLifecycleLedger: React.FC = () => {
               />
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* National Vacant-Seat & Eligibility Extension (Demonstration Only) */}
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-bold text-white flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-amber-400" />
+                National Vacant-Seat &amp; Eligibility Matching Ledger
+              </h2>
+              <span className="text-[10px] font-mono uppercase bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded font-semibold">
+                Demonstration Extension Only
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 mt-1 max-w-3xl leading-relaxed">
+              While the core APAAR integrity platform operates as an independent regulatory clearinghouse, a shared vacant-seat ledger demonstrates how transparent, verifiable intake telemetry could eliminate administrative chaos during institutional spot rounds and stray vacancy counseling.
+            </p>
+          </div>
+        </div>
+
+        {/* Spot-Round Matching Filter */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs">
+          <div>
+            <label className="text-slate-400 font-medium block mb-1">
+              Branch / Discipline Filter:
+            </label>
+            <select
+              value={vacancyFilterBranch}
+              onChange={(e) => setVacancyFilterBranch(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white"
+            >
+              <option value="ALL">All Engineering Disciplines</option>
+              <option value="Computer">Computer Science &amp; AI</option>
+              <option value="Mechanical">Mechanical Engineering</option>
+              <option value="Electrical">Electrical &amp; Electronics</option>
+              <option value="Civil">Civil Engineering</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="text-slate-400 font-medium block mb-1">
+              Candidate Entrance Percentile:
+            </label>
+            <input
+              type="number"
+              step="0.1"
+              min="0"
+              max="100"
+              value={candidatePercentile}
+              onChange={(e) => setCandidatePercentile(parseFloat(e.target.value) || 0)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white font-mono"
+            />
+          </div>
+
+          <div>
+            <label className="text-slate-400 font-medium block mb-1">
+              Candidate Quota Category:
+            </label>
+            <select
+              value={candidateCategory}
+              onChange={(e) => setCandidateCategory(e.target.value)}
+              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white"
+            >
+              <option value="General">General / Open</option>
+              <option value="OBC">OBC-NCL</option>
+              <option value="SC">SC</option>
+              <option value="ST">ST</option>
+              <option value="EWS">EWS</option>
+            </select>
+          </div>
+
+          <div className="flex items-end">
+            <button
+              onClick={() => {
+                const token = `SPOT-${Date.now().toString(36).toUpperCase()}-${Math.floor(Math.random() * 899 + 100)}`;
+                setMatchedToken(token);
+              }}
+              className="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-colors"
+            >
+              <Sparkles className="w-4 h-4" />
+              Generate Spot Pass
+            </button>
+          </div>
+        </div>
+
+        {/* Issued Spot-Round Pass Badge if generated */}
+        {matchedToken && (
+          <div className="p-3 bg-emerald-950/60 border border-emerald-800 rounded-xl flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <div>
+                <span className="font-semibold text-white">
+                  Spot-Round Verification Token Issued:
+                </span>{' '}
+                <span className="font-mono text-emerald-300 font-bold">{matchedToken}</span>
+                <span className="text-slate-400 block text-[11px]">
+                  Eligible for instant automated admission gate clearance at verified participating institutions.
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => setMatchedToken(null)}
+              className="text-xs text-slate-400 hover:text-white underline ml-3"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
+
+        {/* Multi-Institution Vacant Seat Table */}
+        <div className="overflow-x-auto rounded-xl border border-slate-800">
+          <table className="w-full text-left text-xs text-slate-300">
+            <thead className="bg-slate-950 text-slate-400 border-b border-slate-800 font-medium">
+              <tr>
+                <th className="p-3">AICTE Institution</th>
+                <th className="p-3">Sanctioned Programme</th>
+                <th className="p-3 text-center">Approved Intake</th>
+                <th className="p-3 text-center">Enrolled</th>
+                <th className="p-3 text-center">Vacant Seats</th>
+                <th className="p-3 text-center">Spot Round Eligibility</th>
+                <th className="p-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800 bg-slate-950/40">
+              {state.institutions.flatMap((inst) =>
+                inst.programmes
+                  .filter((p) =>
+                    vacancyFilterBranch === 'ALL'
+                      ? true
+                      : p.name.toLowerCase().includes(vacancyFilterBranch.toLowerCase())
+                  )
+                  .map((prog) => {
+                    const confirmed = state.students.filter(
+                      (s) =>
+                        s.institutionId === inst.id &&
+                        s.programmeId === prog.id &&
+                        !s.isSupernumerary &&
+                        (s.admissionStatus === 'Admission Confirmed' ||
+                          s.admissionStatus === 'Enrollment Reported' ||
+                          s.admissionStatus === 'Provisionally Admitted')
+                    ).length;
+                    const vacant = Math.max(0, prog.approvedIntake - confirmed);
+                    const cutoff = prog.name.includes('Computer')
+                      ? 80.0
+                      : prog.name.includes('Mechanical')
+                      ? 65.0
+                      : 60.0;
+                    const isEligible = candidatePercentile >= cutoff && vacant > 0;
+
+                    return (
+                      <tr key={`${inst.id}-${prog.id}`} className="hover:bg-slate-900/60">
+                        <td className="p-3">
+                          <div className="font-semibold text-white">{inst.name}</div>
+                          <div className="text-[11px] text-slate-400 font-mono">
+                            {inst.code} &bull; {inst.state}
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <div className="font-medium text-slate-200">{prog.name}</div>
+                          <div className="text-[11px] text-slate-400 font-mono">{prog.degree}</div>
+                        </td>
+                        <td className="p-3 text-center font-mono">{prog.approvedIntake}</td>
+                        <td className="p-3 text-center font-mono text-slate-300">{confirmed}</td>
+                        <td className="p-3 text-center">
+                          <span
+                            className={`font-mono font-bold px-2 py-0.5 rounded ${
+                              vacant > 0
+                                ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                                : 'bg-rose-950 text-rose-300 border border-rose-800'
+                            }`}
+                          >
+                            {vacant}
+                          </span>
+                        </td>
+                        <td className="p-3 text-center">
+                          {isEligible ? (
+                            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800 px-2 py-0.5 rounded">
+                              <CheckCircle2 className="w-3 h-3" />
+                              Eligible ({cutoff}% Cutoff)
+                            </span>
+                          ) : vacant === 0 ? (
+                            <span className="text-[11px] text-slate-500 font-medium">Capacity Full</span>
+                          ) : (
+                            <span className="text-[11px] text-amber-400/90 font-medium">
+                              Below Cutoff ({cutoff}%)
+                            </span>
+                          )}
+                        </td>
+                        <td className="p-3 text-right">
+                          <button
+                            disabled={!isEligible}
+                            onClick={() => {
+                              alert(`Simulated Spot-Round Interest logged for ${inst.code} - ${prog.name}. In production, this issues an immediate Admission Gate token.`);
+                            }}
+                            className={`text-[11px] font-semibold px-2.5 py-1 rounded transition-colors ${
+                              isEligible
+                                ? 'bg-blue-600 hover:bg-blue-500 text-white cursor-pointer'
+                                : 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                            }`}
+                          >
+                            Apply Spot
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Statutory Guard Notice */}
+        <div className="p-3 bg-slate-950 border border-slate-800/80 rounded-xl text-[11px] text-slate-400 flex items-center justify-between">
+          <span>
+            <strong>Statutory Boundary Notice:</strong> This vacant-seat matching ledger is an optional conceptual extension and does not alter institutional admission autonomy or state counseling reservation quotas.
+          </span>
+          <span className="font-mono text-slate-500 shrink-0 ml-4">
+            AICTE Regulatory Extension
+          </span>
         </div>
       </div>
     </div>
