@@ -1,0 +1,1449 @@
+# MASTER PROMPT — APAAR INTEGRITY MESH
+## End-to-End SIH Prototype for AICTE-Approved Institutions
+
+### 1. YOUR ROLE
+
+Act as a senior full-stack software engineer, product designer, cybersecurity architect, data engineer, education technology specialist and regulatory workflow designer.
+
+Build a complete, interactive, end-to-end, full-stack web application for the following Smart India Hackathon problem statement:
+
+**Official problem statement title:** Development of an APAAR ID-Based Student Data Management and Verification Platform for AICTE-Approved Institutions.
+
+**Proposed prototype name:** APAAR Integrity Mesh.
+
+**Tagline:** From admission data to accountable, verifiable academic records.
+
+Do not merely produce a design, landing page, static UI, frontend mockup, implementation plan or collection of disconnected components. Build the actual runnable application with functional navigation, working forms, validation logic, realistic demo workflows, persistent storage where configured, role-based interfaces, interactive charts, simulated integrations, security controls and testable outputs.
+
+Use your available full-stack runtime and tools. Complete as much of the application as possible without asking me unnecessary questions. Make sensible technical decisions and verify the application after implementation.
+
+### 2. CORE OBJECTIVE
+
+Build a centralized, privacy-aware student data management, admission reconciliation, regulatory monitoring and academic record verification platform for AICTE-approved institutions.
+
+The platform must allow institutions to submit and update student-level enrolment data using APAAR ID as the proposed primary academic identifier. It must validate incoming records, detect potential duplicates, compare enrolment against applicable approved intake, maintain admission timelines, manage discrepancies, provide evidence-backed alerts, offer AICTE monitoring dashboards and support controlled verification of academic credentials.
+
+The application must implement the following end-to-end workflow:
+
+Institution registration and authentication
+→ approved intake configuration
+→ student data upload or secure API submission
+→ schema normalization
+→ record validation
+→ APAAR-related identifier checks
+→ cross-institution reconciliation
+→ intake and category validation
+→ discrepancy investigation and correction
+→ authorized approval
+→ central student record repository
+→ AICTE analytics and monitoring
+→ controlled academic credential verification
+→ regulatory reports and auditable records.
+
+The platform must also demonstrate innovative capabilities beyond a conventional student management dashboard.
+
+### 3. NON-NEGOTIABLE REQUIREMENTS
+
+1. Every important visible button must perform its advertised action.
+2. Do not use nonfunctional placeholder buttons, fake loading animations, hardcoded chart-only screens or navigation links that lead nowhere.
+3. Use a real validation engine with deterministic, testable rules.
+4. Store and retrieve application records through a persistent backend whenever the configured environment supports it.
+5. Enforce permissions on the server or through correctly configured backend security rules, not just in the frontend.
+6. Use synthetic student identities and records throughout the demonstration.
+7. Clearly label all simulated APAAR, AICTE, institutional ERP, SMS, WhatsApp and other external integrations as DEMO or MOCK.
+8. Never claim that a synthetic identifier has been verified against an official APAAR system.
+9. Never automatically classify a student or institution as fraudulent solely because of a duplicate match, missing data, a low score or a missing student response.
+10. Never describe a hash chain as an immutable blockchain.
+11. Do not store production secrets, private keys or API credentials in client-side code.
+12. Do not use real student records, real APAAR IDs or sensitive personal information in sample data.
+13. All core features must remain demonstrable even when external API credentials are unavailable.
+14. Keep automated rules responsible for regulatory calculations. AI may explain findings, but must not independently invent regulations or make final regulatory decisions.
+15. Prioritize a working, integrated application over adding many partially implemented advanced technologies.
+
+### 4. TECHNOLOGY STACK
+
+Build a modern responsive full-stack web application.
+
+Preferred stack:
+
+- Frontend: React, TypeScript and a clean component architecture.
+- UI: Tailwind CSS or the styling framework best supported by the environment.
+- Backend: Node.js server-side routes and business logic.
+- Persistent data: Firebase Authentication and Cloud Firestore if available and configured in the AI Studio environment. Otherwise use an appropriate backend-connected persistent database, with a clearly labelled demo fallback if necessary.
+- Charts: Recharts or a comparable charting library.
+- CSV parsing: a maintained CSV parsing library.
+- Excel handling: a maintained XLSX processing library, if available.
+- PDF generation: a suitable PDF generation library or browser print layout.
+- QR code generation: a maintained QR code package.
+- Cryptography: standard, maintained Node.js cryptographic facilities for server-side hashing, HMAC and signed demo credentials.
+- AI explanation: Gemini API through the server-side runtime when available.
+- Authentication: Firebase Authentication or another suitable maintained authentication implementation when available.
+
+Allow the AI Studio agent to choose supported equivalent packages when necessary.
+
+Use environment variables or the platform's server-side Secrets facility for credentials. Never expose secret values to the browser.
+
+If a real persistent database cannot be configured, implement a functional demo data store with clear limitations. Do not pretend local browser storage is a secure production database.
+
+Keep frontend, backend, validation engine, data access, reporting and security logic separated into understandable modules.
+
+### 5. PRODUCT IDENTITY AND VISUAL DESIGN
+
+Create an elegant, professional, modern Indian public-sector technology platform.
+
+Application name: APAAR Integrity Mesh.
+
+Product descriptor: AICTE Student Data Management and Verification Platform.
+
+Use a premium enterprise dashboard visual style with:
+
+- Deep navy and blue as primary colors.
+- Teal or restrained green for successful validations.
+- Amber for warnings and unresolved issues.
+- Red for critical validation errors.
+- White or soft neutral backgrounds.
+- Clear typography and consistent spacing.
+- Accessible contrasts and readable tables.
+- Responsive desktop, laptop and tablet layouts.
+- A compact collapsible sidebar.
+- Breadcrumbs and page titles.
+- Search, filtering, sorting and pagination.
+- Skeleton loading states where appropriate.
+- Clear empty states and meaningful success/error messages.
+- Modal dialogs for sensitive actions.
+- Confirmation dialogs before destructive operations.
+- Helpful tooltips explaining unfamiliar regulatory or technical terms.
+
+Use suitable icons, polished data visualization, record timelines and graph views.
+
+Do not imitate an official government portal or use an AICTE logo without authorization. Display a visible notice:
+
+“SIH PROTOTYPE — Independent demonstration using synthetic data. Not an official AICTE or APAAR service.”
+
+Show a persistent DEMO MODE indicator whenever mock data or simulated external verification is being used.
+
+### 6. LANDING PAGE AND APPLICATION ENTRY
+
+Build a complete public-facing landing page.
+
+Include:
+
+- Product name and value proposition.
+- Problem overview.
+- Major platform capabilities.
+- How the system works.
+- Core innovations.
+- Security and privacy principles.
+- A visual workflow from institutional submission to authorized verification.
+- A dashboard preview using synthetic metrics.
+- A prominent “Enter Demo Workspace” button.
+- A “Role-Based Login” or “Sign In” entry.
+- A footer explaining demonstration-only integrations and data limitations.
+
+Provide separate routes or equivalent application states for authentication and all major workspaces.
+
+The user must be able to navigate from the landing page into the complete demonstration without a dead end.
+
+### 7. MULTI-ROLE LOGIN AND ACCESS CONTROL
+
+Implement these roles.
+
+**Role A — Institution Administrator**
+
+Can manage the assigned institution's approved programmes, intake configuration where authorized, student submissions, validation reports, corrections and institutional dashboard.
+
+**Role B — Institution Data Operator**
+
+Can upload student data, review errors and prepare corrections. Cannot approve their own high-risk changes or access other institutions' records.
+
+**Role C — Institution Signatory**
+
+Can review submitted batches, inspect validation evidence and approve or reject submissions within the authorized scope of the prototype.
+
+**Role D — AICTE Regulatory Administrator**
+
+Can view permitted cross-institution analytics, investigate discrepancies, manage approved rule versions, review exceptions and generate reports.
+
+**Role E — AICTE Auditor or Inspector**
+
+Can access read-only records, historical snapshots, audit trails, decision evidence and inspection reports. Cannot silently modify source records.
+
+**Role F — Student**
+
+Can see their own synthetic admission receipt, review the admission details reported for them, confirm that the details look correct or raise a dispute.
+
+**Role G — Authorized Verifier**
+
+Represents an employer, awarding body or other authorized verification stakeholder. Can verify permitted student credentials and view only the claims necessary for the specified purpose.
+
+**Role H — Security Administrator**
+
+Can review security events, access failures and configured security controls. This role must not automatically receive unrestricted access to student personal data.
+
+#### Demo login experience
+
+Provide a smooth demo role selector with separate entry cards for each role.
+
+Seed clearly labelled demo accounts such as:
+
+- Institution Administrator — Institution A.
+- Institution Data Operator — Institution A.
+- Institution Signatory — Institution A.
+- Institution Administrator — Institution B.
+- AICTE Regulatory Administrator.
+- AICTE Auditor.
+- Student Demo Account.
+- Authorized Verifier.
+- Security Administrator.
+
+Use a role selector or demo sign-in flow so SIH judges can quickly explore each interface.
+
+If proper Firebase Authentication or another real authentication service is configured, use it for identity and persist role assignments securely. In demo mode, allow role switching only as a clearly labelled prototype simulation. Never present a client-side role selector as production-grade authentication.
+
+Enforce role permissions in backend routes and database security policies wherever supported.
+
+A user from Institution A must not be able to read or modify Institution B's records simply by changing a URL, record identifier or request parameter.
+
+### 8. INSTITUTION REGISTRATION AND INSTITUTION DIRECTORY
+
+Build an institution directory containing synthetic institutions and their programmes.
+
+Include the following fields:
+
+- Institution name.
+- Synthetic institution code.
+- Institution type.
+- State and district.
+- Campus.
+- Approved programmes.
+- Academic years.
+- Programme identifiers.
+- Applicable approved intake.
+- Authorised signatory.
+- Reporting status.
+- Last submission timestamp.
+- Verification status.
+
+The institution registration workflow should allow an authorized administrator to create or update a demo institution, assign programmes, configure permitted data-entry users and initiate a submission.
+
+Mark all approval values as synthetic demo configuration unless obtained from an authorized external source.
+
+Include an institution profile with enrolment summaries, submission history, pending validation issues, programme-level capacity and the audit trail.
+
+### 9. INSTITUTION DASHBOARD
+
+Create a fully functional institution dashboard.
+
+Display KPI cards for:
+
+- Programmes covered.
+- Approved intake.
+- Reported student enrolment.
+- Seat utilization.
+- Student records uploaded.
+- Records passing local validation.
+- Potential duplicate records.
+- Missing or malformed identifiers.
+- Records awaiting review.
+- Records awaiting signatory approval.
+- Outstanding student disputes.
+- Submission completion status.
+
+Include:
+
+- Programme-wise enrolment charts.
+- Admission-category distribution.
+- Submission status chart.
+- Recent activities.
+- Outstanding corrections.
+- Validation summary.
+- Next actions.
+
+Make every KPI and chart interactive. Clicking a metric should open the corresponding filtered data or issue list.
+
+The dashboard must refresh after successful operations using the underlying application data, not just hardcoded display values.
+
+### 10. STUDENT DATA UPLOAD AND SCHEMA NORMALIZATION
+
+Create a complete student data submission workflow.
+
+Support:
+
+1. CSV upload.
+2. Excel upload if the required package is available.
+3. Manual addition of one synthetic student record.
+4. JSON/API submission through a simulated institutional integration endpoint.
+5. A downloadable template containing the supported fields.
+
+Show:
+
+- Drag-and-drop upload area.
+- Selected filename and file size.
+- Upload progress.
+- File preview.
+- Column mapping.
+- Row counts.
+- Detected format problems.
+- Duplicate rows within the file.
+- Preview of normalized data.
+- Validation results before committing the batch.
+- A clear submission summary.
+
+Validate the file type, size and structure. Reject unsupported content safely. Do not execute uploaded content. Prevent spreadsheet formula injection in exported reports.
+
+Include a smart column-mapping feature for differently named fields, such as mapping `student_number` to `institutional_student_id`. Allow the user to confirm mappings before accepting the file.
+
+Handle malformed rows without crashing the application. Return actionable row-level error messages.
+
+Do not import a partially invalid batch as fully verified.
+
+### 11. CANONICAL STUDENT DATA MODEL
+
+Implement a consistent student-level schema.
+
+Include the following fields where appropriate:
+
+- Internal record ID.
+- Synthetic APAAR ID.
+- Institutional student ID.
+- Institution ID.
+- Campus ID.
+- Programme ID.
+- Academic year.
+- Admission date.
+- Admission status.
+- Admission source.
+- Enrolment start date.
+- Withdrawal date where applicable.
+- Transfer date where applicable.
+- Admission category.
+- NRI status.
+- OCI status.
+- Foreign National status.
+- Other permitted supernumerary or category information.
+- Validation status.
+- Verification status.
+- Source submission ID.
+- Created timestamp.
+- Updated timestamp.
+- Record version.
+- Relevant approval or evidence references.
+- Authorized correction history.
+
+Keep programme-level fields separate from student-level fields.
+
+For approved intake, include:
+
+- Institution ID.
+- Programme ID.
+- Campus ID.
+- Academic year.
+- Approved regular intake.
+- Applicable approved supernumerary categories and limits.
+- Relevant approval reference.
+- Effective dates.
+- Rule version.
+
+Use synthetic APAAR-like values such as `APAAR-DEMO-0001`. Clearly state that these values are fictional and are not real identifiers.
+
+Do not collect Aadhaar numbers or unrelated personal information merely to simulate APAAR validation.
+
+### 12. APAAR VALIDATION ENGINE
+
+Build an actual multi-stage validation engine.
+
+**Stage 1 — Field validation**
+
+Check required fields, types, dates, valid category values, institution IDs and programme IDs.
+
+**Stage 2 — Identifier-format validation**
+
+Check the configured demo format and report missing or malformed synthetic identifiers.
+
+**Stage 3 — Internal duplicate detection**
+
+Detect repeated identifiers within an uploaded file and across existing records.
+
+**Stage 4 — Cross-institution reconciliation**
+
+Find possible matches across different institutions and show the associated enrolment timelines.
+
+**Stage 5 — Admission and category validation**
+
+Check that the student is associated with a valid institution, programme, academic year and permitted admission category.
+
+**Stage 6 — Intake reconciliation**
+
+Compare the number of admissions with the applicable approved intake and allowed additional categories.
+
+**Stage 7 — Authoritative verification status**
+
+Represent external identity verification through an adapter interface.
+
+Possible statuses:
+
+- Format Checked.
+- Internal Match Checked.
+- External Verification Pending.
+- Externally Verified.
+- External Verification Failed.
+- Unable to Verify.
+
+In demo mode, the external verification adapter must return MOCK or NOT CONNECTED statuses. Never claim a real APAAR identity has been verified when using synthetic data.
+
+Clearly distinguish successful internal data checks from authoritative identity verification.
+
+### 13. CROSS-INSTITUTION IDENTITY AND ADMISSION LIFECYCLE
+
+Implement a distinctive Academic Identity and Admission Lifecycle Engine.
+
+Track admission events such as:
+
+- Application Submitted.
+- Offer Issued.
+- Provisionally Admitted.
+- Admission Confirmed.
+- Enrollment Reported.
+- Withdrawal Requested.
+- Withdrawal Approved.
+- Transfer Initiated.
+- Transfer Completed.
+- Admission Cancelled.
+
+The valid state transitions must be checked by backend logic.
+
+Show a timeline for every relevant synthetic identifier with associated institutions, programme, start date, end date, current status and source submission.
+
+Detect the same identifier appearing in multiple active admissions, but do not automatically assume fraud.
+
+Classify potential situations such as:
+
+- Duplicate within one upload.
+- Possible simultaneous active enrolments.
+- Potentially legitimate transfer.
+- Previous withdrawn admission.
+- Conflicting admission dates.
+- Repeated reporting of the same admission.
+- Unresolved identity or status conflict.
+
+Display an evidence-based explanation and provide an investigation workflow.
+
+### 14. ADMISSION GATE API
+
+Implement an interactive Admission Gate simulation.
+
+The gate is designed to check a proposed admission before it is committed or reported.
+
+Create a form containing:
+
+- Institution.
+- Programme.
+- Academic year.
+- Synthetic student identifier.
+- Admission category.
+- Proposed admission date.
+- Seat category.
+- Relevant approval reference where applicable.
+
+When the user submits the form, the backend must:
+
+1. Verify that the institution and programme exist in the demo dataset.
+2. Check the relevant approved intake configuration.
+3. Determine whether eligible capacity is available.
+4. Check for potential conflicting active admission records.
+5. Validate the category against the configured rule set.
+6. Return a structured decision and the reasons behind it.
+7. Reserve a seat or create an admission record only if the configured conditions are satisfied.
+8. Record the operation in the audit history.
+
+Supported results:
+
+- Eligible to Proceed.
+- Warning — Review Required.
+- Blocked — Configured Rule Failed.
+- Pending Approval.
+- Duplicate Conflict Requires Investigation.
+
+Where appropriate, demonstrate an override workflow requiring an authorized reason and a second approval. An override must not silently change the approved capacity or ignore applicable rules.
+
+Implement idempotency so a repeated API request does not accidentally create duplicate admissions.
+
+All gate rules in the prototype are illustrative and must be clearly labelled. Actual regulatory enforcement depends on authoritative rules, permission and real institutional integration.
+
+### 15. SEAT LIFECYCLE LEDGER
+
+Create a seat-level lifecycle model with states such as:
+
+Approved → Available → Reserved → Offered → Accepted → Reported → Withdrawn → Vacated → Available Again.
+
+Allow only valid transitions.
+
+Represent approved regular intake and permitted supernumerary allocations separately.
+
+Build a visual seat ledger or seat-flow diagram showing how capacity is used and released.
+
+Show:
+
+- Total applicable capacity.
+- Allocated seats.
+- Accepted admissions.
+- Reported admissions.
+- Withdrawn admissions.
+- Vacant seats.
+- Pending reservations.
+- Supernumerary allocations.
+- Unresolved capacity discrepancies.
+
+Prevent double-counting. Define precise rules for active admissions, withdrawals and reservations, and apply the same definitions across the dashboard and reports.
+
+Do not count a proposed or merely reserved admission as a confirmed enrolment.
+
+### 16. ENROLMENT DIGITAL TWIN / WHAT-IF SIMULATOR
+
+Build an interactive simulation panel for AICTE administrators.
+
+The user should select an institution and programme, then adjust proposed admissions, withdrawals and supernumerary allocations using sliders or input fields.
+
+Show how the hypothetical scenario affects:
+
+- Approved capacity.
+- Reported admissions.
+- Projected active admissions.
+- Seat utilization.
+- Vacancy count.
+- Potential intake discrepancy.
+- Category allocation.
+- Warning count.
+
+Provide side-by-side comparisons:
+
+- Current recorded state.
+- Hypothetical scenario.
+- Difference between them.
+- Reasons for each resulting alert.
+
+Add a Reset Simulation button.
+
+Simulation must never silently change real or committed student records. Clearly mark every simulation result as hypothetical. Where approved capacity depends on specific regulations, use the configured demo rules rather than inventing legal limits.
+
+### 17. REGULATORY RULES ENGINE AND TIME MACHINE
+
+Build a versioned regulatory rules management module.
+
+A rule should contain:
+
+- Rule ID.
+- Rule name.
+- Plain-language explanation.
+- Applicable institution/programme types.
+- Applicable admission category.
+- Academic year and effective dates.
+- Rule version.
+- Validation logic.
+- Authoritative source reference or synthetic demo reference.
+- Approval status.
+- Authorizing user.
+- Activation timestamp.
+- Associated test cases.
+
+Provide sample rules for:
+
+- Required student identifier.
+- Duplicate admission checking.
+- Approved intake.
+- Supernumerary-category allocation.
+- Required student fields.
+- Admission date validation.
+- Submission completion.
+
+Clearly label all example rules as illustrative. Do not misrepresent them as the current AICTE Approval Process Handbook.
+
+Allow a privileged administrator to draft a new version, compare it with the previous version, test it against sample records, review the impact and activate it only through the configured approval workflow.
+
+Include a Regulatory Time Machine that can replay synthetic historical records under an earlier or later rule version.
+
+Show:
+
+- Original historical rule.
+- Original validation result.
+- New rule version.
+- Replayed result.
+- Changed records.
+- Reasons for changes.
+
+Preserve the original decision and history. A replay must not silently overwrite historical facts or approved regulatory decisions.
+
+If Gemini is used to draft a rule from text, treat the result as a proposal requiring human review. Never activate an AI-generated rule automatically.
+
+### 18. BI-TEMPORAL RECORD HISTORY
+
+Support two time dimensions:
+
+1. Valid time: when the represented admission or status was considered true.
+2. System time: when the platform received or recorded that information.
+
+Implement fields such as:
+
+- Valid From.
+- Valid To.
+- Recorded At.
+- Superseded At.
+- Record Version.
+- Source Event ID.
+
+Create a historical date selector that lets an auditor answer:
+
+“What did the system show on this date?”
+
+Also answer:
+
+“When did the institution actually report or correct this information?”
+
+Use synthetic examples involving a delayed withdrawal report and a backdated correction. Display the original information, the later report and the effect on the current view.
+
+Do not overwrite previous events when a correction is made.
+
+### 19. TAMPER-EVIDENT AUDIT CHAIN
+
+Implement a server-side tamper-evident audit event chain.
+
+Each event should include a canonical representation of:
+
+- Event ID.
+- Actor.
+- Action.
+- Timestamp.
+- Affected record reference.
+- Previous event hash.
+- Event hash.
+- Relevant source or transaction reference.
+
+Use a suitable cryptographic hash function, such as SHA-256, over a canonical event representation that includes the previous event hash.
+
+Create a verification utility that rechecks the chain and reports whether the stored events are consistent.
+
+Include a secure demonstration called “Simulate Audit Tampering.”
+
+It must operate on a cloned or disposable demo log so that it does not destroy the normal audit history.
+
+Demonstrate the following:
+
+1. A valid audit chain.
+2. A test modification to an earlier event in the cloned log.
+3. Verification of the altered log.
+4. Detection of the broken hash chain.
+5. Explanation of which event failed verification.
+
+Optionally calculate a Merkle root for a batch of audit events. Clearly label all in-app roots and hashes as demo-generated unless they have actually been published to an independent trusted system.
+
+Do not call the log absolutely immutable. A hash chain alone cannot prevent a privileged attacker from changing the records and recomputing the entire chain. Explain that protected checkpoints, restricted administration and independent backups would be required for stronger assurance.
+
+### 20. PRIVACY-PRESERVING APAAR MATCHING
+
+Implement a separate identity-matching service to demonstrate privacy by design.
+
+The service should:
+
+- Receive a synthetic identifier through the backend.
+- Validate the requester's permission.
+- Generate a protected matching token using a server-side keyed HMAC construction if supported.
+- Store the protected token for matching.
+- Restrict access to any raw identifier that must be retained.
+- Avoid placing raw identifiers in logs, analytics or general dashboard APIs.
+- Return only the minimum data required for a duplicate or matching result.
+
+Keep any HMAC secret on the server in a secret-management facility or protected environment variable.
+
+Do not compute sensitive matching tokens in exposed client-side code.
+
+Clearly state that a matching token is pseudonymous and remains sensitive. It is not equivalent to anonymization.
+
+Use only synthetic IDs in the prototype.
+
+If a safe external private set intersection package is unavailable, implement this restricted matching service first and present PSI as a documented extension. Do not create a homemade cryptographic protocol and claim it is secure.
+
+### 21. STUDENT-IN-THE-LOOP ATTESTATION
+
+Build a complete student confirmation and dispute workflow.
+
+For an admission recorded by an institution, create an optional student attestation request showing:
+
+- Institution.
+- Programme.
+- Academic year.
+- Admission date.
+- Admission status.
+- Request timestamp.
+- Available actions.
+
+Student actions:
+
+- Confirm These Details.
+- Report Incorrect Details.
+- I Do Not Recognize This Admission.
+- Request Correction.
+
+Record responses with timestamps and the relevant request ID.
+
+Create an investigation case if a student disputes an admission.
+
+A missing response must be labelled “Awaiting Response” or “Unconfirmed,” never automatically treated as proof of a ghost student or fraud.
+
+Provide a mock notification inbox for the demo. Do not claim that actual SMS, email or WhatsApp messages are sent unless the relevant authorized integrations are configured.
+
+### 22. STUDENT ADMISSION RECEIPT
+
+Generate a verifiable, synthetic Admission Receipt for each eligible reported admission.
+
+Include:
+
+- Receipt reference.
+- Fictional student identifier.
+- Institution.
+- Programme.
+- Academic year.
+- Admission status.
+- Issue date.
+- Receipt status.
+- Verification endpoint or QR code.
+- Digital signature or integrity verification result.
+
+The receipt must clearly state that it is a prototype artifact and is not an official government credential.
+
+Support receipt states such as:
+
+- Active.
+- Pending Verification.
+- Superseded.
+- Revoked.
+
+A receipt should be tied to a particular record version and should not be treated as permanent proof when the underlying admission status later changes.
+
+Allow authorized users to generate a printable receipt. Ensure that the QR code does not expose the complete student profile.
+
+### 23. SIGNED ACADEMIC CREDENTIALS AND QR VERIFICATION
+
+Build a separate Authorized Verification Portal.
+
+Allow an authorized institution to issue a fictional demo credential containing permitted claims such as:
+
+- Issuing institution.
+- Programme.
+- Academic year or study period.
+- Credential status.
+- Credential identifier.
+- Issuance timestamp.
+- Credential version.
+
+Provide a QR-based verification workflow.
+
+Prefer an established signed credential representation where supported. A simpler server-signed demo credential is acceptable if it is implemented correctly.
+
+Keep private signing keys on the server. Expose only appropriate public verification material.
+
+The QR should contain a protected opaque reference or a verifiable signed credential with minimal claims, not an unprotected complete student record.
+
+When scanned, the verification page should:
+
+1. Resolve the credential reference.
+2. Verify the signature or configured integrity check.
+3. Check current credential status.
+4. Check revocation or supersession status.
+5. Display the limited claims permitted for the verification context.
+6. Clearly indicate demo status when applicable.
+
+Provide a field showing which checks passed and which have not been performed.
+
+Support a certificate preview for an authorized awarding body, displaying institutional student ID and an APAAR identifier or masked identifier alongside the appropriate QR reference. Use fictional demo values and clearly mark the certificate preview as a demonstration, not a legally issued academic award.
+
+### 24. AICTE CENTRAL REGULATORY DASHBOARD
+
+Build a comprehensive national-level monitoring interface for synthetic data.
+
+Display:
+
+- Number of demo institutions.
+- Number of programmes.
+- Applicable approved intake.
+- Reported student enrolment.
+- Active admissions.
+- Vacant seats.
+- Category-wise enrolment.
+- Supernumerary admissions.
+- Records internally validated.
+- Records awaiting external verification.
+- Potential duplicate cases.
+- Intake discrepancies.
+- Missing data.
+- Unresolved disputes.
+- Institution submission completeness.
+- Historical trend comparisons.
+
+Provide filters for:
+
+- Academic year.
+- State.
+- District.
+- Institution.
+- Programme.
+- Admission status.
+- Verification status.
+- Issue category.
+
+Use interactive charts and tables. Clicking a metric should reveal the corresponding details according to the user's permissions.
+
+Distinguish the number of submitted records from the number of unique students and the number of active admissions. Avoid inflated aggregate counts caused by duplicate submissions.
+
+### 25. EXPLAINABLE ADMISSION RISK ENGINE
+
+Build a deterministic, explainable exception and risk engine.
+
+Possible indicators include:
+
+- A potential duplicate active admission.
+- Missing identifier.
+- Malformed identifier.
+- Admission beyond configured permitted capacity.
+- Inconsistent admission dates.
+- Invalid or unsupported category.
+- Repeated submission.
+- Unusual change in aggregate enrolment.
+- Missing supporting approval reference.
+- Conflicting source records.
+
+Each alert must show:
+
+- Alert ID.
+- Institution.
+- Programme.
+- Relevant academic year.
+- Rule triggered.
+- Record or aggregate data supporting the alert.
+- Severity.
+- Risk or priority score if used.
+- Explanation.
+- Recommended next action.
+- Responsible role.
+- Current investigation status.
+
+Use transparent, configurable rules for scores. Make the scoring formula inspectable.
+
+Do not call any score a probability of fraud unless it is supported by a valid, calibrated model and appropriate evidence. Do not automatically penalize or accuse an institution based on an anomaly score.
+
+Provide alert statuses:
+
+New → Under Review → Evidence Requested → Institution Response Received → Resolved, Dismissed or Escalated.
+
+### 26. TRANSFER-VERSUS-DUPLICATE CLASSIFIER
+
+Create a visual enrolment timeline that allows an auditor to compare multiple admissions linked to the same synthetic identifier.
+
+Use temporal overlap, withdrawal status, transfer history and available supporting evidence.
+
+Display findings such as:
+
+- Likely Duplicate Submission.
+- Potential Overlapping Active Admissions.
+- Potentially Legitimate Transfer.
+- Historical Withdrawn Admission.
+- Conflicting Timeline.
+- Insufficient Evidence.
+
+Provide a graphical timeline for each related record.
+
+Explain the exact evidence behind the classification.
+
+Never automatically declare that a record is fraudulent based only on a matching identifier.
+
+### 27. COMPLIANCE HEALTH SCORE AND EARLY-WARNING ANALYTICS
+
+Implement a transparent Institution Data Quality Score based on configurable data-quality metrics.
+
+For example:
+
+- Required-field completeness.
+- Identifier-format validity.
+- Submission timeliness.
+- Unresolved validation errors.
+- Correction turnaround.
+- Unresolved intake discrepancies.
+
+Display the exact formula, weights, underlying counts and calculation date.
+
+Keep data-quality scores separate from official regulatory approval status.
+
+Provide a watchlist that prioritizes issues requiring review, not a black-box list of supposedly fraudulent institutions.
+
+Implement simple statistical trend detection using synthetic historical data. Detect unusual changes in enrolment, reporting volume and data quality.
+
+Clearly label statistical anomalies as review triggers and not proof of misconduct.
+
+Do not use Benford's law or arbitrary identifier sequences as proof of ghost students or fraudulent admission.
+
+### 28. CORROBORATION SIGNALS
+
+Build an optional experimental feature for cross-checking enrolment claims using authorized evidence references or synthetic flags.
+
+Possible demo signals:
+
+- An eligible examination registration exists.
+- An authorized fee-receipt reference exists.
+- A permitted scholarship-processing reference exists.
+- An authorized hostel allocation record exists.
+
+Do not connect to real student financial, examination or scholarship systems without authorization.
+
+For synthetic data, display the available signals, their source and date.
+
+Do not assume the absence of one signal means that a student is fake or inactive. Students may legitimately lack any particular supporting record.
+
+Avoid creating an unexplained composite score that automatically determines the legitimacy of a student.
+
+### 29. STUDENT DATA QUALITY CORRECTION WORKFLOW
+
+Every actionable validation error should have a correction path.
+
+For an institution data operator:
+
+1. Open the affected record.
+2. See the exact validation rule and error.
+3. Correct the permitted fields.
+4. Attach a synthetic or authorized evidence reference.
+5. Submit the correction.
+6. Receive the updated validation result.
+
+For an institution signatory:
+
+1. Review the original submission.
+2. Compare the corrected record.
+3. Review validation evidence.
+4. Approve or reject the correction.
+5. Record the decision and explanation.
+
+For an AICTE reviewer:
+
+1. Open an escalated case.
+2. Review the source and correction history.
+3. Request further evidence, dismiss or escalate the alert.
+4. Record the final decision.
+
+For every correction preserve the history, previous version, current version, actor and timestamp.
+
+Ensure that corrected data triggers reevaluation of relevant dashboards, reports and dependent credentials.
+
+### 30. BATCH APPROVAL AND SIGNATORY WORKFLOW
+
+Allow institution operators to submit a batch after local checks.
+
+The signatory must be able to:
+
+- Open the batch summary.
+- Review valid and invalid counts.
+- View unresolved exceptions.
+- Download the validation report.
+- Request corrections.
+- Approve or reject the batch.
+- Record an approval timestamp and submission version.
+
+Implement approval state transitions in the backend.
+
+A rejected or incomplete batch must not silently appear as a completely verified dataset.
+
+Keep submission status separate from external identity verification status.
+
+### 31. NATIONAL VACANT-SEAT AND ELIGIBILITY EXTENSION
+
+Add a demo-only future capability for vacancy reporting.
+
+Show aggregate vacant-seat data and an optional student interest or notification workflow.
+
+Do not allow unauthorised admission changes, automatic allocations or guaranteed seat offers.
+
+Explain that a production exchange would require a separate approved eligibility, admissions, counselling and policy framework.
+
+Label this module “Future Extension — Demonstration Only.”
+
+### 32. AUTHORIZED VERIFIER PORTAL
+
+Create a clean verification screen for employers, awarding bodies and other permitted stakeholders.
+
+Provide two options:
+
+- Enter a credential or receipt reference.
+- Scan or upload a demo QR code where supported.
+
+The verifier should see only permitted information and an explicit verification summary.
+
+Example result:
+
+- Credential signature: Valid / Invalid / Not Checked.
+- Issuing institution: Identified / Unknown.
+- Credential status: Active / Revoked / Superseded / Unknown.
+- Academic claim: Matches the issuing record / Does not match / Cannot verify.
+- External APAAR verification: Not Connected in Demo Mode.
+
+Include rate limiting and access auditing for verification endpoints.
+
+Do not expose the full student record through a public QR code.
+
+### 33. SECURITY AND PRIVACY CENTRE
+
+Implement security as a system-wide architecture, not merely a settings page.
+
+Include the following controls.
+
+**Authentication**
+- Secure authentication using a maintained implementation.
+- Password hashing through an appropriate library where passwords are used.
+- Multi-factor authentication capability for privileged accounts where supported.
+- Secure session handling and logout.
+- Rate limiting and protection against repeated login failures.
+
+**Role and tenant isolation**
+- Server-side role-based authorization.
+- Institution-level scoping.
+- Object-level access checks.
+- Read-only auditor permissions.
+- Restricted verifier permissions.
+- Separation of institutional, administrative and security responsibilities.
+
+**Transport and storage**
+- HTTPS/TLS in deployment.
+- Appropriate encryption at rest where supported.
+- Restricted database credentials.
+- Server-side secrets.
+- Key separation and documented key rotation.
+- No secrets in frontend bundles or source control.
+
+**Input and API protection**
+- Validated request schemas.
+- Parameterized database queries.
+- Upload size and format limits.
+- Safe file parsing.
+- Rate limits.
+- Allowed-origin and deployment security configuration.
+- Safe error responses without secret disclosure.
+- Protection against unauthorized fields or mass assignment.
+- Server-side authorization on every sensitive operation.
+
+**Privacy**
+- Data minimization.
+- Masked identifiers.
+- Protected matching tokens.
+- Controlled exports.
+- No unnecessary personal data in logs.
+- Clear purposes and access boundaries.
+- Appropriate consent or other lawful authorization for relevant data-sharing activities.
+- Configurable retention policies.
+
+**Audit and monitoring**
+- Successful and failed login events.
+- Student record access events.
+- Record changes.
+- Bulk exports.
+- Role and permission changes.
+- Rule updates.
+- Signature and verification events.
+- Administrative approvals.
+- Security alert events.
+
+Protect audit logs from ordinary modification and restrict access to them.
+
+**Backups and recovery**
+- Documented backup strategy.
+- Restricted backup permissions.
+- Restore testing.
+- Clear data-recovery status.
+
+Create a Security Centre UI showing:
+
+- Recent security events.
+- Blocked cross-institution access attempts.
+- Failed login attempts.
+- Unusual bulk access.
+- Data exports.
+- Pending security alerts.
+- Audit chain verification result.
+- Current demo security configuration.
+
+Use only synthetic activity events in the demo.
+
+### 34. TAMPER-EVIDENT INTEGRITY RECEIPTS
+
+For accepted submissions and important record changes, generate an integrity receipt with:
+
+- Submission reference.
+- Institution ID.
+- Record version.
+- Submission timestamp.
+- Validation summary.
+- Event or batch hash.
+- Relevant rule version.
+- Signature or integrity verification status.
+
+Optionally provide a daily synthetic batch-root demonstration.
+
+Do not claim that the hash itself proves the underlying information is true. Do not claim independent immutability unless an independent trusted checkpoint actually exists.
+
+### 35. STUDENT-FACING PORTAL
+
+Build a dedicated student workspace.
+
+Features:
+
+- View synthetic admission receipt.
+- View reported institution and programme.
+- See admission status.
+- Confirm details.
+- Submit a correction request.
+- Dispute an admission.
+- Track investigation status.
+- View permitted verification events.
+- Download a synthetic receipt or credential.
+- View the data-use explanation.
+
+The student must not be able to modify institution-approved enrolment fields directly. Their actions create a request or attestation event for authorized review.
+
+### 36. REPORTS AND INSPECTION PACK
+
+Build working report generation.
+
+Supported outputs where feasible:
+
+- CSV.
+- Excel.
+- PDF or print-ready HTML.
+
+Reports should include:
+
+- Institution summary.
+- Programme-wise approved intake and enrolment.
+- Category-wise enrolment.
+- Submitted and validated record counts.
+- Duplicate and inconsistency summaries.
+- Unresolved investigation cases.
+- Historical corrections.
+- Submission and approval history.
+- Applicable rule version.
+- Report-generation timestamp.
+- Demonstration-data notice where relevant.
+
+Support an automatically generated inspection pack that combines the permitted evidence for a selected institution or case.
+
+Apply role-based export permissions. Mask identifiers when unnecessary. Prevent spreadsheet formula injection and avoid exposing secrets or raw sensitive identifiers in filenames and report metadata.
+
+### 37. OPTIONAL GEMINI-POWERED DATA COPILOT
+
+Implement an optional assistant for institution administrators and authorized AICTE officials.
+
+Example questions:
+
+- “Why were these student records rejected?”
+- “Which programmes have unresolved intake discrepancies?”
+- “Show me the admission history for this synthetic student.”
+- “Compare enrolment between academic years.”
+- “Summarize this institution's outstanding correction requests.”
+- “Explain the currently configured validation rule.”
+
+The assistant must answer using authorized application data and available validation results.
+
+Requirements:
+
+- Enforce the user's data permissions before generating an answer.
+- Never allow the model to bypass access controls.
+- Redact unnecessary identifying information.
+- Never send raw APAAR IDs to an external model unless explicitly authorized and necessary under the configured policy.
+- Use only approved rule definitions when explaining regulatory outcomes.
+- Clearly distinguish evidence from speculation.
+- Do not invent official rules, approvals or external verification results.
+- Never let Gemini independently approve admission, change approved intake, dismiss a regulatory alert or modify a rule.
+- Keep all AI API calls on the server.
+- If Gemini is unavailable, provide deterministic, rule-based explanations rather than breaking the application.
+
+If AI Studio has configured a Gemini server-side secret, use the available secure integration. Do not expose the key to the client.
+
+### 38. MULTILINGUAL AND ACCESSIBILITY FEATURES
+
+Support English throughout the application.
+
+Provide a language selector with available translations for Hindi and Marathi as a practical prototype extension.
+
+Translate common navigation, user-facing validation messages and core workflow labels consistently. Do not merely translate a few buttons while leaving the rest of the interface inaccessible.
+
+Provide keyboard navigation, visible focus states, descriptive form labels and readable status messages.
+
+Support responsive tables and mobile-friendly correction forms.
+
+A voice interface may be a future extension, but do not request microphone permission unless a functioning voice feature actually requires it.
+
+### 39. SAMPLE DATA AND SEED SCENARIOS
+
+Seed the application with deterministic synthetic demonstration data so that it works immediately after launch.
+
+Include:
+
+- At least four fictional institutions.
+- At least eight fictional programmes.
+- Multiple academic years.
+- Around 100 synthetic student records where practical.
+- Approved intake configurations.
+- Regular and supernumerary examples.
+- NRI, OCI and Foreign National sample categories.
+- Submission batches.
+- Audit events.
+- Admission histories.
+- Student receipts.
+- Synthetic credentials.
+- Investigation cases.
+- Versioned example rules.
+
+Seed intentional edge cases:
+
+1. A record with a missing synthetic APAAR ID.
+2. A malformed synthetic identifier.
+3. A repeated identifier within one upload.
+4. A matching identifier across two institutions with overlapping active enrolments.
+5. A legitimate transfer represented by a previous withdrawal and a later admission.
+6. A programme whose reported admissions exceed its configured permitted intake.
+7. An example where authorized supernumerary capacity must be accounted for correctly.
+8. An unsupported or inconsistent admission category.
+9. A withdrawn admission reported late.
+10. A record requiring authoritative external verification.
+11. An institution with incomplete submissions.
+12. An institutional correction that changes a prior validation outcome.
+13. A disputed admission reported by the student.
+14. An audit chain containing a valid history.
+15. An isolated tampered-copy example for the integrity demonstration.
+
+Make all sample data fictional. Do not use an actual person's name or a real APAAR identifier as a demonstration record.
+
+Provide a “Reset Demo Data” action that restores the initial dataset after a confirmation dialog.
+
+### 40. DATA MODEL AND BACKEND ENTITIES
+
+Create a consistent data model for at least:
+
+- Users.
+- User role assignments.
+- Institutions.
+- Campuses.
+- Programmes.
+- Approved intake records.
+- Admission records.
+- Admission events.
+- Student identifiers or protected matching tokens.
+- Submission batches.
+- Submitted student records.
+- Validation results.
+- Rule definitions and versions.
+- Rule executions.
+- Seat reservations and seat lifecycle events.
+- Attestation requests.
+- Student disputes.
+- Investigation cases.
+- Corrections.
+- Credential records.
+- Credential revocation events.
+- Audit events.
+- Audit-chain checkpoints.
+- Security events.
+- Generated reports.
+- Notifications.
+- Demo integration status.
+
+Store relevant timestamps, version references and source references.
+
+Use stable IDs and appropriate uniqueness constraints.
+
+Ensure retries do not duplicate records, and concurrent seat reservations cannot silently exceed the configured capacity.
+
+Use transactions or appropriate database consistency mechanisms for operations that must succeed or fail together.
+
+### 41. API AND INTEGRATION ARCHITECTURE
+
+Create documented server-side API routes or equivalent backend methods for:
+
+- Authentication and current-user context.
+- Institution lookup.
+- Programme lookup.
+- Intake lookup.
+- Student upload.
+- Submission validation.
+- Submission approval.
+- Student-record lookup.
+- Record correction.
+- Duplicate matching.
+- Admission reservation.
+- Admission status changes.
+- Student attestation.
+- Case management.
+- Audit history.
+- Credential issuance.
+- Credential verification.
+- Reports.
+- Rule versioning.
+- Simulation.
+- Security event queries.
+
+Validate input on every route.
+
+Return meaningful status codes and safe errors.
+
+Provide a mock APAAR verification adapter, mock institutional ERP adapter and mock notification adapter. Clearly show whether each adapter is configured, simulated or unavailable.
+
+Design the APIs so they could be connected to authorized AICTE and institutional systems later.
+
+Do not scrape protected systems or assume access to official APIs.
+
+### 42. CORRECTNESS AND CONSISTENCY RULES
+
+Use one centralized definition for every important metric.
+
+For example:
+
+- Active admissions must be calculated from admission records and valid status transitions.
+- Unique students must be distinct from the number of admission events.
+- Approved intake must be linked to the correct programme, academic year and applicable approval.
+- Supernumerary capacity must not be applied twice.
+- Withdrawn admissions must be reflected consistently across active-enrolment counts.
+- Reservations must not silently become confirmed admissions.
+- Validation status must not be confused with official identity verification status.
+- Historical rules must be associated with the correct decision.
+- Student disputes must remain unresolved until an authorized decision is recorded.
+- Simulations must not modify committed data.
+- Corrected records must update dependent summaries and mark affected credentials for revalidation when appropriate.
+
+Do not hardcode totals independently of the underlying data.
+
+### 43. IMPLEMENTATION QUALITY AND ERROR HANDLING
+
+Implement real error handling throughout.
+
+Examples:
+
+- Empty upload.
+- Unsupported file.
+- Oversized submission.
+- Missing required columns.
+- Invalid dates.
+- Duplicate rows.
+- Unknown institution.
+- Unknown programme.
+- Unauthorized access.
+- Expired session.
+- Invalid record transition.
+- Intake conflict.
+- Failed credential verification.
+- Failed report generation.
+- Database or storage error.
+
+Show useful error messages without exposing internal stack traces, private credentials or sensitive details.
+
+Provide success messages after successful actions.
+
+Use loading and disabled states appropriately to prevent accidental double submissions.
+
+If an operation fails, preserve the user's entered information where safe and give the user a clear recovery action.
+
+### 44. TESTING AND VALIDATION
+
+Create and run available automated tests for the most important functionality.
+
+Test at least:
+
+- Intake calculations.
+- Supernumerary category handling.
+- Active-enrolment status.
+- Legitimate transfer handling.
+- Duplicate detection.
+- Missing and malformed identifiers.
+- Historical rule selection.
+- Record versioning.
+- Audit-chain verification.
+- Signed credential verification.
+- Credential revocation.
+- Role-based access.
+- Institution-level data isolation.
+- Unauthorized record access.
+- Admission reservation idempotency.
+- Invalid state transitions.
+- Export authorization.
+- Simulation isolation from committed data.
+
+Use the seeded synthetic examples as regression cases.
+
+Fix build errors and runtime exceptions. Verify that all primary navigation routes load.
+
+Test the most important interactions in the live preview rather than merely generating code and assuming that it works.
+
+Do not claim that security testing has been completed unless the relevant tests have actually been executed.
+
+### 45. END-TO-END ACCEPTANCE CRITERIA
+
+The final application is acceptable only when an evaluator can complete the following journey:
+
+1. Open the landing page.
+2. Enter a selected demo role.
+3. Open the institution dashboard.
+4. Download the student upload template.
+5. Upload a synthetic student dataset.
+6. Preview and normalize the incoming records.
+7. Run the validation engine.
+8. Review invalid IDs, duplicate matches, category issues and intake discrepancies.
+9. Open an identifier's admission timeline.
+10. Identify a legitimate transfer separately from a potential overlapping admission.
+11. Submit a correction and track it through review.
+12. Reserve or reject a proposed admission through the Admission Gate simulation.
+13. Explore the seat ledger and digital twin.
+14. View the effect of a hypothetical change without modifying committed records.
+15. Submit a batch for signatory review.
+16. Approve or reject the batch using the appropriate demo role.
+17. Log in as AICTE and view the central dashboard.
+18. Investigate an exception and inspect the supporting evidence.
+19. Compare regulatory rule versions and replay a historical validation.
+20. View the bitemporal record history.
+21. Verify a valid synthetic audit chain.
+22. Simulate tampering against an isolated test copy and detect the integrity failure.
+23. Open the student portal and submit an attestation or dispute.
+24. Issue a fictional admission receipt and signed demo credential.
+25. Open the verifier portal and verify the credential.
+26. Generate and download a permitted report or inspection pack.
+27. Open the Security Centre and inspect synthetic security events.
+28. Reset the demo dataset.
+
+If an external integration cannot be configured, its simulated replacement must still demonstrate the related workflow, with an unmistakable MOCK or DEMO label.
+
+### 46. FINAL BUILD INSTRUCTIONS
+
+Start implementing the application immediately.
+
+Do not return merely a plan, technical specification or static screenshot.
+
+Create the actual multi-file full-stack application and launch its live preview.
+
+Build and connect the database or demo persistence, all core pages, all required workflows and the server-side authorization logic supported by the environment.
+
+Prioritize these core milestones:
+
+1. Full navigation, roles and institution separation.
+2. Working data upload and validation.
+3. Admission lifecycle and duplicate reconciliation.
+4. Approved intake and seat lifecycle.
+5. AICTE dashboard and investigation workflow.
+6. Student attestation and correction process.
+7. Versioned regulations and historical time machine.
+8. Audit-chain verification and protected identity matching.
+9. Signed demo credential and QR verification.
+10. Security Centre, reporting and automated tests.
+
+After each major milestone, run available checks and fix errors before proceeding.
+
+Maintain functional behavior when adding visual polish. Avoid replacing implemented functionality with a placeholder during later changes.
+
+The final result must be a cohesive end-to-end product with realistic navigation, persistent or clearly labelled demo data, real business logic and a complete evaluator journey.
+
+Display a visible final demo status:
+
+“APAAR Integrity Mesh — SIH Prototype. Demonstration data only. External government and institutional integrations are simulated unless explicitly configured and authorized.”
+
+Build this as a serious, security-conscious academic data integrity platform, not a generic student management website.

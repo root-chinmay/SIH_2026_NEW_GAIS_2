@@ -1,0 +1,275 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: DEMO MODE (SYNTHETIC DATA)
+      - generic [ref=e9]: SIH PROTOTYPE — Independent demonstration using synthetic data. Not an official AICTE or APAAR service.
+    - generic [ref=e10]:
+      - generic [ref=e11]: "AICTE Problem Statement: SIH-2026-APAAR"
+      - generic [ref=e12]: "|"
+      - generic [ref=e13]: SHA-256 Audit Chain Active
+  - banner [ref=e14]:
+    - generic [ref=e16] [cursor=pointer]:
+      - generic [ref=e17]: AIM
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - heading "APAAR Integrity Mesh" [level=1] [ref=e20]
+          - generic [ref=e21]: AICTE Edition
+        - paragraph [ref=e22]: From admission data to accountable, verifiable academic records
+    - generic [ref=e23]:
+      - combobox "Select Language" [ref=e28] [cursor=pointer]:
+        - option "English" [selected]
+        - option "हिंदी (Hindi)"
+        - option "मराठी (Marathi)"
+      - button "AI Copilot" [active] [ref=e29]
+      - button "INSTITUTION ADMIN Delhi Switch" [ref=e34]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: INSTITUTION ADMIN
+          - generic [ref=e41]: Delhi
+        - generic [ref=e42]: Switch
+      - button "Reset Demo Data" [ref=e43]
+  - generic [ref=e48]:
+    - complementary [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]: Platform Navigation
+        - button "Collapse sidebar" [ref=e52]
+      - navigation [ref=e55]:
+        - button "Public Overview Start" [ref=e56]:
+          - generic [ref=e60]:
+            - generic [ref=e61]: Public Overview
+            - generic [ref=e62]: Start
+        - button "Dashboard" [ref=e63]
+        - button "Data Upload" [ref=e71]
+        - button "Student Records 99" [ref=e77]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Student Records
+            - generic [ref=e85]: "99"
+        - button "Admission Gate API Live API" [ref=e86]:
+          - generic [ref=e90]:
+            - generic [ref=e91]: Admission Gate API
+            - generic [ref=e92]: Live API
+        - button "Seat Ledger" [ref=e93]
+        - button "Digital Twin Simulator What-If" [ref=e100]:
+          - generic [ref=e104]:
+            - generic [ref=e105]: Digital Twin Simulator
+            - generic [ref=e106]: What-If
+        - button "Discrepancy Cases 3" [ref=e107]:
+          - generic [ref=e110]:
+            - generic [ref=e111]: Discrepancy Cases
+            - generic [ref=e112]: "3"
+        - button "Regulatory Time Machine v2.1" [ref=e113]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: Regulatory Time Machine
+            - generic [ref=e120]: v2.1
+        - button "Bi-Temporal Audit" [ref=e121]
+        - button "Tamper-Evident Chain SHA-256" [ref=e127]:
+          - generic [ref=e131]:
+            - generic [ref=e132]: Tamper-Evident Chain
+            - generic [ref=e133]: SHA-256
+        - button "Student Workspace Attestation" [ref=e134]:
+          - generic [ref=e138]:
+            - generic [ref=e139]: Student Workspace
+            - generic [ref=e140]: Attestation
+        - button "Authorized Verifier QR" [ref=e141]:
+          - generic [ref=e145]:
+            - generic [ref=e146]: Authorized Verifier
+            - generic [ref=e147]: QR
+        - button "AICTE Central Hub National" [ref=e148]:
+          - generic [ref=e152]:
+            - generic [ref=e153]: AICTE Central Hub
+            - generic [ref=e154]: National
+        - button "Security & Privacy" [ref=e155]
+        - button "Reports & Export" [ref=e161]
+      - generic [ref=e168]:
+        - generic [ref=e169]: SIH-2026 Sandbox
+        - generic [ref=e172]: registrar@dtu.ac.in
+    - main [ref=e173]:
+      - generic [ref=e565]:
+        - generic [ref=e566]:
+          - generic [ref=e567]:
+            - generic [ref=e568]:
+              - generic [ref=e569]: Cybersecurity Tenet
+              - generic [ref=e570]: SHA-256 Forward-Linked Chain
+            - heading "Tamper-Evident Cryptographic Audit Chain" [level=1] [ref=e571]
+            - paragraph [ref=e575]: Every administrative batch upload, signatory sign-off, gate query, and student correction is cryptographically sealed with the hash of the preceding block.
+          - button "Re-Verify Chain" [ref=e577]
+        - generic [ref=e580]:
+          - generic [ref=e585]:
+            - generic [ref=e586]: Audit Chain Intact & Cryptographically Verified
+            - paragraph [ref=e587]: All 9 audit entries cryptographically verified against SHA-256 forward-linked chain.
+          - generic [ref=e588]:
+            - generic [ref=e589]:
+              - text: "Total Events:"
+              - strong [ref=e590]: "9"
+            - generic [ref=e591]: "Tip: ..."
+        - generic [ref=e592]:
+          - generic [ref=e593]:
+            - generic [ref=e594]:
+              - heading "Interactive Audit Tampering Demonstration Sandbox" [level=2] [ref=e595]
+              - paragraph [ref=e598]: Simulates an unauthorized backdated modification on an isolated cloned log to demonstrate mathematical detection.
+            - button "Reset Tamper Sandbox" [ref=e726]
+          - generic [ref=e730]:
+            - generic [ref=e731]: "Integrity Failure Detected: Modified Log Rejected"
+            - paragraph [ref=e737]:
+              - text: Target event
+              - strong [ref=e738]: "#2"
+              - text: (AUD-EVT-0002) was silently altered in memory. When the SHA-256 verification utility re-calculated the canonical digest, the resulting hash did not match the forward pointer.
+            - generic [ref=e739]:
+              - generic [ref=e740]: "Diagnostic: Data payload tampered at event #2 (AUD-EVT-0002). Stored hash: 9b50379d2279... but recalculated canonical hash: 0bfa378c962e..."
+              - generic [ref=e741]: "Broken Index: Block #1 • Expected Hash: 0bfa378c962e98a909ff..."
+            - generic [ref=e742]:
+              - strong [ref=e743]: "Technical Distinction:"
+              - text: A hash chain provides
+              - emphasis [ref=e744]: tamper-evidence
+              - text: . As mandated by AICTE standards, production durability additionally couples hash chains with off-site write-once storage and trusted periodic notary checkpoints.
+        - generic [ref=e602]:
+          - heading "Verified Cryptographic Event Chain (9 Blocks)" [level=2] [ref=e603]
+          - generic [ref=e608]:
+            - generic [ref=e609]:
+              - generic [ref=e610]:
+                - generic [ref=e611]:
+                  - generic [ref=e612]: "Block #1"
+                  - generic [ref=e613]: AUD-EVT-0001
+                  - generic [ref=e614]: INIT_SYSTEM_LEDGER
+                - generic [ref=e615]: 2026-10-28T11:12:16.740Z
+              - generic [ref=e616]: APAAR Integrity Mesh initial ledger initialized with APH 2026-27 statutory rules.
+              - generic [ref=e617]:
+                - generic [ref=e618]:
+                  - generic [ref=e619]: "Previous Hash (Pointer):"
+                  - text: GENESIS_00000000000000000000000000000000
+                - generic [ref=e620]:
+                  - generic [ref=e621]: "Block Hash (SHA-256):"
+                  - text: 3ea6b53637ad6bad9c2b651d474b66acb9dbbd7e0187a30104725efd086ae1bb
+            - generic [ref=e622]:
+              - generic [ref=e623]:
+                - generic [ref=e624]:
+                  - generic [ref=e625]: "Block #2"
+                  - generic [ref=e626]: AUD-EVT-0002
+                  - generic [ref=e627]: CONFIGURE_PROGRAMME_CAPACITY
+                - generic [ref=e628]: 2026-10-28T15:12:16.747Z
+              - generic [ref=e629]: "Approved intake configured: Regular 20, NRI 3, OCI 2, FN 2, TFW 2, EWS 2."
+              - generic [ref=e630]:
+                - generic [ref=e631]:
+                  - generic [ref=e632]: "Previous Hash (Pointer):"
+                  - text: 3ea6b53637ad6bad9c2b651d474b66acb9dbbd7e0187a30104725efd086ae1bb
+                - generic [ref=e633]:
+                  - generic [ref=e634]: "Block Hash (SHA-256):"
+                  - text: 9b50379d227905a947fd79e6ef55ac736c80fdcc95646e69c2f3138c967060c5
+            - generic [ref=e635]:
+              - generic [ref=e636]:
+                - generic [ref=e637]:
+                  - generic [ref=e638]: "Block #3"
+                  - generic [ref=e639]: AUD-EVT-0003
+                  - generic [ref=e640]: BATCH_UPLOAD_COMMITTED
+                - generic [ref=e641]: 2026-10-28T19:12:16.748Z
+              - generic [ref=e642]: Uploaded batch of 21 students for B.Tech Computer Science & Engineering.
+              - generic [ref=e643]:
+                - generic [ref=e644]:
+                  - generic [ref=e645]: "Previous Hash (Pointer):"
+                  - text: 9b50379d227905a947fd79e6ef55ac736c80fdcc95646e69c2f3138c967060c5
+                - generic [ref=e646]:
+                  - generic [ref=e647]: "Block Hash (SHA-256):"
+                  - text: cd12a27ff0c191cdab4fbe5f0529cbbb92f806b727c8a325208860f46b5db30b
+            - generic [ref=e648]:
+              - generic [ref=e649]:
+                - generic [ref=e650]:
+                  - generic [ref=e651]: "Block #4"
+                  - generic [ref=e652]: AUD-EVT-0004
+                  - generic [ref=e653]: AUTO_VALIDATION_EXECUTED
+                - generic [ref=e654]: 2026-10-28T23:12:16.748Z
+              - generic [ref=e655]: "Multi-stage validation executed: 19 Valid, 1 Warning, 1 Intake Capacity Violation."
+              - generic [ref=e656]:
+                - generic [ref=e657]:
+                  - generic [ref=e658]: "Previous Hash (Pointer):"
+                  - text: cd12a27ff0c191cdab4fbe5f0529cbbb92f806b727c8a325208860f46b5db30b
+                - generic [ref=e659]:
+                  - generic [ref=e660]: "Block Hash (SHA-256):"
+                  - text: 9690f17a18c9e0f45db6211e40cf135b615b85c5e2b1097aeceaa6416ecbba40
+            - generic [ref=e661]:
+              - generic [ref=e662]:
+                - generic [ref=e663]:
+                  - generic [ref=e664]: "Block #5"
+                  - generic [ref=e665]: AUD-EVT-0005
+                  - generic [ref=e666]: SIGNATORY_SUBMISSION_APPROVED
+                - generic [ref=e667]: 2026-10-29T03:12:16.748Z
+              - generic [ref=e668]: Institutional signatory signed off on batch with exception note for investigation.
+              - generic [ref=e669]:
+                - generic [ref=e670]:
+                  - generic [ref=e671]: "Previous Hash (Pointer):"
+                  - text: 9690f17a18c9e0f45db6211e40cf135b615b85c5e2b1097aeceaa6416ecbba40
+                - generic [ref=e672]:
+                  - generic [ref=e673]: "Block Hash (SHA-256):"
+                  - text: 4e74cb438c6e91b646c66da8da04214bb9ec905f0dc71cc5fd140f788829bc77
+            - generic [ref=e674]:
+              - generic [ref=e675]:
+                - generic [ref=e676]:
+                  - generic [ref=e677]: "Block #6"
+                  - generic [ref=e678]: AUD-EVT-0006
+                  - generic [ref=e679]: BATCH_UPLOAD_COMMITTED
+                - generic [ref=e680]: 2026-10-29T07:12:16.748Z
+              - generic [ref=e681]: Uploaded 18 student records for B.Tech AI & Data Science.
+              - generic [ref=e682]:
+                - generic [ref=e683]:
+                  - generic [ref=e684]: "Previous Hash (Pointer):"
+                  - text: 4e74cb438c6e91b646c66da8da04214bb9ec905f0dc71cc5fd140f788829bc77
+                - generic [ref=e685]:
+                  - generic [ref=e686]: "Block Hash (SHA-256):"
+                  - text: abb070936fc96ddc1e867a85205a9247eaaf642426176b941f939e67074da9dd
+            - generic [ref=e687]:
+              - generic [ref=e688]:
+                - generic [ref=e689]:
+                  - generic [ref=e690]: "Block #7"
+                  - generic [ref=e691]: AUD-EVT-0007
+                  - generic [ref=e692]: CROSS_INSTITUTION_CONFLICT_FLAGGED
+                - generic [ref=e693]: 2026-10-29T11:12:16.748Z
+              - generic [ref=e694]: Cross-institution conflict flagged for APAAR-DEMO-0099 (DTU and MIT dual active admission).
+              - generic [ref=e695]:
+                - generic [ref=e696]:
+                  - generic [ref=e697]: "Previous Hash (Pointer):"
+                  - text: abb070936fc96ddc1e867a85205a9247eaaf642426176b941f939e67074da9dd
+                - generic [ref=e698]:
+                  - generic [ref=e699]: "Block Hash (SHA-256):"
+                  - text: 3e57281b15fe530c735db56159e78bb2dc007074e0a8862ddb94d6dc785e53ce
+            - generic [ref=e700]:
+              - generic [ref=e701]:
+                - generic [ref=e702]:
+                  - generic [ref=e703]: "Block #8"
+                  - generic [ref=e704]: AUD-EVT-0008
+                  - generic [ref=e705]: RECORD_WITHDRAWAL_APPROVED
+                - generic [ref=e706]: 2026-10-29T15:12:16.748Z
+              - generic [ref=e707]: Withdrawal approved for student APAAR-DEMO-0098 (Transfer to MIT Pune).
+              - generic [ref=e708]:
+                - generic [ref=e709]:
+                  - generic [ref=e710]: "Previous Hash (Pointer):"
+                  - text: 3e57281b15fe530c735db56159e78bb2dc007074e0a8862ddb94d6dc785e53ce
+                - generic [ref=e711]:
+                  - generic [ref=e712]: "Block Hash (SHA-256):"
+                  - text: 47f7ca6202db2999dc5648c78f7b18f307879031b506cf6f3478a7522bd25f87
+            - generic [ref=e713]:
+              - generic [ref=e714]:
+                - generic [ref=e715]:
+                  - generic [ref=e716]: "Block #9"
+                  - generic [ref=e717]: AUD-EVT-0009
+                  - generic [ref=e718]: ADMISSION_GATE_QUERY
+                - generic [ref=e719]: 2026-10-29T19:13:20.087Z
+              - generic [ref=e720]: "Gate check for Overcapacity Test Student (APAAR-DEMO-0403): Blocked — Configured Rule Failed"
+              - generic [ref=e721]:
+                - generic [ref=e722]:
+                  - generic [ref=e723]: "Previous Hash (Pointer):"
+                  - text: 47f7ca6202db2999dc5648c78f7b18f307879031b506cf6f3478a7522bd25f87
+                - generic [ref=e724]: "Block Hash (SHA-256):"
+  - generic [ref=e746]:
+    - generic [ref=e747]:
+      - generic [ref=e753]:
+        - heading "AICTE Regulatory Copilot Gemini / Rule Engine" [level=3] [ref=e754]:
+          - generic [ref=e755]: AICTE Regulatory Copilot
+          - generic [ref=e756]: Gemini / Rule Engine
+        - paragraph [ref=e757]: "Scope: INSTITUTION ADMIN"
+      - button [ref=e758]
+    - generic [ref=e762]:
+      - button "DTU Intake Breach?" [ref=e763]
+      - button "Dual Enrolment Conflict?" [ref=e764]
+      - button "Supernumerary Quotas?" [ref=e765]
+    - generic [ref=e766]: Hello! I am your **AICTE Regulatory Copilot**. I can explain intake compliance, analyze cross-institution discrepancies, or cite clauses from the Approval Process Handbook (APH 2026-27). How can I assist you?
+    - generic [ref=e769]:
+      - textbox "Ask regulatory or exception question..." [ref=e770]
+      - button [disabled] [ref=e771]

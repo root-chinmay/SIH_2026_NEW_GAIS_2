@@ -1,0 +1,156 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: DEMO MODE (SYNTHETIC DATA)
+      - generic [ref=e9]: SIH PROTOTYPE — Independent demonstration using synthetic data. Not an official AICTE or APAAR service.
+    - generic [ref=e10]:
+      - generic [ref=e11]: "AICTE Problem Statement: SIH-2026-APAAR"
+      - generic [ref=e12]: "|"
+      - generic [ref=e13]: SHA-256 Audit Chain Active
+  - banner [ref=e14]:
+    - generic [ref=e16] [cursor=pointer]:
+      - generic [ref=e17]: AIM
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - heading "APAAR Integrity Mesh" [level=1] [ref=e20]
+          - generic [ref=e21]: AICTE Edition
+        - paragraph [ref=e22]: From admission data to accountable, verifiable academic records
+    - generic [ref=e23]:
+      - combobox "Select Language" [ref=e28] [cursor=pointer]:
+        - option "English" [selected]
+        - option "हिंदी (Hindi)"
+        - option "मराठी (Marathi)"
+      - button "AI Copilot" [ref=e29]
+      - button "INSTITUTION ADMIN Delhi Switch" [ref=e34]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: INSTITUTION ADMIN
+          - generic [ref=e41]: Delhi
+        - generic [ref=e42]: Switch
+      - button "Reset Demo Data" [ref=e43]
+  - generic [ref=e48]:
+    - complementary [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]: Platform Navigation
+        - button "Collapse sidebar" [ref=e52]
+      - navigation [ref=e55]:
+        - button "Public Overview Start" [ref=e56]:
+          - generic [ref=e60]:
+            - generic [ref=e61]: Public Overview
+            - generic [ref=e62]: Start
+        - button "Dashboard" [ref=e63]
+        - button "Data Upload" [ref=e71]
+        - button "Student Records 99" [ref=e77]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Student Records
+            - generic [ref=e85]: "99"
+        - button "Admission Gate API Live API" [active] [ref=e86]:
+          - generic [ref=e90]:
+            - generic [ref=e91]: Admission Gate API
+            - generic [ref=e92]: Live API
+        - button "Seat Ledger" [ref=e93]
+        - button "Digital Twin Simulator What-If" [ref=e100]:
+          - generic [ref=e104]:
+            - generic [ref=e105]: Digital Twin Simulator
+            - generic [ref=e106]: What-If
+        - button "Discrepancy Cases 3" [ref=e107]:
+          - generic [ref=e110]:
+            - generic [ref=e111]: Discrepancy Cases
+            - generic [ref=e112]: "3"
+        - button "Regulatory Time Machine v2.1" [ref=e113]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: Regulatory Time Machine
+            - generic [ref=e120]: v2.1
+        - button "Bi-Temporal Audit" [ref=e121]
+        - button "Tamper-Evident Chain SHA-256" [ref=e127]:
+          - generic [ref=e131]:
+            - generic [ref=e132]: Tamper-Evident Chain
+            - generic [ref=e133]: SHA-256
+        - button "Student Workspace Attestation" [ref=e134]:
+          - generic [ref=e138]:
+            - generic [ref=e139]: Student Workspace
+            - generic [ref=e140]: Attestation
+        - button "Authorized Verifier QR" [ref=e141]:
+          - generic [ref=e145]:
+            - generic [ref=e146]: Authorized Verifier
+            - generic [ref=e147]: QR
+        - button "AICTE Central Hub National" [ref=e148]:
+          - generic [ref=e152]:
+            - generic [ref=e153]: AICTE Central Hub
+            - generic [ref=e154]: National
+        - button "Security & Privacy" [ref=e155]
+        - button "Reports & Export" [ref=e161]
+      - generic [ref=e168]:
+        - generic [ref=e169]: SIH-2026 Sandbox
+        - generic [ref=e172]: registrar@dtu.ac.in
+    - main [ref=e173]:
+      - generic [ref=e455]:
+        - generic [ref=e456]:
+          - generic [ref=e457]:
+            - generic [ref=e458]:
+              - generic [ref=e459]: Regulatory Core Innovation
+              - generic [ref=e460]: Idempotent Verification Gate
+            - heading "AICTE Pre-Admission Gate Simulation" [level=1] [ref=e461]
+            - paragraph [ref=e465]: Validates proposed student allotment in real-time against sanctioned programme capacity, active cross-institution enrollments, and statutory supernumerary quotas before an admission is finalized.
+          - generic [ref=e466]:
+            - generic [ref=e467]: "Presets:"
+            - button "Eligible Student" [ref=e468]
+            - button "Intake Full Breach" [ref=e469]
+            - button "Dual Enrollment Conflict" [ref=e470]
+        - generic [ref=e471]:
+          - generic [ref=e472]:
+            - generic [ref=e473]:
+              - heading "Proposed Admission Allotment Payload" [level=2] [ref=e474]
+              - generic [ref=e479]:
+                - generic [ref=e480]: "Key:"
+                - generic [ref=e481]: GATE-IDEM-188161
+                - button "Generate fresh idempotency key" [ref=e482]
+            - generic [ref=e488]:
+              - generic [ref=e489]:
+                - generic [ref=e490]: "Institution:"
+                - combobox [ref=e491]:
+                  - option "DTU-01 — Delhi Technological University" [selected]
+                  - option "MIT-02 — Maharashtra Institute of Technology"
+                  - option "BCE-03 — Bangalore College of Engineering"
+                  - option "GTI-04 — Gujarat Technological Institute"
+              - generic [ref=e492]:
+                - generic [ref=e493]: "Approved Programme:"
+                - combobox [ref=e494]:
+                  - 'option "B.Tech Computer Science & Engineering (Cap: 20)" [selected]'
+                  - 'option "B.Tech Electronics & Communication (Cap: 18)"'
+              - generic [ref=e495]:
+                - generic [ref=e496]: "Student Full Name:"
+                - textbox [ref=e497]: Nandini Sen
+              - generic [ref=e498]:
+                - generic [ref=e499]: "Synthetic APAAR ID:"
+                - textbox [ref=e500]: APAAR-DEMO-0401
+              - generic [ref=e501]:
+                - generic [ref=e502]: "Institutional Roll Number:"
+                - textbox [ref=e503]: DTU/2026/CSE/401
+              - generic [ref=e504]:
+                - generic [ref=e505]: "Proposed Admission Date:"
+                - textbox [ref=e506]: 2026-08-01
+              - generic [ref=e507]:
+                - generic [ref=e508]: "Admission Category:"
+                - combobox [ref=e509]:
+                  - option "General" [selected]
+                  - option "OBC-NCL"
+                  - option "SC"
+                  - option "ST"
+                  - option "EWS"
+                  - option "TFW"
+                  - option "NRI"
+              - generic [ref=e510]:
+                - generic [ref=e511]: "Seat Classification:"
+                - generic [ref=e512]:
+                  - generic [ref=e513] [cursor=pointer]:
+                    - radio "Regular Sanctioned" [checked] [ref=e514]
+                    - generic [ref=e515]: Regular Sanctioned
+                  - generic [ref=e516] [cursor=pointer]:
+                    - radio "Supernumerary" [ref=e517]
+                    - generic [ref=e518]: Supernumerary
+            - button "Execute Admission Gate Evaluation" [ref=e520]
+          - generic [ref=e524]:
+            - generic [ref=e525]:
+              - heading "Gate Decision & Verification Rationale" [level=2] [ref=e527]
+              - paragraph [ref=e535]: Awaiting payload submission. Select a preset or customize parameters and click "Execute Admission Gate Evaluation".
+            - generic [ref=e536]: "Audit Trail: All admission gate queries are cryptographically logged with caller email and SHA-256 state digest."

@@ -1,0 +1,6 @@
+{
+  "name": "APAAR Integrity Mesh",
+  "description": "AICTE Student Data Management, Admission Reconciliation, and Regulatory Verification Platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

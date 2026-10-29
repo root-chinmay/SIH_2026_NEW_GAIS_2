@@ -1,0 +1,167 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: DEMO MODE (SYNTHETIC DATA)
+      - generic [ref=e9]: SIH PROTOTYPE — Independent demonstration using synthetic data. Not an official AICTE or APAAR service.
+    - generic [ref=e10]:
+      - generic [ref=e11]: "AICTE Problem Statement: SIH-2026-APAAR"
+      - generic [ref=e12]: "|"
+      - generic [ref=e13]: SHA-256 Audit Chain Active
+  - banner [ref=e14]:
+    - generic [ref=e16] [cursor=pointer]:
+      - generic [ref=e17]: AIM
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - heading "APAAR Integrity Mesh" [level=1] [ref=e20]
+          - generic [ref=e21]: AICTE Edition
+        - paragraph [ref=e22]: From admission data to accountable, verifiable academic records
+    - generic [ref=e23]:
+      - combobox "Select Language" [ref=e28] [cursor=pointer]:
+        - option "English" [selected]
+        - option "हिंदी (Hindi)"
+        - option "मराठी (Marathi)"
+      - button "AI Copilot" [ref=e29]
+      - button "INSTITUTION ADMIN Delhi Switch" [ref=e34]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: INSTITUTION ADMIN
+          - generic [ref=e41]: Delhi
+        - generic [ref=e42]: Switch
+      - button "Reset Demo Data" [ref=e43]
+  - generic [ref=e48]:
+    - complementary [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]: Platform Navigation
+        - button "Collapse sidebar" [ref=e52]
+      - navigation [ref=e55]:
+        - button "Public Overview Start" [ref=e56]:
+          - generic [ref=e60]:
+            - generic [ref=e61]: Public Overview
+            - generic [ref=e62]: Start
+        - button "Dashboard" [ref=e63]
+        - button "Data Upload" [ref=e71]
+        - button "Student Records 99" [ref=e77]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Student Records
+            - generic [ref=e85]: "99"
+        - button "Admission Gate API Live API" [ref=e86]:
+          - generic [ref=e90]:
+            - generic [ref=e91]: Admission Gate API
+            - generic [ref=e92]: Live API
+        - button "Seat Ledger" [ref=e93]
+        - button "Digital Twin Simulator What-If" [ref=e100]:
+          - generic [ref=e104]:
+            - generic [ref=e105]: Digital Twin Simulator
+            - generic [ref=e106]: What-If
+        - button "Discrepancy Cases 3" [ref=e107]:
+          - generic [ref=e110]:
+            - generic [ref=e111]: Discrepancy Cases
+            - generic [ref=e112]: "3"
+        - button "Regulatory Time Machine v2.1" [ref=e113]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: Regulatory Time Machine
+            - generic [ref=e120]: v2.1
+        - button "Bi-Temporal Audit" [ref=e121]
+        - button "Tamper-Evident Chain SHA-256" [ref=e127]:
+          - generic [ref=e131]:
+            - generic [ref=e132]: Tamper-Evident Chain
+            - generic [ref=e133]: SHA-256
+        - button "Student Workspace Attestation" [ref=e134]:
+          - generic [ref=e138]:
+            - generic [ref=e139]: Student Workspace
+            - generic [ref=e140]: Attestation
+        - button "Authorized Verifier QR" [ref=e141]:
+          - generic [ref=e145]:
+            - generic [ref=e146]: Authorized Verifier
+            - generic [ref=e147]: QR
+        - button "AICTE Central Hub National" [ref=e148]:
+          - generic [ref=e152]:
+            - generic [ref=e153]: AICTE Central Hub
+            - generic [ref=e154]: National
+        - button "Security & Privacy" [ref=e155]
+        - button "Reports & Export" [ref=e161]
+      - generic [ref=e168]:
+        - generic [ref=e169]: SIH-2026 Sandbox
+        - generic [ref=e172]: registrar@dtu.ac.in
+    - main [ref=e173]:
+      - generic [ref=e175]:
+        - generic [ref=e176]:
+          - generic [ref=e177]:
+            - generic [ref=e178]: Smart India Hackathon (SIH 2026) Prototype
+            - heading "From Admission Data to Accountable, Verifiable Academic Records" [level=1] [ref=e182]
+            - paragraph [ref=e183]:
+              - text: A centralized, privacy-aware student data management, admission reconciliation, regulatory monitoring, and academic record verification platform for AICTE-approved institutions powered by synthetic
+              - strong [ref=e184]: APAAR ID
+              - text: .
+            - generic [ref=e185]:
+              - button "Enter Demo Workspace" [ref=e186]
+              - button "AICTE Central Regulatory Hub" [ref=e189]
+              - button "SHA-256 Audit Chain" [ref=e193]
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - generic [ref=e199]: Institutions In Registry
+              - generic [ref=e200]: "4"
+              - generic [ref=e201]: Delhi, MH, KA, GUJ
+            - generic [ref=e202]:
+              - generic [ref=e203]: Synthetic Students
+              - generic [ref=e204]: "99"
+              - generic [ref=e205]: 15 Seed Edge Cases
+            - generic [ref=e206]:
+              - generic [ref=e207]: Cryptographic Audit Chain
+              - generic [ref=e208]: "8"
+              - generic [ref=e209]: SHA-256 Verified
+            - generic [ref=e210]:
+              - generic [ref=e211]: Active Rulebook
+              - generic [ref=e212]: APH v2.1
+              - generic [ref=e213]: Time Machine Active
+        - generic [ref=e214]:
+          - generic [ref=e215]:
+            - heading "End-to-End Regulatory & Integrity Pipeline" [level=2] [ref=e216]
+            - paragraph [ref=e221]: How APAAR Integrity Mesh reconciles data from local institutional submission to public verifiability.
+          - generic [ref=e222]:
+            - generic [ref=e223]:
+              - generic [ref=e224]: "01"
+              - heading "Intake & Upload" [level=4] [ref=e225]
+              - paragraph [ref=e226]: Approved programme quotas configured. CSV/Excel student data uploaded with column auto-mapping.
+            - generic [ref=e227]:
+              - generic [ref=e228]: "02"
+              - heading "7-Stage Validation" [level=4] [ref=e229]
+              - paragraph [ref=e230]: Format, internal duplicate, cross-institution conflict, intake ceiling, and supernumerary quota checks.
+            - generic [ref=e231]:
+              - generic [ref=e232]: "03"
+              - heading "Signatory & Ledger" [level=4] [ref=e233]
+              - paragraph [ref=e234]: Dual-role review, correction workflows, immutable SHA-256 audit chaining, and seat lifecycle ledger.
+            - generic [ref=e235]:
+              - generic [ref=e236]: "04"
+              - heading "Verification & AI" [level=4] [ref=e237]
+              - paragraph [ref=e238]: Student attestation, QR-based verifier portal, national regulatory dashboard, and AI copilot.
+        - generic [ref=e239]:
+          - generic [ref=e240]:
+            - heading "Explore Demonstration by Stakeholder Role" [level=2] [ref=e241]
+            - paragraph [ref=e242]: Click any persona to log in instantly with appropriate permissions and tenant isolation.
+          - generic [ref=e243]:
+            - generic [ref=e244] [cursor=pointer]:
+              - heading "Institution Administrator" [level=3] [ref=e249]
+              - paragraph [ref=e250]: Oversee DTU Delhi, inspect approved intake capacity, review validation reports.
+              - generic [ref=e251]: Launch Dashboard →
+            - generic [ref=e252] [cursor=pointer]:
+              - heading "Data Entry Operator" [level=3] [ref=e257]
+              - paragraph [ref=e258]: Upload CSV batches, map headers, preview row errors, submit corrections.
+              - generic [ref=e259]: Upload Records →
+            - generic [ref=e260] [cursor=pointer]:
+              - heading "AICTE Regulatory Officer" [level=3] [ref=e265]
+              - paragraph [ref=e266]: Cross-institution duplicate classifier, Digital Twin simulation, risk engine.
+              - generic [ref=e267]: National Oversight →
+            - generic [ref=e268] [cursor=pointer]:
+              - heading "Student Workspace" [level=3] [ref=e273]
+              - paragraph [ref=e274]: Review reported admission, confirm details, raise dispute, download verified receipt.
+              - generic [ref=e275]: Student Portal →
+        - generic [ref=e276]:
+          - generic [ref=e277]:
+            - generic [ref=e278]: Privacy-Preserving Matching
+            - paragraph [ref=e282]: Raw student identifiers are protected using server-side HMAC-SHA256 pseudonymous tokens. Identifiers are masked across logs and exports.
+          - generic [ref=e283]:
+            - generic [ref=e284]: Tamper-Evident SHA-256 Ledger
+            - paragraph [ref=e288]: Forward-linked cryptographic event chain where every batch upload, signatory approval, and correction links to its prior hash. Includes an interactive tampering simulator.
+          - generic [ref=e289]:
+            - generic [ref=e290]: Zero-Hallucination Regulatory Rules
+            - paragraph [ref=e295]: Statutory calculations are computed strictly by deterministic rules. AI assists by explaining findings, without inventing policies or making autonomous decisions.
