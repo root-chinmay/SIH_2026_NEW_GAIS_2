@@ -81,44 +81,44 @@ export const BatchSignatoryReview: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Title */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-teal-900/60 text-teal-300 border border-teal-700/60">
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
               Regulatory Gate
             </span>
-            <span className="text-[11px] font-mono text-blue-400 bg-blue-950/60 px-2 py-0.5 rounded border border-blue-800/60">
+            <span className="text-[11px] font-mono text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 font-semibold">
               Statutory Sign-Off
             </span>
           </div>
-          <h1 className="text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <FileCheck className="w-6 h-6 text-teal-400" />
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <FileCheck className="w-6 h-6 text-blue-600" />
             Batch Certification &amp; Signatory Workflow
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Authorizes official submission batches. A batch must receive signatory approval before its records are committed to the central verified repository.
           </p>
         </div>
 
         <div className="text-right text-xs">
-          <span className="text-slate-400">Signatory Role: </span>
-          <span className={`font-semibold ${isSignatory ? 'text-teal-400' : 'text-amber-400'}`}>
+          <span className="text-slate-500">Signatory Role: </span>
+          <span className={`font-semibold ${isSignatory ? 'text-teal-700' : 'text-amber-700'}`}>
             {isSignatory ? 'Authorized to Certify' : 'Read-Only Operator Mode'}
           </span>
         </div>
       </div>
 
       {/* Batches Table */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-        <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-          <h2 className="text-sm font-bold text-white">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+        <div className="p-4 border-b border-slate-100 flex items-center justify-between">
+          <h2 className="text-sm font-bold text-slate-900">
             Submission Batches Awaiting Signatory Review ({batches.length})
           </h2>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-slate-950 text-slate-400">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-blue-50/70 text-blue-950 font-semibold border-b border-blue-100">
               <tr>
                 <th className="p-3.5">Batch Reference</th>
                 <th className="p-3.5">Institution &amp; Programme</th>
@@ -127,36 +127,36 @@ export const BatchSignatoryReview: React.FC = () => {
                 <th className="p-3.5 text-right">Signatory Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800">
+            <tbody className="divide-y divide-slate-100">
               {batches.map((batch) => {
                 const inst = state.institutions.find((i) => i.id === batch.institutionId);
                 const isPending = batch.status === 'PENDING_APPROVAL';
 
                 return (
-                  <tr key={batch.id} className="hover:bg-slate-800/40">
+                  <tr key={batch.id} className="hover:bg-blue-50/30 transition-colors">
                     <td className="p-3.5">
-                      <div className="font-mono font-bold text-white">{batch.batchNumber}</div>
-                      <div className="text-[11px] text-slate-400 mt-0.5">
+                      <div className="font-mono font-bold text-slate-900">{batch.batchNumber}</div>
+                      <div className="text-[11px] text-slate-500 mt-0.5">
                         Uploaded by: {batch.uploadedBy} on {batch.uploadedAt.split('T')[0]}
                       </div>
                     </td>
 
                     <td className="p-3.5">
-                      <div className="text-white font-medium">{inst?.name || batch.institutionId}</div>
-                      <div className="text-slate-400 text-[11px]">{batch.programmeId}</div>
+                      <div className="text-slate-900 font-medium">{inst?.name || batch.institutionId}</div>
+                      <div className="text-slate-500 text-[11px]">{batch.programmeId}</div>
                     </td>
 
                     <td className="p-3.5">
                       <div className="flex items-center gap-2">
-                        <span className="text-emerald-400 font-semibold">
+                        <span className="text-emerald-700 font-semibold">
                           {batch.validRecords} Valid
                         </span>
                         <span>&bull;</span>
-                        <span className={batch.invalidRecords > 0 ? 'text-rose-400 font-semibold' : 'text-slate-400'}>
+                        <span className={batch.invalidRecords > 0 ? 'text-rose-600 font-semibold' : 'text-slate-500'}>
                           {batch.invalidRecords} Errors
                         </span>
                       </div>
-                      <div className="text-[11px] text-slate-400 mt-0.5">
+                      <div className="text-[11px] text-slate-500 mt-0.5">
                         Total Cohort: {batch.totalRecords}
                       </div>
                     </td>
@@ -165,10 +165,10 @@ export const BatchSignatoryReview: React.FC = () => {
                       <span
                         className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase ${
                           batch.status === 'APPROVED'
-                            ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                             : batch.status === 'REJECTED'
-                            ? 'bg-rose-950 text-rose-300 border border-rose-800'
-                            : 'bg-amber-950 text-amber-300 border border-amber-800'
+                            ? 'bg-rose-50 text-rose-800 border border-rose-200'
+                            : 'bg-amber-50 text-amber-800 border border-amber-200'
                         }`}
                       >
                         {batch.status}
@@ -178,7 +178,7 @@ export const BatchSignatoryReview: React.FC = () => {
                     <td className="p-3.5 text-right space-x-1.5">
                       <button
                         onClick={() => handleDownloadBatchReport(batch)}
-                        className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs"
+                        className="p-1.5 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-lg text-xs border border-slate-200 shadow-2xs"
                         title="Download CSV Validation Report"
                       >
                         <Download className="w-3.5 h-3.5" />
@@ -188,13 +188,13 @@ export const BatchSignatoryReview: React.FC = () => {
                         <>
                           <button
                             onClick={() => handleOpenAction(batch, 'APPROVE')}
-                            className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold"
+                            className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold shadow-xs"
                           >
                             Approve Batch
                           </button>
                           <button
                             onClick={() => handleOpenAction(batch, 'REJECT')}
-                            className="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white rounded-lg text-xs font-semibold"
+                            className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-semibold shadow-xs"
                           >
                             Reject
                           </button>
@@ -211,14 +211,14 @@ export const BatchSignatoryReview: React.FC = () => {
 
       {/* Decision Modal */}
       {showConfirmModal && selectedBatch && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 text-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
                 {actionType === 'APPROVE' ? (
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                 ) : (
-                  <XCircle className="w-5 h-5 text-rose-400" />
+                  <XCircle className="w-5 h-5 text-rose-600" />
                 )}
                 <span>
                   {actionType === 'APPROVE' ? 'Sign & Approve Batch' : 'Reject Batch Submission'}
@@ -226,53 +226,53 @@ export const BatchSignatoryReview: React.FC = () => {
               </h2>
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-400 hover:text-slate-700 p-1"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-slate-600">
               Batch: <strong>{selectedBatch.batchNumber}</strong> ({selectedBatch.totalRecords} records, {selectedBatch.invalidRecords} exceptions).
             </p>
 
             {actionType === 'APPROVE' ? (
               <div>
-                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1">
                   Institutional Signatory Certification Statement:
                 </label>
                 <textarea
                   value={signatoryComments}
                   onChange={(e) => setSignatoryComments(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-xs text-white h-24"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-3 text-xs text-slate-800 h-24 focus:bg-white focus:border-blue-600"
                 />
               </div>
             ) : (
               <div>
-                <label className="text-xs font-semibold text-slate-300 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1">
                   Reason for Batch Rejection (Sent to Operator):
                 </label>
                 <textarea
                   value={rejectionReason}
                   onChange={(e) => setRejectionReason(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-3 text-xs text-white h-24"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-3 text-xs text-slate-800 h-24 focus:bg-white focus:border-blue-600"
                 />
               </div>
             )}
 
-            <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-800">
+            <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-200">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium"
               >
                 Cancel
               </button>
               <button
                 onClick={handleExecuteDecision}
-                className={`px-5 py-2 text-white rounded-lg text-xs font-bold ${
+                className={`px-5 py-2 text-white rounded-lg text-xs font-bold shadow-xs ${
                   actionType === 'APPROVE'
-                    ? 'bg-emerald-600 hover:bg-emerald-500'
-                    : 'bg-rose-600 hover:bg-rose-500'
+                    ? 'bg-emerald-600 hover:bg-emerald-700'
+                    : 'bg-rose-600 hover:bg-rose-700'
                 }`}
               >
                 Confirm {actionType === 'APPROVE' ? 'Approval' : 'Rejection'}

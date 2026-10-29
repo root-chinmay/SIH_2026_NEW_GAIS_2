@@ -93,21 +93,21 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
   return (
     <div className="space-y-6">
       {/* Header bar with Institution Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-blue-900/60 border border-blue-700/50 flex items-center justify-center text-blue-300">
+          <div className="w-12 h-12 rounded-xl bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-700 shadow-2xs">
             <Building2 className="w-6 h-6" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold text-white tracking-tight">
+              <h1 className="text-xl font-bold text-slate-900 tracking-tight">
                 {activeInstitution.name}
               </h1>
-              <span className="text-xs font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
+              <span className="text-xs font-mono bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200 font-medium">
                 {activeInstitution.code}
               </span>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               {activeInstitution.district}, {activeInstitution.state} &bull; Type: {activeInstitution.type} &bull; Signatory: {activeInstitution.authorizedSignatory}
             </p>
           </div>
@@ -116,11 +116,11 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
         {/* Institution selector */}
         {isNationalRole ? (
           <div className="flex items-center gap-2">
-            <label className="text-xs text-slate-400">View Institution:</label>
+            <label className="text-xs text-slate-500 font-medium">View Institution:</label>
             <select
               value={selectedInstId}
               onChange={(e) => setSelectedInstId(e.target.value)}
-              className="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500 cursor-pointer"
+              className="bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-blue-600 cursor-pointer shadow-2xs"
             >
               {state.institutions.map((inst) => (
                 <option key={inst.id} value={inst.id}>
@@ -130,9 +130,9 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
             </select>
           </div>
         ) : (
-          <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-300">
-            <span className="font-semibold text-white">{activeInstitution.code}</span>
-            <span className="text-[10px] bg-blue-950 text-blue-300 px-1.5 py-0.5 rounded border border-blue-800 font-mono">
+          <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-700">
+            <span className="font-semibold text-slate-900">{activeInstitution.code}</span>
+            <span className="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded border border-blue-200 font-mono font-medium">
               Tenant Scoped
             </span>
           </div>
@@ -144,11 +144,11 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
         {/* Approved Intake */}
         <div
           onClick={() => onNavigate('ledger')}
-          className="cursor-pointer bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-blue-500 rounded-xl p-4 transition-all"
+          className="cursor-pointer bg-white hover:bg-blue-50/40 border border-slate-200 hover:border-blue-400 rounded-xl p-4 transition-all shadow-xs"
         >
-          <div className="text-xs text-slate-400">Approved Intake</div>
-          <div className="text-2xl font-bold text-white mt-1">{totalApprovedIntake}</div>
-          <div className="text-[11px] text-blue-400 mt-1 flex items-center gap-1">
+          <div className="text-xs text-slate-500 font-medium">Approved Intake</div>
+          <div className="text-2xl font-bold text-slate-900 mt-1">{totalApprovedIntake}</div>
+          <div className="text-[11px] text-blue-700 mt-1 flex items-center gap-1 font-medium">
             <span>{activeInstitution.programmes.length} Programmes</span>
           </div>
         </div>
@@ -156,23 +156,23 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
         {/* Reported Enrolment */}
         <div
           onClick={() => onNavigate('students')}
-          className="cursor-pointer bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500 rounded-xl p-4 transition-all"
+          className="cursor-pointer bg-white hover:bg-indigo-50/40 border border-slate-200 hover:border-indigo-400 rounded-xl p-4 transition-all shadow-xs"
         >
-          <div className="text-xs text-slate-400">Reported Enrolment</div>
-          <div className="text-2xl font-bold text-indigo-300 mt-1">{totalReportedEnrolment}</div>
-          <div className="text-[11px] text-slate-400 mt-1">
-            Utilization: <strong className={seatUtilizationPct > 100 ? 'text-rose-400' : 'text-emerald-400'}>{seatUtilizationPct}%</strong>
+          <div className="text-xs text-slate-500 font-medium">Reported Enrolment</div>
+          <div className="text-2xl font-bold text-slate-900 mt-1">{totalReportedEnrolment}</div>
+          <div className="text-[11px] text-slate-500 mt-1">
+            Utilization: <strong className={seatUtilizationPct > 100 ? 'text-rose-600' : 'text-emerald-700'}>{seatUtilizationPct}%</strong>
           </div>
         </div>
 
         {/* Passed Local Validation */}
         <div
           onClick={() => onNavigate('students')}
-          className="cursor-pointer bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-emerald-500 rounded-xl p-4 transition-all"
+          className="cursor-pointer bg-white hover:bg-emerald-50/40 border border-slate-200 hover:border-emerald-400 rounded-xl p-4 transition-all shadow-xs"
         >
-          <div className="text-xs text-slate-400">Valid Records</div>
-          <div className="text-2xl font-bold text-emerald-400 mt-1">{validRecords}</div>
-          <div className="text-[11px] text-emerald-400/80 mt-1 flex items-center gap-1">
+          <div className="text-xs text-slate-500 font-medium">Valid Records</div>
+          <div className="text-2xl font-bold text-emerald-700 mt-1">{validRecords}</div>
+          <div className="text-[11px] text-emerald-700 mt-1 flex items-center gap-1 font-medium">
             <CheckCircle className="w-3 h-3" />
             <span>Passed 7 Stages</span>
           </div>
@@ -181,11 +181,11 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
         {/* Potential Duplicates */}
         <div
           onClick={() => onNavigate('discrepancies')}
-          className="cursor-pointer bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-rose-500 rounded-xl p-4 transition-all"
+          className="cursor-pointer bg-white hover:bg-rose-50/40 border border-slate-200 hover:border-rose-400 rounded-xl p-4 transition-all shadow-xs"
         >
-          <div className="text-xs text-slate-400">Duplicate Conflicts</div>
-          <div className="text-2xl font-bold text-rose-400 mt-1">{crossDuplicates}</div>
-          <div className="text-[11px] text-rose-400/80 mt-1 flex items-center gap-1">
+          <div className="text-xs text-slate-500 font-medium">Duplicate Conflicts</div>
+          <div className="text-2xl font-bold text-rose-600 mt-1">{crossDuplicates}</div>
+          <div className="text-[11px] text-rose-700 mt-1 flex items-center gap-1 font-medium">
             <AlertOctagon className="w-3 h-3" />
             <span>Cross-Inst Alert</span>
           </div>
@@ -194,11 +194,11 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
         {/* Malformed / Missing APAAR */}
         <div
           onClick={() => onNavigate('students')}
-          className="cursor-pointer bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-amber-500 rounded-xl p-4 transition-all"
+          className="cursor-pointer bg-white hover:bg-amber-50/40 border border-slate-200 hover:border-amber-400 rounded-xl p-4 transition-all shadow-xs"
         >
-          <div className="text-xs text-slate-400">Missing/Malformed</div>
-          <div className="text-2xl font-bold text-amber-400 mt-1">{missingOrMalformedApaar}</div>
-          <div className="text-[11px] text-amber-400/80 mt-1 flex items-center gap-1">
+          <div className="text-xs text-slate-500 font-medium">Missing/Malformed</div>
+          <div className="text-2xl font-bold text-amber-700 mt-1">{missingOrMalformedApaar}</div>
+          <div className="text-[11px] text-amber-700 mt-1 flex items-center gap-1 font-medium">
             <AlertTriangle className="w-3 h-3" />
             <span>Format Error</span>
           </div>
@@ -207,37 +207,37 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
         {/* Awaiting Signatory / Review */}
         <div
           onClick={() => onNavigate('batch-review')}
-          className="cursor-pointer bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-purple-500 rounded-xl p-4 transition-all"
+          className="cursor-pointer bg-white hover:bg-purple-50/40 border border-slate-200 hover:border-purple-400 rounded-xl p-4 transition-all shadow-xs"
         >
-          <div className="text-xs text-slate-400">Awaiting Signatory</div>
-          <div className="text-2xl font-bold text-purple-300 mt-1">{pendingSignatoryBatches}</div>
-          <div className="text-[11px] text-purple-400 mt-1">Batches Pending</div>
+          <div className="text-xs text-slate-500 font-medium">Awaiting Signatory</div>
+          <div className="text-2xl font-bold text-purple-700 mt-1">{pendingSignatoryBatches}</div>
+          <div className="text-[11px] text-purple-700 mt-1 font-medium">Batches Pending</div>
         </div>
       </div>
 
       {/* Two Column Layout: Programme Capacity & Category Distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Programme-wise Enrolment Bars */}
-        <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <Layers className="w-4 h-4 text-blue-400" />
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <Layers className="w-4 h-4 text-blue-600" />
                 Programme-Wise Approved Intake vs Enrolment
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Monitoring seat capacity and regular vs supernumerary admissions
               </p>
             </div>
             <button
               onClick={() => onNavigate('ledger')}
-              className="text-xs text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1"
+              className="text-xs text-blue-700 hover:text-blue-800 font-semibold flex items-center gap-1"
             >
               View Full Ledger &rarr;
             </button>
           </div>
 
-          <div className="space-y-5">
+          <div className="space-y-4">
             {activeInstitution.programmes.map((prog) => {
               const progStudents = instStudents.filter(
                 (s) =>
@@ -252,29 +252,29 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
               const pct = Math.round((regularCount / prog.approvedIntake) * 100);
 
               return (
-                <div key={prog.id} className="bg-slate-950/60 border border-slate-800/80 rounded-xl p-4">
+                <div key={prog.id} className="bg-slate-50/70 border border-slate-200 rounded-xl p-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
                     <div>
-                      <div className="text-sm font-semibold text-white flex items-center gap-2">
+                      <div className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                         <span>{prog.name}</span>
-                        <span className="text-[10px] font-mono bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] font-mono bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-medium">
                           {prog.code}
                         </span>
                       </div>
-                      <div className="text-xs text-slate-400 mt-0.5">
-                        Sanctioned Regular Intake: <strong className="text-slate-200">{prog.approvedIntake}</strong> &bull; Supernumerary Cap: {prog.supernumeraryLimits.nri + prog.supernumeraryLimits.tfw + prog.supernumeraryLimits.ews}
+                      <div className="text-xs text-slate-500 mt-0.5">
+                        Sanctioned Regular Intake: <strong className="text-slate-700">{prog.approvedIntake}</strong> &bull; Supernumerary Cap: {prog.supernumeraryLimits.nri + prog.supernumeraryLimits.tfw + prog.supernumeraryLimits.ews}
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-sm font-bold">
-                        <span className={isOverIntake ? 'text-rose-400' : 'text-slate-200'}>
+                        <span className={isOverIntake ? 'text-rose-600' : 'text-slate-800'}>
                           {regularCount}
                         </span>
                         <span className="text-slate-500"> / {prog.approvedIntake} seats</span>
                       </div>
-                      <div className="text-[11px] text-slate-400">
-                        {superCount > 0 && <span className="text-teal-400 font-medium">+{superCount} Supernumerary &bull; </span>}
-                        <span className={isOverIntake ? 'text-rose-400 font-bold' : 'text-slate-400'}>
+                      <div className="text-[11px] text-slate-500">
+                        {superCount > 0 && <span className="text-teal-700 font-semibold">+{superCount} Supernumerary &bull; </span>}
+                        <span className={isOverIntake ? 'text-rose-600 font-bold' : 'text-slate-600'}>
                           {pct}% utilized
                         </span>
                       </div>
@@ -282,16 +282,16 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
                   </div>
 
                   {/* Visual Progress Bar */}
-                  <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden flex">
+                  <div className="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden flex">
                     <div
                       className={`h-full transition-all duration-500 ${
-                        isOverIntake ? 'bg-rose-500' : pct > 90 ? 'bg-amber-400' : 'bg-blue-500'
+                        isOverIntake ? 'bg-rose-500' : pct > 90 ? 'bg-amber-500' : 'bg-blue-600'
                       }`}
                       style={{ width: `${Math.min(100, pct)}%` }}
                     />
                     {superCount > 0 && (
                       <div
-                        className="h-full bg-teal-400 transition-all duration-500"
+                        className="h-full bg-teal-500 transition-all duration-500"
                         style={{ width: `${Math.min(25, (superCount / prog.approvedIntake) * 100)}%` }}
                         title={`${superCount} Supernumerary seats`}
                       />
@@ -299,14 +299,14 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
                   </div>
 
                   {isOverIntake && (
-                    <div className="mt-2.5 flex items-center justify-between text-xs text-rose-300 bg-rose-950/40 border border-rose-900/60 px-2.5 py-1.5 rounded-lg">
-                      <div className="flex items-center gap-1.5">
-                        <AlertOctagon className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                    <div className="mt-2.5 flex items-center justify-between text-xs text-rose-800 bg-rose-50 border border-rose-200 px-2.5 py-1.5 rounded-lg">
+                      <div className="flex items-center gap-1.5 font-medium">
+                        <AlertOctagon className="w-3.5 h-3.5 text-rose-600 shrink-0" />
                         <span>Intake Capacity Exceeded: {regularCount - prog.approvedIntake} excess regular admission recorded.</span>
                       </div>
                       <button
                         onClick={() => onNavigate('discrepancies')}
-                        className="underline text-[11px] hover:text-white shrink-0 ml-2"
+                        className="underline text-[11px] hover:text-rose-950 font-bold shrink-0 ml-2"
                       >
                         Investigate
                       </button>
@@ -321,18 +321,18 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
         {/* Right Sidebar: Categories & Fast Actions */}
         <div className="space-y-6">
           {/* Admission Category Distribution */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-            <h3 className="text-sm font-bold text-white mb-3">Admission Quotas &amp; Categories</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 mb-3">Admission Quotas &amp; Categories</h3>
             <div className="space-y-2">
               {Object.entries(categoryCounts).map(([cat, count]) => {
                 const total = instStudents.length || 1;
                 const catPct = Math.round((count / total) * 100);
                 return (
-                  <div key={cat} className="flex items-center justify-between text-xs py-1 border-b border-slate-800/60">
-                    <span className="text-slate-300 font-medium">{cat}</span>
+                  <div key={cat} className="flex items-center justify-between text-xs py-1.5 border-b border-slate-100">
+                    <span className="text-slate-700 font-medium">{cat}</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-slate-400">{catPct}%</span>
-                      <span className="w-8 text-right font-semibold text-white">{count}</span>
+                      <span className="text-slate-500">{catPct}%</span>
+                      <span className="w-8 text-right font-semibold text-slate-900">{count}</span>
                     </div>
                   </div>
                 );
@@ -341,40 +341,40 @@ export const InstitutionDashboard: React.FC<InstitutionDashboardProps> = ({ onNa
           </div>
 
           {/* Outstanding Corrections & Actions */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-            <h3 className="text-sm font-bold text-white mb-3">Institutional Action Center</h3>
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
+            <h3 className="text-sm font-bold text-slate-900 mb-3">Institutional Action Center</h3>
             <div className="space-y-2.5">
               <button
                 onClick={() => onNavigate('upload')}
-                className="w-full flex items-center justify-between p-3 rounded-xl bg-blue-600/10 hover:bg-blue-600/20 border border-blue-500/30 text-blue-300 text-xs font-semibold transition-colors"
+                className="w-full flex items-center justify-between p-3 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-800 text-xs font-semibold transition-colors shadow-2xs"
               >
                 <div className="flex items-center gap-2">
-                  <FileSpreadsheet className="w-4 h-4 text-blue-400" />
+                  <FileSpreadsheet className="w-4 h-4 text-blue-600" />
                   <span>Upload New Batch Data</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
               </button>
 
               <button
                 onClick={() => onNavigate('gate')}
-                className="w-full flex items-center justify-between p-3 rounded-xl bg-indigo-600/10 hover:bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 text-xs font-semibold transition-colors"
+                className="w-full flex items-center justify-between p-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-800 text-xs font-semibold transition-colors shadow-2xs"
               >
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-indigo-400" />
+                  <TrendingUp className="w-4 h-4 text-indigo-600" />
                   <span>Test Admission Gate API</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-indigo-600" />
               </button>
 
               <button
                 onClick={() => onNavigate('digital-twin')}
-                className="w-full flex items-center justify-between p-3 rounded-xl bg-teal-600/10 hover:bg-teal-600/20 border border-teal-500/30 text-teal-300 text-xs font-semibold transition-colors"
+                className="w-full flex items-center justify-between p-3 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-800 text-xs font-semibold transition-colors shadow-2xs"
               >
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-teal-400" />
+                  <Sparkles className="w-4 h-4 text-teal-600" />
                   <span>Enrolment Digital Twin</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-teal-600" />
               </button>
             </div>
           </div>

@@ -100,53 +100,75 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
       {
         apaar_id: 'APAAR-DEMO-0203',
         institutional_student_id: 'DTU/2026/CSE/203',
-        student_name: 'Arjun Singhal',
-        date_of_birth: '2004-11-19',
+        student_name: 'Aditya Birla',
+        date_of_birth: '2005-01-19',
         gender: 'Male',
+        admission_date: '2026-08-02',
+        admission_category: 'SC',
+        is_supernumerary: 'false',
+        supernumerary_type: '',
+      },
+      {
+        apaar_id: 'APAAR-DEMO-0204',
+        institutional_student_id: 'DTU/2026/CSE/204',
+        student_name: 'Zoya Khan',
+        date_of_birth: '2004-11-30',
+        gender: 'Female',
         admission_date: '2026-08-02',
         admission_category: 'NRI',
         is_supernumerary: 'true',
         supernumerary_type: 'NRI',
       },
       {
-        // Intentional batch-level duplicate to showcase validation engine
-        apaar_id: 'APAAR-DEMO-0202',
-        institutional_student_id: 'DTU/2026/CSE/204',
-        student_name: 'Duplicate Entry Test',
-        date_of_birth: '2005-07-22',
-        gender: 'Female',
-        admission_date: '2026-08-02',
+        // INTENTIONAL EDGE CASE: Duplicate APAAR already registered at MIT Pune
+        apaar_id: 'APAAR-DEMO-0099',
+        institutional_student_id: 'DTU/2026/CSE/999',
+        student_name: 'Sameer Singhania',
+        date_of_birth: '2005-04-14',
+        gender: 'Male',
+        admission_date: '2026-08-03',
+        admission_category: 'General',
+        is_supernumerary: 'false',
+        supernumerary_type: '',
+      },
+      {
+        // INTENTIONAL EDGE CASE: Malformed APAAR ID syntax
+        apaar_id: 'INVALID-SYNTAX-99',
+        institutional_student_id: 'DTU/2026/CSE/888',
+        student_name: 'Kunal Deshmukh',
+        date_of_birth: '2005-09-09',
+        gender: 'Male',
+        admission_date: '2026-08-04',
         admission_category: 'General',
         is_supernumerary: 'false',
         supernumerary_type: '',
       },
     ];
 
-    setFileName('sample_admissions_batch_dtu.csv');
-    setFileSize('1.4 KB');
     setRawRows(sampleCSV);
     setHeaders(Object.keys(sampleCSV[0]));
+    setFileName('sample_dtu_cohort_2026.csv');
+    setFileSize('1.8 KB');
     setStep('MAPPING');
   };
 
-  // Parse actual uploaded CSV
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const selected = e.target.files[0];
-      setFile(selected);
-      setFileName(selected.name);
-      setFileSize(`${(selected.size / 1024).toFixed(1)} KB`);
+    const selected = e.target.files?.[0];
+    if (!selected) return;
 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const text = event.target?.result as string;
-        parseCSVText(text);
-      };
-      reader.readAsText(selected);
-    }
+    setFile(selected);
+    setFileName(selected.name);
+    setFileSize(`${(selected.size / 1024).toFixed(1)} KB`);
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target?.result as string;
+      parseCSV(text);
+    };
+    reader.readAsText(selected);
   };
 
-  const parseCSVText = (text: string) => {
+  const parseCSV = (text: string) => {
     const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
     if (lines.length < 2) return;
 
@@ -239,36 +261,44 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
   return (
     <div className="space-y-6">
       {/* Page Title & Instructions */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-white flex items-center gap-2">
-            <UploadCloud className="w-6 h-6 text-blue-400" />
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
+              Batch Ingestion
+            </span>
+            <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
+              7-Stage Pre-Commit Validation
+            </span>
+          </div>
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <UploadCloud className="w-6 h-6 text-blue-600" />
             Student Enrolment Batch Submission
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Upload institutional student cohorts, normalize field schemas, and execute 7-stage APAAR validation before final signatory sign-off.
           </p>
         </div>
 
         <button
           onClick={handleDownloadTemplate}
-          className="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-xl text-xs font-semibold transition-all shrink-0"
+          className="flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-4 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all shrink-0"
         >
-          <Download className="w-4 h-4 text-teal-400" />
+          <Download className="w-4 h-4 text-blue-600" />
           Download CSV Template
         </button>
       </div>
 
       {/* Programme & Academic Year Selection */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-950/60 border border-slate-800 p-4 rounded-xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white border border-slate-200 p-4 rounded-xl shadow-sm">
         <div>
-          <label className="text-xs font-medium text-slate-300 block mb-1">
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
             Target Programme:
           </label>
           <select
             value={selectedProgrammeId}
             onChange={(e) => setSelectedProgrammeId(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500"
+            className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
           >
             {institution.programmes.map((p) => (
               <option key={p.id} value={p.id}>
@@ -279,14 +309,14 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
         </div>
 
         <div>
-          <label className="text-xs font-medium text-slate-300 block mb-1">
+          <label className="text-xs font-semibold text-slate-700 block mb-1">
             Academic Session / Year:
           </label>
           <input
             type="text"
             value={academicYear}
             onChange={(e) => setAcademicYear(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 font-mono"
+            className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
             placeholder="2026-2027"
           />
         </div>
@@ -294,24 +324,24 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
 
       {/* STEP 1: Upload Dropzone */}
       {step === 'UPLOAD' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-6">
-          <div className="border-2 border-dashed border-slate-700 hover:border-blue-500/80 rounded-2xl p-10 transition-colors flex flex-col items-center justify-center cursor-pointer relative bg-slate-950/40">
+        <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center space-y-6 shadow-sm">
+          <div className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-2xl p-10 transition-colors flex flex-col items-center justify-center cursor-pointer relative bg-blue-50/20">
             <input
               type="file"
               accept=".csv"
               onChange={handleFileChange}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-            <div className="w-16 h-16 rounded-2xl bg-blue-900/40 text-blue-400 flex items-center justify-center mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4 shadow-sm">
               <FileSpreadsheet className="w-8 h-8" />
             </div>
-            <h3 className="text-base font-bold text-white">
+            <h3 className="text-base font-bold text-slate-900">
               Drag &amp; drop student CSV file here
             </h3>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Supports CSV with UTF-8 encoding up to 10MB per batch
             </p>
-            <div className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold">
+            <div className="mt-4 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm">
               Browse Files
             </div>
           </div>
@@ -320,7 +350,7 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
             <span className="text-xs text-slate-500">— or test with pre-built dataset —</span>
             <button
               onClick={handleLoadSampleCSV}
-              className="text-xs font-semibold text-teal-400 hover:text-teal-300 underline"
+              className="text-xs font-semibold text-blue-700 hover:text-blue-900 underline"
             >
               Load Sample DTU Batch (Includes Intentional Edge Cases)
             </button>
@@ -330,21 +360,21 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
 
       {/* STEP 2: Column Mapping */}
       {step === 'MAPPING' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-6 shadow-sm">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-200">
             <div>
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <SlidersHorizontal className="w-5 h-5 text-indigo-400" />
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <SlidersHorizontal className="w-5 h-5 text-blue-600" />
                 Schema Normalization &amp; Column Mapping
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
-                File: <strong className="text-slate-200">{fileName}</strong> ({fileSize}, {rawRows.length} rows detected)
+              <p className="text-xs text-slate-500 mt-0.5">
+                File: <strong className="text-slate-800">{fileName}</strong> ({fileSize}, {rawRows.length} rows detected)
               </p>
             </div>
 
             <button
               onClick={() => setStep('UPLOAD')}
-              className="text-xs text-slate-400 hover:text-white"
+              className="text-xs text-slate-600 hover:text-slate-900 font-medium underline"
             >
               Change File
             </button>
@@ -352,8 +382,8 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(columnMapping).map(([canonicalKey, mappedHeader]) => (
-              <div key={canonicalKey} className="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                <label className="text-[11px] font-semibold text-blue-300 block mb-1">
+              <div key={canonicalKey} className="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                <label className="text-[11px] font-bold text-blue-900 block mb-1.5 uppercase tracking-wider">
                   {canonicalKey}
                 </label>
                 <select
@@ -361,7 +391,7 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
                   onChange={(e) =>
                     setColumnMapping({ ...columnMapping, [canonicalKey]: e.target.value })
                   }
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                 >
                   <option value="">-- Ignore Field --</option>
                   {headers.map((h) => (
@@ -374,16 +404,16 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
             ))}
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
             <button
               onClick={() => setStep('UPLOAD')}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium"
+              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold"
             >
               Back
             </button>
             <button
               onClick={handleRunValidation}
-              className="flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold shadow-md"
+              className="flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm"
             >
               Run 7-Stage Validation Engine
               <ArrowRight className="w-4 h-4" />
@@ -394,32 +424,32 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
 
       {/* STEP 3: Pre-Commit Validation Results Preview */}
       {step === 'VALIDATION_PREVIEW' && validationSummary && (
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-6 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
             <div>
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <FileCheck className="w-5 h-5 text-teal-400" />
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <FileCheck className="w-5 h-5 text-blue-600" />
                 Pre-Commit Validation Results
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Evaluated against statutory rules: Capacity ({selectedProgramme.approvedIntake}), format, duplicate index.
               </p>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs bg-emerald-950 text-emerald-300 border border-emerald-800 px-2.5 py-1 rounded-lg font-semibold">
+              <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-lg font-semibold">
                 {validationSummary.validCount} Valid
               </span>
-              <span className="text-xs bg-rose-950 text-rose-300 border border-rose-800 px-2.5 py-1 rounded-lg font-semibold">
+              <span className="text-xs bg-rose-50 text-rose-700 border border-rose-200 px-3 py-1 rounded-lg font-semibold">
                 {validationSummary.invalidCount} Errors
               </span>
             </div>
           </div>
 
           {/* Row Level Table */}
-          <div className="overflow-x-auto rounded-xl border border-slate-800 max-h-96 overflow-y-auto">
-            <table className="w-full text-left text-xs text-slate-300">
-              <thead className="bg-slate-950 text-slate-400 sticky top-0">
+          <div className="overflow-x-auto rounded-xl border border-slate-200 max-h-96 overflow-y-auto">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-blue-50/75 text-blue-950 sticky top-0 border-b border-slate-200 font-semibold">
                 <tr>
                   <th className="p-3">#</th>
                   <th className="p-3">APAAR ID</th>
@@ -428,20 +458,20 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
                   <th className="p-3">Validation Findings &amp; Errors</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800">
+              <tbody className="divide-y divide-slate-100">
                 {validationSummary.summaries.map((s: any, idx: number) => (
-                  <tr key={s.recordId} className={s.isValid ? 'hover:bg-slate-800/40' : 'bg-rose-950/20'}>
+                  <tr key={s.recordId} className={s.isValid ? 'hover:bg-blue-50/30' : 'bg-rose-50/40'}>
                     <td className="p-3 text-slate-500 font-mono">{idx + 1}</td>
-                    <td className="p-3 font-mono font-medium text-white">{s.apaarId}</td>
-                    <td className="p-3">{s.studentName}</td>
+                    <td className="p-3 font-mono font-medium text-slate-900">{s.apaarId}</td>
+                    <td className="p-3 font-semibold text-slate-900">{s.studentName}</td>
                     <td className="p-3">
                       {s.isValid ? (
-                        <span className="inline-flex items-center gap-1 text-emerald-400 font-semibold">
+                        <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           Passed
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-rose-400 font-semibold">
+                        <span className="inline-flex items-center gap-1 text-rose-700 font-semibold">
                           <XCircle className="w-3.5 h-3.5" />
                           Failed
                         </span>
@@ -449,15 +479,15 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
                     </td>
                     <td className="p-3">
                       {s.errors.length === 0 ? (
-                        <span className="text-slate-400">All checks satisfied.</span>
+                        <span className="text-slate-500">All checks satisfied.</span>
                       ) : (
                         <div className="space-y-1">
                           {s.errors.map((err: any, errIdx: number) => (
                             <div
                               key={errIdx}
-                              className="text-xs text-rose-300 flex items-start gap-1"
+                              className="text-xs text-rose-700 flex items-start gap-1"
                             >
-                              <span className="font-mono text-[10px] bg-rose-900/60 px-1 rounded shrink-0">
+                              <span className="font-mono text-[10px] bg-rose-100 text-rose-800 px-1 py-0.5 rounded shrink-0">
                                 {err.ruleId}
                               </span>
                               <span>{err.message}</span>
@@ -472,22 +502,22 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
             </table>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-slate-200">
             <button
               onClick={() => setStep('MAPPING')}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-medium"
+              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium"
             >
               Modify Mapping
             </button>
 
             <div className="flex items-center gap-3">
-              <span className="text-xs text-slate-400">
-                Batch will be staged as <strong>PENDING_APPROVAL</strong> for institutional signatory.
+              <span className="text-xs text-slate-500">
+                Batch will be staged as <strong className="text-slate-800">PENDING_APPROVAL</strong> for institutional signatory.
               </span>
               <button
                 onClick={handleCommitBatch}
                 disabled={isCommitting}
-                className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-900 text-white rounded-xl text-xs font-bold shadow-lg shadow-blue-600/30"
+                className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-600/20"
               >
                 {isCommitting ? (
                   <>
@@ -508,26 +538,26 @@ export const StudentDataUpload: React.FC<StudentDataUploadProps> = ({ onSuccess 
 
       {/* STEP 4: Committed Confirmation */}
       {step === 'COMMITTED' && (
-        <div className="bg-slate-900 border border-teal-800/80 rounded-2xl p-8 text-center space-y-4 shadow-xl">
-          <div className="w-14 h-14 rounded-full bg-teal-900/50 text-teal-400 flex items-center justify-center mx-auto border border-teal-500/40">
+        <div className="bg-white border border-emerald-300 rounded-2xl p-8 text-center space-y-4 shadow-sm">
+          <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
             <CheckCircle2 className="w-8 h-8" />
           </div>
-          <h2 className="text-lg font-bold text-white">
+          <h2 className="text-lg font-bold text-slate-900">
             Batch Submission Successfully Committed
           </h2>
-          <p className="text-xs text-slate-300 max-w-md mx-auto">
+          <p className="text-xs text-slate-600 max-w-md mx-auto">
             Records have been staged in the central student repository and appended to the forward-linked SHA-256 audit chain. Institutional Signatory has been alerted for approval.
           </p>
           <div className="pt-4 flex justify-center gap-3">
             <button
               onClick={() => setStep('UPLOAD')}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium"
+              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold"
             >
               Upload Another Batch
             </button>
             <button
               onClick={() => onSuccess('students')}
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold"
+              className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm"
             >
               View in Student Directory
             </button>

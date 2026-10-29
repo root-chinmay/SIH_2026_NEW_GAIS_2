@@ -18,8 +18,6 @@ export const BiTemporalHistory: React.FC = () => {
   const [scrubberDate, setScrubberDate] = useState('2026-08-01');
 
   // Synthetic bitemporal demonstration records
-  // Example 1: Student admitted on 2026-07-20 (Valid From), but institution recorded it on 2026-08-01 (System Time)
-  // Example 2: Withdrawal happened on 2026-08-02 (Valid From), but institution reported withdrawal late on 2026-08-10 (System Time)
   const bitemporalExamples = [
     {
       studentName: 'Pooja Raghavan',
@@ -65,47 +63,47 @@ export const BiTemporalHistory: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Title */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-700/60">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
               Audit Dimension
             </span>
-            <span className="text-[11px] font-mono text-teal-400 bg-teal-950/60 px-2 py-0.5 rounded border border-teal-800/60">
+            <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
               Valid Time vs System Time
             </span>
           </div>
-          <h1 className="text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <Clock className="w-6 h-6 text-purple-400" />
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <Clock className="w-6 h-6 text-blue-600" />
             Bi-Temporal Record History &amp; Inspector Scrubber
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Reconstructs historical states to answer <em>"What did AICTE know on date X?"</em> alongside <em>"When did the institution actually report or backdate this transaction?"</em>
           </p>
         </div>
 
         {/* Auditor Scrubber Date Picker */}
-        <div className="bg-slate-950 border border-slate-700 rounded-xl p-3 flex items-center gap-3 shrink-0">
+        <div className="bg-slate-50 border border-slate-300 rounded-xl p-3 flex items-center gap-3 shrink-0 shadow-sm">
           <div>
-            <label className="text-[10px] uppercase font-bold text-slate-400 block">
+            <label className="text-[10px] uppercase font-bold text-slate-500 block">
               Historical Auditor Scrubber:
             </label>
             <input
               type="date"
               value={scrubberDate}
               onChange={(e) => setScrubberDate(e.target.value)}
-              className="bg-transparent border-none text-white text-xs font-mono font-bold focus:outline-none cursor-pointer mt-0.5"
+              className="bg-transparent border-none text-slate-900 text-xs font-mono font-bold focus:outline-none cursor-pointer mt-0.5"
             />
           </div>
           <button
             onClick={() => setScrubberDate('2026-08-05')}
-            className="text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded border border-slate-700"
+            className="text-[10px] bg-white hover:bg-slate-100 text-slate-700 px-2.5 py-1 rounded border border-slate-300 font-medium"
           >
             Mid-Aug
           </button>
           <button
             onClick={() => setScrubberDate('2026-10-29')}
-            className="text-[10px] bg-blue-900/60 hover:bg-blue-800 text-blue-300 px-2 py-1 rounded border border-blue-700/60"
+            className="text-[10px] bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded font-medium shadow-sm"
           >
             Today
           </button>
@@ -114,36 +112,36 @@ export const BiTemporalHistory: React.FC = () => {
 
       {/* Explanation Card */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-blue-400 uppercase tracking-wider">
-            <Calendar className="w-4 h-4" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-2 shadow-sm">
+          <div className="flex items-center gap-2 text-xs font-bold text-blue-700 uppercase tracking-wider">
+            <Calendar className="w-4 h-4 text-blue-600" />
             Valid Time (Reality Dimension)
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className="text-xs text-slate-600 leading-relaxed">
             The exact calendar date when the student physically enrolled, commenced classes, or obtained an authorized transfer certificate.
           </p>
         </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2">
-          <div className="flex items-center gap-2 text-xs font-bold text-teal-400 uppercase tracking-wider">
-            <ShieldCheck className="w-4 h-4" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-2 shadow-sm">
+          <div className="flex items-center gap-2 text-xs font-bold text-emerald-700 uppercase tracking-wider">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
             System Time (Audit Dimension)
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className="text-xs text-slate-600 leading-relaxed">
             The cryptographic timestamp when the institutional operator uploaded the record into the AICTE platform and the hash chain registered it.
           </p>
         </div>
       </div>
 
       {/* Bi-Temporal Scrubber Reconstruction Matrix */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-          <h2 className="text-sm font-bold text-white flex items-center gap-2">
-            <Layers className="w-4 h-4 text-purple-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+          <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <Layers className="w-4 h-4 text-blue-600" />
             Reconstructed State as of {scrubberDate}
           </h2>
-          <span className="text-xs text-slate-400 font-mono">
-            Scrubber View: <strong>{scrubberDate}</strong>
+          <span className="text-xs text-slate-500 font-mono">
+            Scrubber View: <strong className="text-slate-800">{scrubberDate}</strong>
           </span>
         </div>
 
@@ -151,33 +149,33 @@ export const BiTemporalHistory: React.FC = () => {
           {bitemporalExamples.map((item, idx) => (
             <div
               key={idx}
-              className="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3"
+              className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <div>
-                  <h3 className="text-sm font-bold text-white">{item.studentName}</h3>
-                  <div className="text-xs text-slate-400 font-mono">
+                  <h3 className="text-sm font-bold text-slate-900">{item.studentName}</h3>
+                  <div className="text-xs text-slate-500 font-mono">
                     {item.apaarId} &bull; {item.institution}
                   </div>
                 </div>
-                <span className="text-xs bg-slate-900 border border-slate-700 text-slate-300 px-2 py-0.5 rounded font-mono">
+                <span className="text-xs bg-white border border-slate-300 text-slate-700 px-2.5 py-0.5 rounded font-mono font-medium shadow-2xs">
                   Reporting Lag: {item.delayDays} Days
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs bg-slate-900/60 p-3 rounded-lg border border-slate-800/80">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs bg-white p-3.5 rounded-lg border border-slate-200">
                 <div>
-                  <span className="text-slate-400 text-[11px] block">Valid Time (When Event Happened):</span>
-                  <span className="text-blue-300 font-bold font-mono text-sm">{item.validTime}</span>
+                  <span className="text-slate-500 text-[11px] block font-medium">Valid Time (When Event Happened):</span>
+                  <span className="text-blue-700 font-bold font-mono text-sm">{item.validTime}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-[11px] block">System Time (When Recorded into AIM):</span>
-                  <span className="text-teal-300 font-bold font-mono text-sm">{item.systemTime}</span>
+                  <span className="text-slate-500 text-[11px] block font-medium">System Time (When Recorded into AIM):</span>
+                  <span className="text-emerald-700 font-bold font-mono text-sm">{item.systemTime}</span>
                 </div>
               </div>
 
-              <div className="text-xs p-3 rounded-lg bg-indigo-950/30 border border-indigo-900/50 text-indigo-200">
-                <strong>What the system showed on {scrubberDate}:</strong> {item.effectOnScrubberDate}
+              <div className="text-xs p-3.5 rounded-lg bg-blue-50/70 border border-blue-200 text-blue-950">
+                <strong className="text-blue-900">What the system showed on {scrubberDate}:</strong> {item.effectOnScrubberDate}
               </div>
             </div>
           ))}

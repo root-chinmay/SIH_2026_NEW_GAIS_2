@@ -172,12 +172,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`bg-slate-950 border-r border-slate-800 flex flex-col transition-all duration-200 z-20 shrink-0 ${
+      className={`bg-white border-r border-slate-200 flex flex-col transition-all duration-200 z-20 shrink-0 shadow-2xs ${
         collapsed ? 'w-16' : 'w-64'
       }`}
     >
       {/* Collapse Toggle */}
-      <div className="p-3 border-b border-slate-800/80 flex items-center justify-between">
+      <div className="p-3 border-b border-slate-200 flex items-center justify-between">
         {!collapsed && (
           <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
             Platform Navigation
@@ -185,7 +185,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-900 transition-colors mx-auto"
+          className="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition-colors mx-auto"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -206,13 +206,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
               title={collapsed ? item.label : undefined}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                 isActive
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30 font-semibold'
+                  ? 'bg-blue-600 text-white shadow-xs font-semibold'
                   : item.disabled
-                  ? 'opacity-40 cursor-not-allowed text-slate-500'
-                  : 'text-slate-300 hover:bg-slate-900 hover:text-white'
+                  ? 'opacity-40 cursor-not-allowed text-slate-400'
+                  : 'text-slate-600 hover:bg-blue-50 hover:text-blue-700'
               }`}
             >
-              <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+              <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-500'}`} />
 
               {!collapsed && (
                 <div className="flex-1 text-left flex items-center justify-between truncate">
@@ -220,14 +220,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {item.badge && (
                     <span
                       className={`text-[9px] px-1.5 py-0.5 rounded border ml-1 font-mono uppercase font-semibold ${
-                        item.badgeColor || 'bg-slate-800 text-slate-300 border-slate-700'
+                        item.badgeColor || 'bg-blue-100 text-blue-800 border-blue-200'
                       }`}
                     >
                       {item.badge}
                     </span>
                   )}
                   {item.count !== undefined && !item.badge && (
-                    <span className="text-[10px] text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded font-medium">
                       {item.count}
                     </span>
                   )}
@@ -239,12 +239,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </nav>
 
       {/* Footer System Status */}
-      <div className="p-3 border-t border-slate-800/80 bg-slate-900/50">
+      <div className="p-3 border-t border-slate-200 bg-slate-50/70">
         {!collapsed ? (
-          <div className="text-[11px] text-slate-400 space-y-1">
-            <div className="flex items-center justify-between text-slate-300 font-medium">
+          <div className="text-[11px] text-slate-500 space-y-1">
+            <div className="flex items-center justify-between text-slate-700 font-medium">
               <span>SIH-2026 Sandbox</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
             </div>
             <div className="text-[10px] text-slate-400 truncate">
               {state.currentUser.email}
@@ -252,7 +252,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         ) : (
           <div className="flex justify-center">
-            <div className="w-2 h-2 rounded-full bg-emerald-400" title="System Active" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500" title="System Active" />
           </div>
         )}
       </div>

@@ -51,21 +51,21 @@ export const AuditChainViewer: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Title */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-teal-900/60 text-teal-300 border border-teal-700/60">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
               Cybersecurity Tenet
             </span>
-            <span className="text-[11px] font-mono text-blue-400 bg-blue-950/60 px-2 py-0.5 rounded border border-blue-800/60">
+            <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
               SHA-256 Forward-Linked Chain
             </span>
           </div>
-          <h1 className="text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <Link2 className="w-6 h-6 text-teal-400" />
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <Link2 className="w-6 h-6 text-blue-600" />
             Tamper-Evident Cryptographic Audit Chain
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Every administrative batch upload, signatory sign-off, gate query, and student correction is cryptographically sealed with the hash of the preceding block.
           </p>
         </div>
@@ -74,7 +74,7 @@ export const AuditChainViewer: React.FC = () => {
           <button
             onClick={handleVerifyChain}
             disabled={isVerifying}
-            className="flex items-center gap-1.5 px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-teal-600/30"
+            className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm"
           >
             <ShieldAlert className="w-4 h-4" />
             {isVerifying ? 'Verifying Hashes...' : 'Re-Verify Chain'}
@@ -85,46 +85,46 @@ export const AuditChainViewer: React.FC = () => {
       {/* Verification Status Banner */}
       {verificationResult && (
         <div
-          className={`p-5 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+          className={`p-5 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm ${
             verificationResult.isValid
-              ? 'bg-teal-950/40 border-teal-800 text-teal-200'
-              : 'bg-rose-950/40 border-rose-800 text-rose-200'
+              ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950'
+              : 'bg-rose-50/70 border-rose-200 text-rose-950'
           }`}
         >
           <div className="flex items-center gap-3">
             {verificationResult.isValid ? (
-              <CheckCircle2 className="w-6 h-6 text-teal-400 shrink-0" />
+              <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
             ) : (
-              <XCircle className="w-6 h-6 text-rose-400 shrink-0" />
+              <XCircle className="w-6 h-6 text-rose-600 shrink-0" />
             )}
             <div>
-              <div className="font-bold text-sm text-white">
+              <div className="font-bold text-sm text-slate-900">
                 {verificationResult.isValid
                   ? 'Audit Chain Intact & Cryptographically Verified'
                   : 'Chain Tamper Alert Detected!'}
               </div>
-              <p className="text-xs text-slate-300 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5">
                 {verificationResult.diagnostic}
               </p>
             </div>
           </div>
 
-          <div className="text-right font-mono text-xs text-slate-400 shrink-0">
-            <div>Total Events: <strong className="text-white">{verificationResult.totalEvents}</strong></div>
+          <div className="sm:text-right font-mono text-xs text-slate-500 shrink-0">
+            <div>Total Events: <strong className="text-slate-900">{verificationResult.totalEvents}</strong></div>
             <div className="text-[10px] truncate max-w-[200px]">Tip: {verificationResult.latestHash.substring(0, 16)}...</div>
           </div>
         </div>
       )}
 
-      {/* Interactive Tampering Simulation Sandbox (Section 19) */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+      {/* Interactive Tampering Simulation Sandbox */}
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200">
           <div>
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <ShieldAlert className="w-5 h-5 text-amber-400" />
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <ShieldAlert className="w-5 h-5 text-amber-600" />
               Interactive Audit Tampering Demonstration Sandbox
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-600 mt-0.5">
               Simulates an unauthorized backdated modification on an isolated cloned log to demonstrate mathematical detection.
             </p>
           </div>
@@ -132,7 +132,7 @@ export const AuditChainViewer: React.FC = () => {
           {!tamperingDemoResult ? (
             <button
               onClick={() => handleRunTamperingSimulation(1)}
-              className="flex items-center gap-1.5 px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-amber-600/30"
+              className="flex items-center gap-1.5 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold shadow-sm"
             >
               <Play className="w-3.5 h-3.5" />
               Simulate Audit Tampering
@@ -140,7 +140,7 @@ export const AuditChainViewer: React.FC = () => {
           ) : (
             <button
               onClick={handleClearTamperSandbox}
-              className="flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium"
+              className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-xl text-xs font-semibold"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               Reset Tamper Sandbox
@@ -149,52 +149,52 @@ export const AuditChainViewer: React.FC = () => {
         </div>
 
         {tamperingDemoResult && (
-          <div className="bg-rose-950/30 border border-rose-900/80 rounded-xl p-5 space-y-3 text-xs">
-            <div className="flex items-center gap-2 font-bold text-sm text-rose-300">
-              <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
+          <div className="bg-rose-50 border border-rose-200 rounded-xl p-5 space-y-3 text-xs">
+            <div className="flex items-center gap-2 font-bold text-sm text-rose-800">
+              <XCircle className="w-5 h-5 text-rose-600 shrink-0" />
               <span>Integrity Failure Detected: Modified Log Rejected</span>
             </div>
 
-            <p className="text-slate-300 leading-relaxed">
+            <p className="text-slate-700 leading-relaxed">
               Target event <strong>#{tamperingDemoResult.tamperedEvent.sequenceNumber}</strong> ({tamperingDemoResult.tamperedEvent.id}) was silently altered in memory. When the SHA-256 verification utility re-calculated the canonical digest, the resulting hash did not match the forward pointer.
             </p>
 
-            <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 font-mono text-[11px] space-y-1">
+            <div className="bg-white p-3 rounded-lg border border-rose-200 font-mono text-[11px] space-y-1">
               <div>
-                Diagnostic: <span className="text-rose-400">{tamperingDemoResult.verificationResult.diagnostic}</span>
+                Diagnostic: <span className="text-rose-700 font-semibold">{tamperingDemoResult.verificationResult.diagnostic}</span>
               </div>
-              <div>
+              <div className="text-slate-600">
                 Broken Index: Block #{tamperingDemoResult.verificationResult.brokenIndex} &bull; Expected Hash: {tamperingDemoResult.verificationResult.expectedHash?.substring(0, 20)}...
               </div>
             </div>
 
-            <div className="text-[11px] text-slate-400">
-              <strong>Technical Distinction:</strong> A hash chain provides <em>tamper-evidence</em>. As mandated by AICTE standards, production durability additionally couples hash chains with off-site write-once storage and trusted periodic notary checkpoints.
+            <div className="text-[11px] text-slate-500">
+              <strong className="text-slate-700">Technical Distinction:</strong> A hash chain provides <em>tamper-evidence</em>. As mandated by AICTE standards, production durability additionally couples hash chains with off-site write-once storage and trusted periodic notary checkpoints.
             </div>
           </div>
         )}
       </div>
 
       {/* Live Event Blocks Feed */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-        <h2 className="text-sm font-bold text-white flex items-center gap-2">
-          <Layers className="w-4 h-4 text-blue-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
+        <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <Layers className="w-4 h-4 text-blue-600" />
           Verified Cryptographic Event Chain ({auditChain.length} Blocks)
         </h2>
 
         <div className="space-y-3 overflow-y-auto max-h-[600px] pr-1">
-          {auditChain.map((evt, idx) => (
+          {auditChain.map((evt) => (
             <div
               key={evt.id}
-              className="bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-slate-700 transition-colors space-y-2 text-xs"
+              className="bg-slate-50 p-4 rounded-xl border border-slate-200 hover:border-slate-300 transition-colors space-y-2 text-xs"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-2 border-b border-slate-900">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-2 border-b border-slate-200">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono font-bold text-white text-xs bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                  <span className="font-mono font-bold text-slate-900 text-xs bg-white px-2 py-0.5 rounded border border-slate-200">
                     Block #{evt.sequenceNumber}
                   </span>
-                  <span className="font-mono text-slate-400">{evt.id}</span>
-                  <span className="font-semibold text-blue-300 bg-blue-950/60 px-2 py-0.5 rounded text-[10px] border border-blue-800/60">
+                  <span className="font-mono text-slate-500">{evt.id}</span>
+                  <span className="font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded text-[10px] border border-blue-200">
                     {evt.action}
                   </span>
                 </div>
@@ -203,18 +203,18 @@ export const AuditChainViewer: React.FC = () => {
                 </div>
               </div>
 
-              <div className="text-slate-300 leading-relaxed">
+              <div className="text-slate-700 leading-relaxed">
                 {evt.details}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 font-mono text-[10px]">
-                <div className="bg-slate-900/60 p-2 rounded truncate text-slate-400 border border-slate-800/60">
-                  <span className="text-slate-500 block">Previous Hash (Pointer):</span>
-                  <span className="text-slate-300">{evt.previousHash}</span>
+                <div className="bg-white p-2 rounded truncate text-slate-600 border border-slate-200">
+                  <span className="text-slate-400 block font-sans">Previous Hash (Pointer):</span>
+                  <span className="text-slate-700">{evt.previousHash}</span>
                 </div>
-                <div className="bg-slate-900/60 p-2 rounded truncate text-teal-400 border border-slate-800/60">
-                  <span className="text-slate-500 block">Block Hash (SHA-256):</span>
-                  <span>{evt.eventHash}</span>
+                <div className="bg-white p-2 rounded truncate text-blue-700 border border-slate-200">
+                  <span className="text-slate-400 block font-sans">Block Hash (SHA-256):</span>
+                  <span className="font-semibold">{evt.eventHash}</span>
                 </div>
               </div>
             </div>

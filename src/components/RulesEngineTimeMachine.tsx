@@ -103,36 +103,36 @@ export const RulesEngineTimeMachine: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Page Title */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-300 border border-indigo-700/60">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
               Regulatory Core
             </span>
-            <span className="text-[11px] font-mono text-teal-400 bg-teal-950/60 px-2 py-0.5 rounded border border-teal-800/60">
+            <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
               Bi-Directional Rulebook
             </span>
           </div>
-          <h1 className="text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <History className="w-6 h-6 text-indigo-400" />
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <History className="w-6 h-6 text-blue-600" />
             Regulatory Rules Engine &amp; Time Machine
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Version-controlled statutory AICTE rulebook with retroactive compliance simulation and historical re-evaluation.
           </p>
         </div>
 
-        <div className="text-right">
-          <div className="text-xs text-slate-400">Current Statutory Version:</div>
-          <div className="text-sm font-bold text-teal-400 font-mono">APH 2026-27 v2.1 (Active)</div>
+        <div className="sm:text-right">
+          <div className="text-xs text-slate-500 font-medium">Current Statutory Version:</div>
+          <div className="text-sm font-bold text-blue-700 font-mono">APH 2026-27 v2.1 (Active)</div>
         </div>
       </div>
 
       {/* Versioned Rules List & Detail */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Rules Table */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
-          <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider px-2">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 shadow-sm">
+          <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider px-2">
             Configured Statutory Rules ({rules.length})
           </h3>
 
@@ -143,21 +143,21 @@ export const RulesEngineTimeMachine: React.FC = () => {
                 <div
                   key={r.id}
                   onClick={() => setSelectedRuleId(r.id)}
-                  className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                  className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-indigo-950/70 border-indigo-500 shadow-md'
-                      : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                      ? 'bg-blue-50/70 border-blue-500 shadow-sm'
+                      : 'bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100/60'
                   }`}
                 >
                   <div className="flex items-center justify-between text-xs mb-1">
-                    <span className="font-mono text-slate-400 font-semibold">{r.ruleCode}</span>
-                    <span className="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-mono">
+                    <span className="font-mono text-slate-600 font-semibold">{r.ruleCode}</span>
+                    <span className="text-[10px] bg-white border border-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-mono font-semibold">
                       v{r.version}
                     </span>
                   </div>
-                  <div className="font-semibold text-white text-xs">{r.name}</div>
-                  <div className="text-[11px] text-teal-400 mt-1 flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3" />
+                  <div className="font-semibold text-slate-900 text-xs">{r.name}</div>
+                  <div className="text-[11px] text-blue-700 font-medium mt-1 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                     <span>{r.testCasesCount} Automated Unit Tests</span>
                   </div>
                 </div>
@@ -167,41 +167,41 @@ export const RulesEngineTimeMachine: React.FC = () => {
         </div>
 
         {/* Rule Detail View */}
-        <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-5">
-          <div className="flex items-start justify-between pb-4 border-b border-slate-800">
+        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 space-y-5 shadow-sm">
+          <div className="flex items-start justify-between pb-4 border-b border-slate-200">
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-300 border border-indigo-700/60">
+                <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
                   {activeRule.ruleCode}
                 </span>
-                <span className="text-xs text-slate-400 font-mono">v{activeRule.version}</span>
+                <span className="text-xs text-slate-500 font-mono">v{activeRule.version}</span>
               </div>
-              <h2 className="text-lg font-bold text-white mt-1">{activeRule.name}</h2>
+              <h2 className="text-lg font-bold text-slate-900 mt-1">{activeRule.name}</h2>
             </div>
-            <span className="text-xs bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-1 rounded-lg font-semibold">
+            <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-lg font-semibold">
               {activeRule.status}
             </span>
           </div>
 
           <div className="space-y-4 text-xs">
-            <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1">
-              <div className="text-slate-400 uppercase font-semibold text-[10px]">
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+              <div className="text-slate-500 uppercase font-bold text-[10px] tracking-wider">
                 Plain Language Regulatory Mandate:
               </div>
-              <p className="text-slate-200 leading-relaxed text-sm">
+              <p className="text-slate-800 leading-relaxed text-sm">
                 {activeRule.plainLanguage}
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-                <div className="text-slate-400 text-[11px]">Statutory Authority Source:</div>
-                <div className="text-white font-medium mt-0.5">{activeRule.authoritativeSource}</div>
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                <div className="text-slate-500 text-[11px] font-medium">Statutory Authority Source:</div>
+                <div className="text-slate-900 font-semibold mt-0.5">{activeRule.authoritativeSource}</div>
               </div>
 
-              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-                <div className="text-slate-400 text-[11px]">Authorized Sign-Off:</div>
-                <div className="text-white font-medium mt-0.5">
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                <div className="text-slate-500 text-[11px] font-medium">Authorized Sign-Off:</div>
+                <div className="text-slate-900 font-semibold mt-0.5">
                   {activeRule.authorizedBy} ({activeRule.effectiveAcademicYear})
                 </div>
               </div>
@@ -210,28 +210,28 @@ export const RulesEngineTimeMachine: React.FC = () => {
         </div>
       </div>
 
-      {/* Regulatory Time Machine Section (Section 17) */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      {/* Regulatory Time Machine Section */}
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
           <div>
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-indigo-400" />
-              <h2 className="text-base font-bold text-white">
+              <Sparkles className="w-5 h-5 text-blue-600" />
+              <h2 className="text-base font-bold text-slate-900">
                 Regulatory Time Machine Replay
               </h2>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-600 mt-0.5">
               Re-evaluates synthetic historical student cohorts under a previous or new regulatory rule version to inspect variance.
             </p>
           </div>
 
           {/* Version Selector for Replay */}
           <div className="flex items-center gap-2">
-            <label className="text-xs text-slate-400">Replay Under Rule Version:</label>
+            <label className="text-xs text-slate-600 font-medium">Replay Under Rule Version:</label>
             <select
               value={targetVersion}
               onChange={(e) => setTargetVersion(e.target.value as any)}
-              className="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white font-mono"
+              className="bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-800 font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
             >
               <option value="v1.0">APH 2025-26 (v1.0 — Advisory Mode)</option>
               <option value="v2.1">APH 2026-27 (v2.1 — Strict Mandate)</option>
@@ -239,7 +239,7 @@ export const RulesEngineTimeMachine: React.FC = () => {
             <button
               onClick={handleRunTimeMachineReplay}
               disabled={isReplaying}
-              className="flex items-center gap-1.5 px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold"
+              className="flex items-center gap-1.5 px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm"
             >
               <Play className="w-3.5 h-3.5" />
               {isReplaying ? 'Replaying...' : 'Run Replay'}
@@ -251,30 +251,30 @@ export const RulesEngineTimeMachine: React.FC = () => {
         {replayedResults && (
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center">
-                <div className="text-xs text-slate-400">Records Evaluated</div>
-                <div className="text-2xl font-extrabold text-white mt-1">
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
+                <div className="text-xs text-slate-500 font-medium">Records Evaluated</div>
+                <div className="text-2xl font-extrabold text-slate-900 mt-1">
                   {replayedResults.totalReplayed}
                 </div>
               </div>
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center">
-                <div className="text-xs text-slate-400">Passed Historical Rules</div>
-                <div className="text-2xl font-extrabold text-emerald-400 mt-1">
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
+                <div className="text-xs text-slate-500 font-medium">Passed Historical Rules</div>
+                <div className="text-2xl font-extrabold text-emerald-700 mt-1">
                   {replayedResults.passedEarlier}
                 </div>
               </div>
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-center">
-                <div className="text-xs text-slate-400">Variance Status Discrepancies</div>
-                <div className="text-2xl font-extrabold text-amber-400 mt-1">
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center">
+                <div className="text-xs text-slate-500 font-medium">Variance Status Discrepancies</div>
+                <div className="text-2xl font-extrabold text-amber-600 mt-1">
                   {replayedResults.failedUnderNew}
                 </div>
               </div>
             </div>
 
             {replayedResults.changedRecords.length > 0 && (
-              <div className="bg-slate-950 rounded-xl border border-slate-800 overflow-hidden text-xs">
-                <table className="w-full text-left text-slate-300">
-                  <thead className="bg-slate-900 text-slate-400">
+              <div className="bg-white rounded-xl border border-slate-200 overflow-hidden text-xs shadow-sm">
+                <table className="w-full text-left text-slate-700">
+                  <thead className="bg-blue-50/75 text-blue-950 font-semibold border-b border-slate-200">
                     <tr>
                       <th className="p-3">Student &amp; APAAR</th>
                       <th className="p-3">Historical Decision ({targetVersion})</th>
@@ -282,16 +282,16 @@ export const RulesEngineTimeMachine: React.FC = () => {
                       <th className="p-3">Regulatory Impact Rationale</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800">
+                  <tbody className="divide-y divide-slate-100">
                     {replayedResults.changedRecords.map((r, i) => (
-                      <tr key={i} className="hover:bg-slate-900/50">
+                      <tr key={i} className="hover:bg-blue-50/30">
                         <td className="p-3">
-                          <div className="font-semibold text-white">{r.studentName}</div>
-                          <div className="text-[11px] font-mono text-slate-400">{r.apaarId}</div>
+                          <div className="font-semibold text-slate-900">{r.studentName}</div>
+                          <div className="text-[11px] font-mono text-slate-500">{r.apaarId}</div>
                         </td>
-                        <td className="p-3 font-mono text-emerald-400">{r.historicalDecision}</td>
-                        <td className="p-3 font-mono text-rose-400">{r.replayedDecision}</td>
-                        <td className="p-3 text-slate-300">{r.impactReason}</td>
+                        <td className="p-3 font-mono text-emerald-700 font-semibold">{r.historicalDecision}</td>
+                        <td className="p-3 font-mono text-rose-700 font-semibold">{r.replayedDecision}</td>
+                        <td className="p-3 text-slate-600">{r.impactReason}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -302,15 +302,15 @@ export const RulesEngineTimeMachine: React.FC = () => {
         )}
       </div>
 
-      {/* AI Rule Drafter Simulation (Section 17 - Prompt to draft proposal) */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+      {/* AI Rule Drafter Simulation */}
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
         <div className="flex items-center gap-2">
-          <FileCode className="w-5 h-5 text-teal-400" />
-          <h2 className="text-sm font-bold text-white">
+          <FileCode className="w-5 h-5 text-blue-600" />
+          <h2 className="text-sm font-bold text-slate-900">
             AI-Assisted Regulatory Rule Proposal Sandbox
           </h2>
         </div>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-600">
           Draft new proposed amendments in natural language. The system treats all AI outputs as unapproved proposals requiring human sign-off before activation.
         </p>
 
@@ -320,27 +320,27 @@ export const RulesEngineTimeMachine: React.FC = () => {
             value={aiDraftPrompt}
             onChange={(e) => setAiDraftPrompt(e.target.value)}
             placeholder="e.g., Introduce a 10% supernumerary quota for sports excellence candidates..."
-            className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white"
+            className="flex-1 bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
           />
           <button
             onClick={handleAiRuleDraft}
             disabled={isAiDrafting}
-            className="px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white rounded-lg text-xs font-semibold shrink-0"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm shrink-0"
           >
             {isAiDrafting ? 'Drafting...' : 'Draft Rule Proposal'}
           </button>
         </div>
 
         {aiRuleDraft && (
-          <div className="p-4 rounded-xl bg-slate-950 border border-teal-800/80 space-y-2 text-xs">
-            <div className="flex items-center justify-between text-teal-300 font-bold">
+          <div className="p-4 rounded-xl bg-blue-50/40 border border-blue-200 space-y-2 text-xs">
+            <div className="flex items-center justify-between text-blue-900 font-bold">
               <span>Proposal: {aiRuleDraft.ruleCode}</span>
-              <span className="text-[10px] bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded">
+              <span className="text-[10px] bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded font-semibold">
                 Unapproved Proposal (Human Sign-Off Required)
               </span>
             </div>
-            <div className="text-slate-200 font-semibold">{aiRuleDraft.name}</div>
-            <p className="text-slate-400">{aiRuleDraft.plainLanguage}</p>
+            <div className="text-slate-900 font-semibold">{aiRuleDraft.name}</div>
+            <p className="text-slate-600">{aiRuleDraft.plainLanguage}</p>
           </div>
         )}
       </div>

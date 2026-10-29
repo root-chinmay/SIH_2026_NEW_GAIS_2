@@ -104,21 +104,21 @@ export const InstitutionDirectory: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-900/60 text-blue-300 border border-blue-700/60">
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
               National Registry
             </span>
-            <span className="text-[11px] font-mono text-teal-400 bg-teal-950/60 px-2 py-0.5 rounded border border-teal-800/60">
+            <span className="text-[11px] font-mono text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 font-semibold">
               AICTE Approved Network
             </span>
           </div>
-          <h1 className="text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <Building2 className="w-6 h-6 text-blue-400" />
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <Building2 className="w-6 h-6 text-blue-600" />
             Institution Directory &amp; Registration
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Complete institutional directory containing approved programmes, sanctioned capacities, authorized signatories, and reporting compliance.
           </p>
         </div>
@@ -127,7 +127,7 @@ export const InstitutionDirectory: React.FC = () => {
           {isAuthorizedToRegister && (
             <button
               onClick={() => setShowRegisterModal(true)}
-              className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-blue-600/30"
+              className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-all"
             >
               <Plus className="w-4 h-4" />
               Register New Institution
@@ -144,7 +144,7 @@ export const InstitutionDirectory: React.FC = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search institutions by name, code, or state..."
-          className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+          className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-600 shadow-2xs"
         />
       </div>
 
@@ -163,18 +163,18 @@ export const InstitutionDirectory: React.FC = () => {
           return (
             <div
               key={inst.id}
-              className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4 hover:border-slate-700 transition-colors shadow-sm"
+              className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 hover:border-blue-300 transition-colors shadow-xs"
             >
               <div className="flex items-start justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold bg-slate-800 text-blue-300 px-2 py-0.5 rounded border border-slate-700">
+                    <span className="text-xs font-mono font-bold bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200">
                       {inst.code}
                     </span>
-                    <span className="text-xs text-slate-400">{inst.type}</span>
+                    <span className="text-xs text-slate-500">{inst.type}</span>
                   </div>
-                  <h2 className="text-base font-bold text-white mt-1.5">{inst.name}</h2>
-                  <div className="text-xs text-slate-400 mt-0.5">
+                  <h2 className="text-base font-bold text-slate-900 mt-1.5">{inst.name}</h2>
+                  <div className="text-xs text-slate-500 mt-0.5">
                     {inst.district}, {inst.state} &bull; {inst.address}
                   </div>
                 </div>
@@ -182,10 +182,10 @@ export const InstitutionDirectory: React.FC = () => {
                 <span
                   className={`text-[11px] px-2 py-0.5 rounded font-semibold border ${
                     inst.reportingStatus === 'Verified'
-                      ? 'bg-teal-950 text-teal-300 border-teal-800'
+                      ? 'bg-teal-50 text-teal-800 border-teal-200'
                       : inst.reportingStatus === 'Submitted'
-                      ? 'bg-blue-950 text-blue-300 border-blue-800'
-                      : 'bg-amber-950 text-amber-300 border-amber-800'
+                      ? 'bg-blue-50 text-blue-800 border border-blue-200'
+                      : 'bg-amber-50 text-amber-800 border-amber-200'
                   }`}
                 >
                   {inst.reportingStatus}
@@ -193,33 +193,33 @@ export const InstitutionDirectory: React.FC = () => {
               </div>
 
               {/* Programmes summary */}
-              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 space-y-2 text-xs">
-                <div className="flex items-center justify-between text-slate-300 font-semibold">
+              <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2 text-xs">
+                <div className="flex items-center justify-between text-slate-700 font-semibold">
                   <span>Approved Programmes ({inst.programmes.length}):</span>
-                  <span className="font-mono text-teal-400">
+                  <span className="font-mono text-teal-700 font-semibold">
                     {activeAdmissions} / {totalIntake} Seats Enrolled
                   </span>
                 </div>
                 <div className="space-y-1">
                   {inst.programmes.map((p) => (
-                    <div key={p.id} className="flex justify-between text-slate-400 text-[11px]">
+                    <div key={p.id} className="flex justify-between text-slate-600 text-[11px]">
                       <span>{p.name} ({p.code})</span>
-                      <span className="font-mono text-slate-300 font-medium">Cap: {p.approvedIntake}</span>
+                      <span className="font-mono text-slate-700 font-medium">Cap: {p.approvedIntake}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Signatory and actions */}
-              <div className="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
+              <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
                 <div>
-                  <span className="text-[11px] text-slate-500 block">Authorized Signatory:</span>
-                  <span className="text-slate-200 font-medium">{inst.authorizedSignatory}</span>
+                  <span className="text-[11px] text-slate-400 block">Authorized Signatory:</span>
+                  <span className="text-slate-800 font-medium">{inst.authorizedSignatory}</span>
                 </div>
 
                 <button
                   onClick={() => setSelectedInstitution(inst)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-blue-300 rounded-lg text-xs font-semibold"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 rounded-lg text-xs font-semibold shadow-2xs transition-colors"
                 >
                   View Profile &amp; Audit Trail &rarr;
                 </button>
@@ -229,26 +229,26 @@ export const InstitutionDirectory: React.FC = () => {
         })}
       </div>
 
-      {/* Institution Profile Drawer / Modal (Section 8) */}
+      {/* Institution Profile Drawer / Modal */}
       {selectedInstitution && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-start justify-between pb-4 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto text-slate-800">
+            <div className="flex items-start justify-between pb-4 border-b border-slate-200">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold bg-blue-900/60 text-blue-300 px-2 py-0.5 rounded">
+                  <span className="text-xs font-mono font-bold bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200">
                     {selectedInstitution.code}
                   </span>
-                  <span className="text-xs text-slate-400">{selectedInstitution.type}</span>
+                  <span className="text-xs text-slate-500">{selectedInstitution.type}</span>
                 </div>
-                <h2 className="text-xl font-bold text-white mt-1">{selectedInstitution.name}</h2>
-                <div className="text-xs text-slate-400 mt-0.5">
+                <h2 className="text-xl font-bold text-slate-900 mt-1">{selectedInstitution.name}</h2>
+                <div className="text-xs text-slate-500 mt-0.5">
                   Signatory: {selectedInstitution.authorizedSignatory} ({selectedInstitution.signatoryDesignation})
                 </div>
               </div>
               <button
                 onClick={() => setSelectedInstitution(null)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800"
+                className="text-slate-400 hover:text-slate-700 p-1"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -256,12 +256,12 @@ export const InstitutionDirectory: React.FC = () => {
 
             {/* Approved Programmes & Limits Table */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Approved Programme Capacities &amp; Supernumerary Quotas
               </h3>
-              <div className="overflow-x-auto rounded-xl border border-slate-800 text-xs">
-                <table className="w-full text-left text-slate-300">
-                  <thead className="bg-slate-950 text-slate-400">
+              <div className="overflow-x-auto rounded-xl border border-slate-200 text-xs">
+                <table className="w-full text-left text-slate-700">
+                  <thead className="bg-blue-50/70 text-blue-950 font-semibold border-b border-blue-100">
                     <tr>
                       <th className="p-3">Programme</th>
                       <th className="p-3">Regular Cap</th>
@@ -270,10 +270,10 @@ export const InstitutionDirectory: React.FC = () => {
                       <th className="p-3">EWS Quota</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800">
+                  <tbody className="divide-y divide-slate-100">
                     {selectedInstitution.programmes.map((p) => (
                       <tr key={p.id}>
-                        <td className="p-3 font-semibold text-white">{p.name}</td>
+                        <td className="p-3 font-semibold text-slate-900">{p.name}</td>
                         <td className="p-3 font-mono">{p.approvedIntake}</td>
                         <td className="p-3 font-mono">{p.supernumeraryLimits.nri}</td>
                         <td className="p-3 font-mono">{p.supernumeraryLimits.tfw}</td>
@@ -287,7 +287,7 @@ export const InstitutionDirectory: React.FC = () => {
 
             {/* Institutional Submission Batches */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Submission Batch History
               </h3>
               <div className="space-y-2">
@@ -296,15 +296,15 @@ export const InstitutionDirectory: React.FC = () => {
                   .map((b) => (
                     <div
                       key={b.id}
-                      className="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between text-xs"
+                      className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs"
                     >
                       <div>
-                        <div className="font-semibold text-white">{b.batchNumber}</div>
-                        <div className="text-[11px] text-slate-400">
+                        <div className="font-semibold text-slate-900">{b.batchNumber}</div>
+                        <div className="text-[11px] text-slate-500">
                           {b.totalRecords} records &bull; Uploaded by {b.uploadedBy} on {b.uploadedAt.split('T')[0]}
                         </div>
                       </div>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-950 text-blue-300 border border-blue-800">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-800 border border-blue-200">
                         {b.status}
                       </span>
                     </div>
@@ -314,7 +314,7 @@ export const InstitutionDirectory: React.FC = () => {
 
             {/* Institutional Audit Trail */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
                 Institutional Cryptographic Audit Trail
               </h3>
               <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
@@ -325,13 +325,13 @@ export const InstitutionDirectory: React.FC = () => {
                   .map((e) => (
                     <div
                       key={e.id}
-                      className="p-2.5 bg-slate-950 rounded-lg border border-slate-800/80 text-[11px] space-y-1"
+                      className="p-2.5 bg-slate-50 rounded-lg border border-slate-200 text-[11px] space-y-1"
                     >
-                      <div className="flex justify-between text-slate-400">
-                        <span className="font-mono text-teal-400 font-semibold">{e.action}</span>
+                      <div className="flex justify-between text-slate-500">
+                        <span className="font-mono text-teal-700 font-semibold">{e.action}</span>
                         <span>{e.timestamp.split('T')[0]}</span>
                       </div>
-                      <div className="text-slate-300">{e.details}</div>
+                      <div className="text-slate-800">{e.details}</div>
                     </div>
                   ))}
               </div>
@@ -342,20 +342,20 @@ export const InstitutionDirectory: React.FC = () => {
 
       {/* Register New Institution Modal */}
       {showRegisterModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
           <form
             onSubmit={handleRegisterInstitution}
-            className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4"
+            className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 text-slate-800"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-blue-400" />
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <Building2 className="w-5 h-5 text-blue-600" />
                 Register AICTE Institution (Demo)
               </h2>
               <button
                 type="button"
                 onClick={() => setShowRegisterModal(false)}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-400 hover:text-slate-700 p-1"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -363,7 +363,7 @@ export const InstitutionDirectory: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div className="sm:col-span-2">
-                <label className="font-semibold text-slate-300 block mb-1">
+                <label className="font-semibold text-slate-700 block mb-1">
                   Institution Name:
                 </label>
                 <input
@@ -371,12 +371,12 @@ export const InstitutionDirectory: React.FC = () => {
                   required
                   value={newInst.name}
                   onChange={(e) => setNewInst({ ...newInst, name: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">
+                <label className="font-semibold text-slate-700 block mb-1">
                   Permanent AICTE Code:
                 </label>
                 <input
@@ -384,16 +384,16 @@ export const InstitutionDirectory: React.FC = () => {
                   required
                   value={newInst.code}
                   onChange={(e) => setNewInst({ ...newInst, code: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-mono focus:bg-white focus:border-blue-600"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">Institution Type:</label>
+                <label className="font-semibold text-slate-700 block mb-1">Institution Type:</label>
                 <select
                   value={newInst.type}
                   onChange={(e) => setNewInst({ ...newInst, type: e.target.value as any })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
                 >
                   <option value="State University">State University</option>
                   <option value="Central University">Central University</option>
@@ -403,29 +403,29 @@ export const InstitutionDirectory: React.FC = () => {
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">State:</label>
+                <label className="font-semibold text-slate-700 block mb-1">State:</label>
                 <input
                   type="text"
                   required
                   value={newInst.state}
                   onChange={(e) => setNewInst({ ...newInst, state: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">District:</label>
+                <label className="font-semibold text-slate-700 block mb-1">District:</label>
                 <input
                   type="text"
                   required
                   value={newInst.district}
                   onChange={(e) => setNewInst({ ...newInst, district: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="font-semibold text-slate-300 block mb-1">
+                <label className="font-semibold text-slate-700 block mb-1">
                   Initial Approved Programme:
                 </label>
                 <input
@@ -435,12 +435,12 @@ export const InstitutionDirectory: React.FC = () => {
                   onChange={(e) =>
                     setNewInst({ ...newInst, initialProgrammeName: e.target.value })
                   }
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">Programme Code:</label>
+                <label className="font-semibold text-slate-700 block mb-1">Programme Code:</label>
                 <input
                   type="text"
                   required
@@ -448,12 +448,12 @@ export const InstitutionDirectory: React.FC = () => {
                   onChange={(e) =>
                     setNewInst({ ...newInst, initialProgrammeCode: e.target.value })
                   }
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-mono focus:bg-white focus:border-blue-600"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">Approved Intake:</label>
+                <label className="font-semibold text-slate-700 block mb-1">Approved Intake:</label>
                 <input
                   type="number"
                   min="1"
@@ -462,22 +462,22 @@ export const InstitutionDirectory: React.FC = () => {
                   onChange={(e) =>
                     setNewInst({ ...newInst, initialIntake: Number(e.target.value) })
                   }
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-mono focus:bg-white focus:border-blue-600"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-2.5 pt-4 border-t border-slate-800">
+            <div className="flex justify-end gap-2.5 pt-4 border-t border-slate-200">
               <button
                 type="button"
                 onClick={() => setShowRegisterModal(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold"
+                className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-xs"
               >
                 Complete Registration
               </button>

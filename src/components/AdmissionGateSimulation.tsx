@@ -92,7 +92,6 @@ export const AdmissionGateSimulation: React.FC = () => {
       setRollNumber('MIT/2026/MECH/402');
       setIsSupernumerary(false);
     } else if (type === 'CAPACITY_FULL') {
-      // DTU CSE already has 21 students against 20 regular seats
       setSelectedInstId('INST-DEL-01');
       setSelectedProgId('PROG-DEL-CSE');
       setApaarId('APAAR-DEMO-0403');
@@ -100,7 +99,6 @@ export const AdmissionGateSimulation: React.FC = () => {
       setRollNumber('DTU/2026/CSE/OVER');
       setIsSupernumerary(false);
     } else if (type === 'DUAL_CONFLICT') {
-      // APAAR-DEMO-0099 has active admission at DTU
       setSelectedInstId('INST-KAR-03');
       setSelectedProgId('PROG-KAR-ISE');
       setApaarId('APAAR-DEMO-0099');
@@ -113,65 +111,65 @@ export const AdmissionGateSimulation: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Title */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs text-slate-800">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-indigo-900/60 text-indigo-300 border border-indigo-700/60">
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
               Regulatory Core Innovation
             </span>
-            <span className="text-[11px] font-mono text-teal-400 bg-teal-950/60 px-2 py-0.5 rounded border border-teal-800/60">
+            <span className="text-[11px] font-mono text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 font-semibold">
               Idempotent Verification Gate
             </span>
           </div>
-          <h1 className="text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <DoorOpen className="w-6 h-6 text-blue-400" />
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <DoorOpen className="w-6 h-6 text-blue-600" />
             AICTE Pre-Admission Gate Simulation
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Validates proposed student allotment in real-time against sanctioned programme capacity, active cross-institution enrollments, and statutory supernumerary quotas before an admission is finalized.
           </p>
         </div>
 
         {/* Quick Test Scenarios for Evaluators */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs text-slate-400 hidden sm:inline">Presets:</span>
+          <span className="text-xs text-slate-500 font-medium hidden sm:inline">Presets:</span>
           <button
             onClick={() => loadScenario('VALID')}
-            className="px-2.5 py-1.5 bg-emerald-950 hover:bg-emerald-900 text-emerald-300 border border-emerald-800 rounded-lg text-xs font-semibold"
+            className="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-lg text-xs font-semibold shadow-2xs transition-colors"
           >
             Eligible Student
           </button>
           <button
             onClick={() => loadScenario('CAPACITY_FULL')}
-            className="px-2.5 py-1.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded-lg text-xs font-semibold"
+            className="px-2.5 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 rounded-lg text-xs font-semibold shadow-2xs transition-colors"
           >
             Intake Full Breach
           </button>
           <button
             onClick={() => loadScenario('DUAL_CONFLICT')}
-            className="px-2.5 py-1.5 bg-amber-950 hover:bg-amber-900 text-amber-300 border border-amber-800 rounded-lg text-xs font-semibold"
+            className="px-2.5 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg text-xs font-semibold shadow-2xs transition-colors"
           >
-            Dual Enrollment Conflict
+            Dual Conflict
           </button>
         </div>
       </div>
 
-      {/* Main Two-Column Layout: Gate Parameters Form & Gate Decision Output */}
+      {/* Main Two-Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Form */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-            <h2 className="text-sm font-bold text-white flex items-center gap-2">
-              <Key className="w-4 h-4 text-blue-400" />
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-xs text-slate-800">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+              <Key className="w-4 h-4 text-blue-600" />
               Proposed Admission Allotment Payload
             </h2>
-            <div className="flex items-center gap-1.5 text-xs text-slate-400 font-mono">
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 font-mono">
               <span>Key:</span>
-              <span className="text-slate-200">{idempotencyKey}</span>
+              <span className="text-slate-800 font-medium">{idempotencyKey}</span>
               <button
                 onClick={handleGenerateNewKey}
                 title="Generate fresh idempotency key"
-                className="text-slate-400 hover:text-white"
+                className="text-slate-400 hover:text-slate-700"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
               </button>
@@ -181,7 +179,7 @@ export const AdmissionGateSimulation: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             {/* Institution */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Institution:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Institution:</label>
               <select
                 value={selectedInstId}
                 onChange={(e) => {
@@ -189,7 +187,7 @@ export const AdmissionGateSimulation: React.FC = () => {
                   const inst = institutions.find((i) => i.id === e.target.value);
                   if (inst && inst.programmes[0]) setSelectedProgId(inst.programmes[0].id);
                 }}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
               >
                 {institutions.map((i) => (
                   <option key={i.id} value={i.id}>
@@ -201,11 +199,11 @@ export const AdmissionGateSimulation: React.FC = () => {
 
             {/* Programme */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Approved Programme:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Approved Programme:</label>
               <select
                 value={selectedProgId}
                 onChange={(e) => setSelectedProgId(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
               >
                 {activeInst.programmes.map((p) => (
                   <option key={p.id} value={p.id}>
@@ -217,55 +215,55 @@ export const AdmissionGateSimulation: React.FC = () => {
 
             {/* Student Name */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Student Full Name:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Student Full Name:</label>
               <input
                 type="text"
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
               />
             </div>
 
             {/* APAAR Identifier */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Synthetic APAAR ID:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Synthetic APAAR ID:</label>
               <input
                 type="text"
                 value={apaarId}
                 onChange={(e) => setApaarId(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-mono focus:bg-white focus:border-blue-600"
               />
             </div>
 
             {/* Roll Number */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Institutional Roll Number:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Institutional Roll Number:</label>
               <input
                 type="text"
                 value={rollNumber}
                 onChange={(e) => setRollNumber(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-mono focus:bg-white focus:border-blue-600"
               />
             </div>
 
             {/* Proposed Admission Date */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Proposed Admission Date:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Proposed Admission Date:</label>
               <input
                 type="date"
                 value={proposedDate}
                 onChange={(e) => setProposedDate(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 font-mono focus:bg-white focus:border-blue-600"
               />
             </div>
 
             {/* Admission Quota */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Admission Category:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Admission Category:</label>
               <select
                 value={admissionCategory}
                 onChange={(e) => setAdmissionCategory(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
               >
                 <option value="General">General</option>
                 <option value="OBC-NCL">OBC-NCL</option>
@@ -279,9 +277,9 @@ export const AdmissionGateSimulation: React.FC = () => {
 
             {/* Supernumerary Toggle */}
             <div>
-              <label className="font-semibold text-slate-300 block mb-1">Seat Classification:</label>
+              <label className="font-semibold text-slate-700 block mb-1">Seat Classification:</label>
               <div className="flex items-center gap-3 pt-1">
-                <label className="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+                <label className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
                   <input
                     type="radio"
                     name="superQuota"
@@ -290,7 +288,7 @@ export const AdmissionGateSimulation: React.FC = () => {
                   />
                   <span>Regular Sanctioned</span>
                 </label>
-                <label className="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+                <label className="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
                   <input
                     type="radio"
                     name="superQuota"
@@ -304,14 +302,14 @@ export const AdmissionGateSimulation: React.FC = () => {
           </div>
 
           {isSupernumerary && (
-            <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs">
-              <label className="font-semibold text-teal-300 block mb-1">
+            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs">
+              <label className="font-semibold text-teal-800 block mb-1">
                 Supernumerary Quota Classification:
               </label>
               <select
                 value={supernumeraryType}
                 onChange={(e) => setSupernumeraryType(e.target.value as any)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-white"
+                className="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-slate-800"
               >
                 <option value="NRI">NRI (Non-Resident Indian)</option>
                 <option value="OCI">OCI (Overseas Citizen of India)</option>
@@ -326,7 +324,7 @@ export const AdmissionGateSimulation: React.FC = () => {
             <button
               onClick={handleTestGate}
               disabled={isEvaluating}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-900 text-white rounded-xl text-xs font-bold shadow-lg shadow-blue-600/30 transition-all"
+              className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white rounded-xl text-xs font-bold shadow-xs transition-all"
             >
               {isEvaluating ? (
                 <>
@@ -344,23 +342,23 @@ export const AdmissionGateSimulation: React.FC = () => {
         </div>
 
         {/* Structured Gate Decision Output */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col justify-between shadow-xs text-slate-800">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-              <h2 className="text-sm font-bold text-white flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-teal-400" />
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+              <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-blue-600" />
                 Gate Decision &amp; Verification Rationale
               </h2>
               {gateResult?.idempotencyCached && (
-                <span className="text-[10px] font-mono bg-indigo-900/60 text-indigo-300 px-2 py-0.5 rounded border border-indigo-700/60">
+                <span className="text-[10px] font-mono bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200 font-medium">
                   Idempotent Cache Hit
                 </span>
               )}
             </div>
 
             {!gateResult ? (
-              <div className="h-64 flex flex-col items-center justify-center text-center p-6 text-slate-500 space-y-2">
-                <DoorOpen className="w-10 h-10 stroke-1 text-slate-600" />
+              <div className="h-64 flex flex-col items-center justify-center text-center p-6 text-slate-400 space-y-2">
+                <DoorOpen className="w-10 h-10 stroke-1 text-slate-300" />
                 <p className="text-xs">
                   Awaiting payload submission. Select a preset or customize parameters and click "Execute Admission Gate Evaluation".
                 </p>
@@ -371,49 +369,49 @@ export const AdmissionGateSimulation: React.FC = () => {
                 <div
                   className={`p-4 rounded-xl border ${
                     gateResult.status === 'Eligible to Proceed'
-                      ? 'bg-emerald-950/40 border-emerald-800/80 text-emerald-300'
+                      ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
                       : gateResult.status === 'Warning — Review Required'
-                      ? 'bg-amber-950/40 border-amber-800/80 text-amber-300'
-                      : 'bg-rose-950/40 border-rose-800/80 text-rose-300'
+                      ? 'bg-amber-50 border-amber-200 text-amber-900'
+                      : 'bg-rose-50 border-rose-200 text-rose-900'
                   }`}
                 >
                   <div className="flex items-center gap-2 font-bold text-sm">
                     {gateResult.eligible ? (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     ) : (
-                      <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
+                      <XCircle className="w-5 h-5 text-rose-600 shrink-0" />
                     )}
                     <span>{gateResult.status}</span>
                   </div>
 
                   {gateResult.reservationId && (
-                    <div className="text-xs mt-2 font-mono text-emerald-400">
+                    <div className="text-xs mt-2 font-mono text-emerald-800 font-semibold">
                       Temporary Reservation ID: <strong>{gateResult.reservationId}</strong>
                     </div>
                   )}
                 </div>
 
                 {/* Capacity Breakdown */}
-                <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
-                  <h4 className="font-semibold text-slate-300 uppercase tracking-wider text-[11px]">
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">
+                  <h4 className="font-semibold text-slate-700 uppercase tracking-wider text-[11px]">
                     Intake Capacity Inspection
                   </h4>
                   <div className="grid grid-cols-3 gap-2 text-center pt-1">
-                    <div className="bg-slate-900 p-2 rounded-lg">
-                      <div className="text-slate-400 text-[10px]">Sanctioned</div>
-                      <div className="text-base font-bold text-white mt-0.5">
+                    <div className="bg-white border border-slate-200 p-2 rounded-lg">
+                      <div className="text-slate-500 text-[10px]">Sanctioned</div>
+                      <div className="text-base font-bold text-slate-900 mt-0.5">
                         {gateResult.capacityCheck.approvedIntake}
                       </div>
                     </div>
-                    <div className="bg-slate-900 p-2 rounded-lg">
-                      <div className="text-slate-400 text-[10px]">Occupied</div>
-                      <div className="text-base font-bold text-slate-200 mt-0.5">
+                    <div className="bg-white border border-slate-200 p-2 rounded-lg">
+                      <div className="text-slate-500 text-[10px]">Occupied</div>
+                      <div className="text-base font-bold text-slate-800 mt-0.5">
                         {gateResult.capacityCheck.currentEnrolled}
                       </div>
                     </div>
-                    <div className="bg-slate-900 p-2 rounded-lg">
-                      <div className="text-slate-400 text-[10px]">Available</div>
-                      <div className={`text-base font-bold mt-0.5 ${gateResult.capacityCheck.availableSeats > 0 ? 'text-teal-400' : 'text-rose-400'}`}>
+                    <div className="bg-white border border-slate-200 p-2 rounded-lg">
+                      <div className="text-slate-500 text-[10px]">Available</div>
+                      <div className={`text-base font-bold mt-0.5 ${gateResult.capacityCheck.availableSeats > 0 ? 'text-teal-700' : 'text-rose-600'}`}>
                         {gateResult.capacityCheck.availableSeats}
                       </div>
                     </div>
@@ -422,27 +420,27 @@ export const AdmissionGateSimulation: React.FC = () => {
 
                 {/* Reasons List */}
                 <div className="space-y-1.5">
-                  <h4 className="font-semibold text-slate-300 text-xs">
+                  <h4 className="font-semibold text-slate-700 text-xs">
                     Regulatory Reasons &amp; Findings:
                   </h4>
-                  <ul className="space-y-1 text-xs text-slate-400">
+                  <ul className="space-y-1 text-xs text-slate-600">
                     {gateResult.reasons.map((r, idx) => (
-                      <li key={idx} className="flex items-start gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/80">
-                        <span className="text-blue-400 font-bold">&bull;</span>
+                      <li key={idx} className="flex items-start gap-2 bg-slate-50 p-2 rounded-lg border border-slate-200">
+                        <span className="text-blue-600 font-bold">&bull;</span>
                         <span>{r}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Dual Override Action (Section 14) */}
+                {/* Dual Override Action */}
                 {!gateResult.eligible && (
                   <div className="pt-2">
                     <button
                       onClick={() => setShowOverrideModal(true)}
-                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-amber-950/60 hover:bg-amber-900/80 text-amber-300 border border-amber-800/80 rounded-xl text-xs font-bold transition-all"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded-xl text-xs font-bold transition-all shadow-2xs"
                     >
-                      <ShieldAlert className="w-4 h-4 text-amber-400" />
+                      <ShieldAlert className="w-4 h-4 text-amber-600" />
                       Initiate Dual-Approval Regulatory Override Workflow
                     </button>
                   </div>
@@ -451,7 +449,7 @@ export const AdmissionGateSimulation: React.FC = () => {
             )}
           </div>
 
-          <div className="pt-4 border-t border-slate-800/80 text-[11px] text-slate-500">
+          <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-400">
             Audit Trail: All admission gate queries are cryptographically logged with caller email and SHA-256 state digest.
           </div>
         </div>
@@ -459,60 +457,60 @@ export const AdmissionGateSimulation: React.FC = () => {
 
       {/* Dual Override Modal */}
       {showOverrideModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <ShieldAlert className="w-5 h-5 text-amber-400" />
+        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 text-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <ShieldAlert className="w-5 h-5 text-amber-600" />
                 Emergency Regulatory Override (Dual Approval)
               </h2>
               <button
                 onClick={() => setShowOverrideModal(false)}
-                className="text-slate-400 hover:text-white"
+                className="text-slate-400 hover:text-slate-700 p-1"
               >
                 &times;
               </button>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               Section 14 of the AICTE framework permits emergency exceptions (e.g. court/state counseling directives) requiring verified reasons and two independent authorizations. This does <strong>not</strong> silently alter statutory intake.
             </p>
 
             <div className="space-y-3 pt-2 text-xs">
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">
+                <label className="font-semibold text-slate-700 block mb-1">
                   1. Institutional Signatory / Dean Justification:
                 </label>
                 <textarea
                   value={overrideReason}
                   onChange={(e) => setOverrideReason(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white h-20"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-slate-800 h-20 focus:bg-white focus:border-blue-600"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">
+                <label className="font-semibold text-slate-700 block mb-1">
                   2. AICTE Regulatory Officer Authorization:
                 </label>
                 <input
                   type="text"
                   value={aicteOfficer}
                   onChange={(e) => setAicteOfficer(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 text-slate-800 focus:bg-white focus:border-blue-600"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-800">
+            <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-200">
               <button
                 onClick={() => setShowOverrideModal(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-medium"
               >
                 Cancel
               </button>
               <button
                 onClick={handleExecuteOverride}
-                className="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-bold"
+                className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold shadow-xs"
               >
                 Execute Dual Override
               </button>

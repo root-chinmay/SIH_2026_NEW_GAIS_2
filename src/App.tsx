@@ -37,7 +37,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
       {/* Top Application Header */}
       <Header
         onOpenCopilot={() => setIsCopilotOpen(true)}
@@ -55,7 +55,7 @@ export default function App() {
         />
 
         {/* Workspace Content Canvas */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-slate-50">
           <div className="max-w-7xl mx-auto">
             {activeView === 'landing' && (
               <LandingPage onEnterDemo={(view) => setActiveView(view)} />

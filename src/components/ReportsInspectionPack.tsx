@@ -27,7 +27,7 @@ export const ReportsInspectionPack: React.FC = () => {
 
   const totalIntake = activeInst.programmes.reduce((acc, p) => acc + p.approvedIntake, 0);
 
-  // Safe CSV export with formula injection prevention (Section 36)
+  // Safe CSV export with formula injection prevention
   const handleExportCSV = () => {
     // Sanitize string to prevent spreadsheet formula execution (=, +, -, @)
     const sanitize = (val: string) => {
@@ -90,21 +90,21 @@ export const ReportsInspectionPack: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Title */}
-      <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-blue-900/60 text-blue-300 border border-blue-700/60">
+            <span className="text-[11px] font-bold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">
               Regulatory Dossier
             </span>
-            <span className="text-[11px] font-mono text-teal-400 bg-teal-950/60 px-2 py-0.5 rounded border border-teal-800/60">
+            <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
               Formula-Safe Sanitization
             </span>
           </div>
-          <h1 className="text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <FileText className="w-6 h-6 text-blue-400" />
+          <h1 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+            <FileText className="w-6 h-6 text-blue-600" />
             AICTE Regulatory Reports &amp; Inspection Pack
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Generate print-ready inspection packs with cryptographic integrity hashes and formula-sanitized CSV datasets.
           </p>
         </div>
@@ -114,7 +114,7 @@ export const ReportsInspectionPack: React.FC = () => {
           <select
             value={selectedInstId}
             onChange={(e) => setSelectedInstId(e.target.value)}
-            className="bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white"
+            className="bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
           >
             {state.institutions.map((i) => (
               <option key={i.id} value={i.id}>
@@ -125,15 +125,15 @@ export const ReportsInspectionPack: React.FC = () => {
 
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-teal-300 border border-slate-700 rounded-xl text-xs font-semibold shrink-0"
+            className="flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-slate-50 text-blue-700 border border-slate-300 rounded-xl text-xs font-semibold shadow-sm shrink-0"
           >
-            <Download className="w-4 h-4 text-teal-400" />
+            <Download className="w-4 h-4 text-blue-600" />
             Export CSV
           </button>
 
           <button
             onClick={handlePrintDossier}
-            className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-blue-600/30 shrink-0"
+            className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm shrink-0"
           >
             <Printer className="w-4 h-4" />
             Print Dossier
@@ -141,53 +141,53 @@ export const ReportsInspectionPack: React.FC = () => {
         </div>
       </div>
 
-      {/* Printable Inspection Pack Preview (Section 36) */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 space-y-8 print:bg-white print:text-black print:p-0 print:border-none">
+      {/* Printable Inspection Pack Preview */}
+      <div className="bg-white border border-slate-200 rounded-2xl p-8 space-y-8 shadow-sm print:bg-white print:text-black print:p-0 print:border-none print:shadow-none">
         {/* Dossier Header */}
-        <div className="text-center pb-6 border-b-2 border-slate-800 print:border-slate-300">
-          <div className="text-xs font-bold uppercase tracking-widest text-slate-400 print:text-slate-600">
+        <div className="text-center pb-6 border-b-2 border-slate-200">
+          <div className="text-xs font-bold uppercase tracking-widest text-blue-900">
             All India Council for Technical Education (AICTE)
           </div>
-          <h2 className="text-2xl font-black text-white print:text-slate-950 mt-1">
+          <h2 className="text-2xl font-black text-slate-950 mt-1">
             INSTITUTIONAL ENROLMENT INSPECTION DOSSIER
           </h2>
-          <div className="text-xs text-slate-400 print:text-slate-600 mt-1">
+          <div className="text-xs text-slate-500 mt-1">
             Academic Session 2026-2027 &bull; Generated: {new Date().toISOString().split('T')[0]} &bull; Inspection ID: INS-2026-{activeInst.code}
           </div>
         </div>
 
         {/* Institution Profile Summary */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
-          <div className="bg-slate-950 print:bg-slate-50 p-4 rounded-xl border border-slate-800 print:border-slate-200">
-            <span className="text-slate-400 block text-[10px] uppercase font-bold">Institution Name:</span>
-            <span className="font-bold text-white print:text-slate-900 text-sm mt-0.5 block">{activeInst.name}</span>
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <span className="text-slate-500 block text-[10px] uppercase font-bold">Institution Name:</span>
+            <span className="font-bold text-slate-900 text-sm mt-0.5 block">{activeInst.name}</span>
           </div>
 
-          <div className="bg-slate-950 print:bg-slate-50 p-4 rounded-xl border border-slate-800 print:border-slate-200">
-            <span className="text-slate-400 block text-[10px] uppercase font-bold">AICTE Permanent Code:</span>
-            <span className="font-mono font-bold text-white print:text-slate-900 text-sm mt-0.5 block">{activeInst.code}</span>
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <span className="text-slate-500 block text-[10px] uppercase font-bold">AICTE Permanent Code:</span>
+            <span className="font-mono font-bold text-slate-900 text-sm mt-0.5 block">{activeInst.code}</span>
           </div>
 
-          <div className="bg-slate-950 print:bg-slate-50 p-4 rounded-xl border border-slate-800 print:border-slate-200">
-            <span className="text-slate-400 block text-[10px] uppercase font-bold">Sanctioned Regular Capacity:</span>
-            <span className="font-bold text-white print:text-slate-900 text-sm mt-0.5 block">{totalIntake} Seats</span>
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <span className="text-slate-500 block text-[10px] uppercase font-bold">Sanctioned Regular Capacity:</span>
+            <span className="font-bold text-slate-900 text-sm mt-0.5 block">{totalIntake} Seats</span>
           </div>
 
-          <div className="bg-slate-950 print:bg-slate-50 p-4 rounded-xl border border-slate-800 print:border-slate-200">
-            <span className="text-slate-400 block text-[10px] uppercase font-bold">Active Enrolment:</span>
-            <span className="font-bold text-teal-400 print:text-teal-700 text-sm mt-0.5 block">{activeCount} Students</span>
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <span className="text-slate-500 block text-[10px] uppercase font-bold">Active Enrolment:</span>
+            <span className="font-bold text-blue-700 text-sm mt-0.5 block">{activeCount} Students</span>
           </div>
         </div>
 
         {/* Programme Breakdown Table */}
         <div className="space-y-3">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 print:text-slate-800">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
             Programme Capacity &amp; Utilization Verification
           </h3>
 
-          <div className="overflow-x-auto rounded-xl border border-slate-800 print:border-slate-300">
-            <table className="w-full text-left text-xs text-slate-300 print:text-slate-800">
-              <thead className="bg-slate-950 print:bg-slate-100 text-slate-400 print:text-slate-700">
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-blue-50/75 text-blue-950 font-semibold border-b border-slate-200">
                 <tr>
                   <th className="p-3">Programme</th>
                   <th className="p-3">Sanctioned Intake</th>
@@ -196,7 +196,7 @@ export const ReportsInspectionPack: React.FC = () => {
                   <th className="p-3">Compliance Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 print:divide-slate-200">
+              <tbody className="divide-y divide-slate-100">
                 {activeInst.programmes.map((p) => {
                   const pStudents = instStudents.filter((s) => s.programmeId === p.id);
                   const regular = pStudents.filter((s) => !s.isSupernumerary).length;
@@ -204,18 +204,18 @@ export const ReportsInspectionPack: React.FC = () => {
                   const isBreach = regular > p.approvedIntake;
 
                   return (
-                    <tr key={p.id}>
-                      <td className="p-3 font-semibold text-white print:text-slate-900">{p.name}</td>
+                    <tr key={p.id} className="hover:bg-blue-50/30">
+                      <td className="p-3 font-semibold text-slate-900">{p.name}</td>
                       <td className="p-3 font-mono">{p.approvedIntake}</td>
-                      <td className="p-3 font-mono">{regular}</td>
-                      <td className="p-3 font-mono">{superNum}</td>
+                      <td className="p-3 font-mono font-medium">{regular}</td>
+                      <td className="p-3 font-mono font-medium">{superNum}</td>
                       <td className="p-3">
                         {isBreach ? (
-                          <span className="text-rose-400 print:text-rose-700 font-bold">
+                          <span className="text-rose-700 font-bold bg-rose-50 border border-rose-200 px-2 py-0.5 rounded">
                             Intake Ceiling Exceeded (+{regular - p.approvedIntake})
                           </span>
                         ) : (
-                          <span className="text-emerald-400 print:text-emerald-700 font-medium">
+                          <span className="text-emerald-700 font-semibold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
                             Compliant
                           </span>
                         )}
@@ -229,28 +229,28 @@ export const ReportsInspectionPack: React.FC = () => {
         </div>
 
         {/* Integrity Receipt & Hash Seal */}
-        <div className="p-5 rounded-2xl bg-slate-950 print:bg-slate-50 border border-slate-800 print:border-slate-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+        <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
           <div className="space-y-1">
-            <div className="font-bold text-white print:text-slate-900 flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-teal-400 print:text-teal-700" />
+            <div className="font-bold text-slate-900 flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-blue-600" />
               Cryptographic Integrity Verification Seal
             </div>
-            <p className="text-slate-400 print:text-slate-600 text-[11px]">
+            <p className="text-slate-600 text-[11px]">
               This inspection pack reflects data verified against the SHA-256 forward-linked audit chain at tip block #{state.auditChain.length}.
             </p>
-            <div className="font-mono text-[10px] text-teal-400 print:text-slate-700 mt-1 truncate max-w-md">
+            <div className="font-mono text-[10px] text-blue-800 font-semibold mt-1 truncate max-w-md">
               Tip Hash: {state.auditChain[state.auditChain.length - 1]?.eventHash || '0000000000000000'}
             </div>
           </div>
 
-          <div className="text-right shrink-0">
-            <div className="text-[10px] uppercase font-bold text-slate-400 print:text-slate-600">
+          <div className="sm:text-right shrink-0">
+            <div className="text-[10px] uppercase font-bold text-slate-500">
               Authorized Signatory Stamp:
             </div>
-            <div className="text-sm font-bold text-white print:text-slate-950 mt-1">
+            <div className="text-sm font-bold text-slate-900 mt-1">
               {activeInst.authorizedSignatory}
             </div>
-            <div className="text-[11px] text-slate-400 print:text-slate-600">
+            <div className="text-[11px] text-slate-500">
               {activeInst.signatoryDesignation}
             </div>
           </div>
